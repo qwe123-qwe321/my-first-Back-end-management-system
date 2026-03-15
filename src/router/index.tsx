@@ -1,15 +1,22 @@
 // src/router/index.tsx
-import { createBrowserRouter } from 'react-router-dom';
-import Login from '../pages/Login'; // 确认路径指向了你写好的那个 index.tsx
+import { createBrowserRouter, Navigate } from 'react-router-dom'; // 1. 引入 Navigate
+import Login from '../pages/Login';
+// 假设你之后会有 MainLayout，现在先用占位符
 
 const router = createBrowserRouter([
   {
     path: '/login',
-    element: <Login />, // 这里必须是 <Login /> 组件，而不是 <div>文字</div>
+    element: <Login />,
   },
   {
     path: '/',
-    element: <div>这是首页，请在地址栏手动输入 /login 看看</div>,
+    // 2. 这里的逻辑是：访问 / 时，直接重定向到 /login
+    // replace 表示不保留这一步在浏览器历史记录里
+    element: <Navigate to="/login" replace />, 
+  },
+  {
+    path: '/dashboard', // 以后真正的首页改名叫 dashboard
+    element: <div>这是登录后才能看的后台首页</div>,
   }
 ]);
 
