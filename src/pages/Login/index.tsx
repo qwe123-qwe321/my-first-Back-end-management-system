@@ -15,7 +15,7 @@ const Login: React.FC = () => {
   const onFinish = (values: LoginValues) => {
     console.log('Received values of form: ', values);
     message.success('登录成功！');
-    navigate('/');
+    navigate('/dashboard');
   };
 
   return (
@@ -24,7 +24,7 @@ const Login: React.FC = () => {
       style={{ backgroundImage: `url(${bgImage})` }}
       >
      
-      <div className="flex flex-row bg-gray-300 backdrop-blur-md rounded-3xl shadow-2xl overflow-hidden w-full max-w-[850px] min-h-[500px] border border-gray-500">
+      <div className="flex flex-row bg-gray-300 backdrop-blur-md rounded-3xl shadow-2xl overflow-hidden w-full max-w-212.5 min-h-125 border border-gray-500">
         
         {/* 左侧栏：放置小图片的空间 */}
         <div className="hidden md:flex md:w-1/2 " 
