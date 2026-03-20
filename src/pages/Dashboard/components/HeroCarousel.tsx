@@ -2,20 +2,19 @@ import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import React, { useState, useEffect } from 'react';
 import { CAROUSEL_IMAGES, CAROUSEL_CONFIG } from '../constants/carousel';
 
-// 仅接收必要的 props（主题模式），移除无关依赖
-interface HeroCarouselProps {
-  themeMode: 'dark' | 'light';
-}
+// 移除了未使用的 themeMode 属性
+interface HeroCarouselProps {}
 
-const HeroCarousel: React.FC<HeroCarouselProps> = ({ themeMode }) => {
+const HeroCarousel: React.FC<HeroCarouselProps> = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const { autoPlayInterval } = CAROUSEL_CONFIG;
 
-  // 下一张/上一张逻辑抽离
+  // 下一张
   const nextSlide = () => setCurrentIndex(prev => (prev + 1) % CAROUSEL_IMAGES.length);
+  // 上一张
   const prevSlide = () => setCurrentIndex(prev => (prev === 0 ? CAROUSEL_IMAGES.length - 1 : prev - 1));
 
-  // 自动轮播（清理副作用）
+  // 自动轮播
   useEffect(() => {
     const interval = setInterval(nextSlide, autoPlayInterval);
     return () => clearInterval(interval);
@@ -34,6 +33,7 @@ const HeroCarousel: React.FC<HeroCarouselProps> = ({ themeMode }) => {
               src={src}
               alt={`首页轮播图 ${index + 1}`}
               className="w-full h-full object-cover"
+              loading="lazy"
             />
           </div>
         ))}

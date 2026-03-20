@@ -1,10 +1,8 @@
 import React from 'react';
 import HeroCarousel from './components/HeroCarousel';
-import { useTheme } from '../../config/theme/useTheme';
 import { CAROUSEL_CONFIG } from './constants/carousel';
 
 const Dashboard: React.FC = () => {
-  const { themeMode } = useTheme();
   const { placeholderText } = CAROUSEL_CONFIG;
 
   return (
@@ -14,8 +12,8 @@ const Dashboard: React.FC = () => {
         backgroundImage: 'url(https://game.gtimg.cn/images/yxzj/ip/bg.c7e8614f.jpg)',
       }}
     >
-      {/* 页面专属子组件（语义化引入） */}
-      <HeroCarousel themeMode={themeMode} />
+      {/* 移除了未使用的 themeMode 传参 */}
+      <HeroCarousel />
       <div className="p-6">
         <h2 className="text-white text-2xl font-bold">{placeholderText}</h2>
       </div>
