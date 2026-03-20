@@ -6,3 +6,18 @@ html, body, #root {
   margin: 0;
   padding: 0;
 }
+/* 修复深色模式下 AntD 弹窗样式 */
+.ant-popover {
+  --ant-popover-bg: var(--ant-color-bg-container);
+  --ant-popover-text: var(--ant-color-text);
+}
+
+.dark .ant-popover {
+  --ant-popover-bg: #1f2937;
+  --ant-popover-text: #f9fafb;
+}
+
+/* 保证 Badge 数字可见 */
+.ant-badge-count {
+  z-index: 1;
+}

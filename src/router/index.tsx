@@ -1,5 +1,5 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
-import MainLayout from '../layout/MainLayout';
+import MainLayout from '../components/layout/MainLayout';
 import Login from '../pages/Login';
 import Dashboard from '../pages/Dashboard';
 
@@ -19,27 +19,20 @@ const router = createBrowserRouter([
     element: <MainLayout />,
     children: [
       { index: true, element: <Navigate to="/dashboard" replace /> },
-      // 1. 仪表盘
-      { path: 'dashboard', element: <Dashboard /> },
-      // 2. 英雄殿堂及其子模块
-      { path: 'heroes', element: <Placeholder name="Heroes Hall" /> },
-      { path: 'heroes/skins', element: <Placeholder name="Skin Showcase" /> },
-      // 3. 巅峰战力
-      { path: 'rank', element: <Placeholder name="Power Arena" /> },
-      // 4. 智谋熔炉及其子模块
-      { path: 'strategy', element: <Placeholder name="Strategy Forge" /> },
-      { path: 'strategy/lineup', element: <Placeholder name="Lineup Simulator" /> },
-      // 5. 我的荣耀档案
-      { path: 'my-archive', element: <Placeholder name="My Archive" /> },
-      // 6. 数据洞察中心
-      { path: 'insights', element: <Placeholder name="Insight Nexus" /> },
-      // 7. 社区荣耀广场
-      { path: 'community', element: <Placeholder name="Community Square" /> },
-      // 8. 系统控制台
-      { path: 'settings', element: <Placeholder name="System Terminal" /> },
+
+      // 对应侧边栏菜单的路由
+      { path: 'dashboard', element: <Dashboard /> },                     // 首页
+      { path: 'world', element: <Placeholder name="世界" /> },           // 世界
+      { path: 'story', element: <Placeholder name="主线剧情" /> },       // 主线剧情
+      { path: 'heroes', element: <Placeholder name="英雄" /> },          // 英雄
+      { path: 'skins', element: <Placeholder name="皮肤" /> },           // 皮肤
+      { path: 'explore', element: <Placeholder name="专题探索" /> },     // 专题探索
+      { path: 'community', element: <Placeholder name="玩家社区" /> },   // 玩家社区
+      { path: 'settings', element: <Placeholder name="个人主页" /> },    // 个人主页
+      { path: 'about', element: <Placeholder name="关于" /> },    // 关于
     ],
   },
-  { path: '*', element: <Navigate to="/dashboard" replace /> }
+  { path: '*', element: <Navigate to="/dashboard" replace /> },
 ]);
 
 export default router;
