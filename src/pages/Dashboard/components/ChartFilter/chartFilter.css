@@ -1,0 +1,87 @@
+.king-dashboard-filter .king-dashboard-select {
+  color: #f5f5f5 !important;
+}
+
+.king-dashboard-filter
+  .king-dashboard-select.ant-select:not(.ant-select-disabled)
+  .ant-select-selector,
+.king-dashboard-filter .king-dashboard-select .ant-select-selector {
+  background-color: rgba(11, 18, 32, 0.78) !important;
+  background: rgba(11, 18, 32, 0.78) !important;
+  border: 1px solid rgba(34, 211, 238, 0.55) !important;
+  color: #f5f5f5 !important;
+  box-shadow: 0 0 18px rgba(34, 211, 238, 0.12) !important;
+}
+
+/* 更高优先级兜底（命中 antd 选择器层级） */
+.king-dashboard-filter .ant-select.king-dashboard-select .ant-select-selector {
+  background-color: rgba(11, 18, 32, 0.78) !important;
+  background: rgba(11, 18, 32, 0.78) !important;
+  border: 1px solid rgba(34, 211, 238, 0.55) !important;
+  color: #f5f5f5 !important;
+}
+
+.king-dashboard-filter .king-dashboard-select .ant-select-selection-search,
+.king-dashboard-filter
+  .king-dashboard-select
+  .ant-select-selection-search-input {
+  background: transparent !important;
+}
+
+.king-dashboard-filter .king-dashboard-select .ant-select-selection-item,
+.king-dashboard-filter
+  .king-dashboard-select
+  .ant-select-selection-placeholder {
+  background: transparent !important;
+  color: #f5f5f5 !important;
+  opacity: 1 !important;
+  font-weight: 600 !important;
+}
+
+.king-dashboard-filter
+  .king-dashboard-select
+  .ant-select-selection-search-input {
+  color: #f5f5f5 !important;
+  caret-color: rgba(34, 211, 238, 0.95) !important;
+  background: transparent !important;
+}
+
+.king-dashboard-filter .king-dashboard-select .ant-select-arrow {
+  color: rgba(245, 245, 245, 0.95) !important;
+}
+
+.king-dashboard-filter
+  .king-dashboard-select.ant-select-focused
+  .ant-select-selector,
+.king-dashboard-filter .king-dashboard-select:hover .ant-select-selector {
+  border-color: rgba(34, 211, 238, 0.95) !important;
+  box-shadow: 0 0 0 2px rgba(34, 211, 238, 0.18) !important;
+}
+
+/* Dropdown panel & options
+ * 注意：AntD Select dropdown 默认会 mount 到 body（不在 king-dashboard-filter 内），
+ * 所以这里不要依赖祖先选择器。
+ */
+.king-dashboard-select-dropdown {
+  background-color: rgba(11, 18, 32, 0.98) !important;
+  border: 1px solid rgba(34, 211, 238, 0.55) !important;
+  box-shadow: 0 0 24px rgba(34, 211, 238, 0.18) !important;
+  color: #f5f5f5 !important;
+}
+
+.king-dashboard-select-dropdown .ant-select-item-option-content {
+  color: rgba(245, 245, 245, 0.95) !important;
+}
+
+.king-dashboard-select-dropdown
+  .ant-select-item-option-active:not(.ant-select-item-option-disabled) {
+  background-color: rgba(34, 211, 238, 0.14) !important;
+}
+
+.king-dashboard-select-dropdown .ant-select-item-option-selected {
+  background-color: rgba(34, 211, 238, 0.18) !important;
+}
+
+.king-dashboard-select-dropdown .ant-select-item-option:hover {
+  background-color: rgba(34, 211, 238, 0.1) !important;
+}
