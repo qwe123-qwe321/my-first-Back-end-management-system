@@ -99,7 +99,10 @@ const defaultFavoriteHeroes = [
   },
 ];
 
-const defaultBadges = [
+const defaultBadges: Array<{
+  name: string;
+  type: 'gold' | 'silver' | 'bronze' | 'blue';
+}> = [
   { name: '王者', type: 'gold' },
   { name: '五杀', type: 'silver' },
   { name: '连胜', type: 'bronze' },

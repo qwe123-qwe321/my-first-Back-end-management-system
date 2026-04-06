@@ -52,10 +52,10 @@ const VoiceAnimation: React.FC = () => {
   const handleVoiceClick = (index: number) => {
     const currentHero = heroesData[currentHeroIndex];
     if (!currentHero) return;
-    
+
     const currentSkinData = currentHero.skins[currentSkin];
     if (!currentSkinData) return;
-    
+
     const voiceLine = currentSkinData.voiceLines[index];
     if (!voiceLine || !voiceLine.audio) return;
 

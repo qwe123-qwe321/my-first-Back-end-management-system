@@ -16,15 +16,29 @@ export default defineConfig({
     rollupOptions: {
       output: {
         // 手动配置代码分割
-        manualChunks: {
-          // 将第三方库打包到单独的 chunk
-          vendor: ['react', 'react-dom', 'react-router-dom'],
-          // 将 Ant Design 打包到单独的 chunk
-          antd: ['antd', '@ant-design/icons'],
-          // 将图表库打包到单独的 chunk
-          charts: ['echarts', 'echarts-for-react', '@ant-design/plots'],
-          // 将状态管理库打包到单独的 chunk
-          state: ['zustand', '@tanstack/react-query'],
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (
+              id.includes('react') ||
+              id.includes('react-dom') ||
+              id.includes('react-router-dom')
+            ) {
+              return 'vendor';
+            }
+            if (id.includes('antd') || id.includes('@ant-design/icons')) {
+              return 'antd';
+            }
+            if (id.includes('echarts') || id.includes('echarts-for-react')) {
+              return 'charts';
+            }
+            if (
+              id.includes('zustand') ||
+              id.includes('@tanstack/react-query')
+            ) {
+              return 'state';
+            }
+            return 'vendor';
+          }
         },
       },
     },

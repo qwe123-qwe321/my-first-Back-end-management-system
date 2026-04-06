@@ -11,7 +11,6 @@ const Community: React.FC = () => {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  // TapTap社区URL
   const communityUrl = 'https://www.taptap.cn/app/2301/topic';
 
   // 处理重新加载
@@ -54,12 +53,10 @@ const Community: React.FC = () => {
     message.success('已在新的浏览器窗口中打开社区页面');
   };
 
-  // 处理iframe加载完成
   const handleIframeLoad = () => {
     setIsLoading(false);
   };
 
-  // 处理iframe加载错误
   const handleIframeError = () => {
     setIsLoading(false);
     message.error('社区页面加载失败，请检查网络连接或稍后重试');
@@ -150,7 +147,6 @@ const Community: React.FC = () => {
             </div>
           )}
 
-          {/* 内嵌iframe */}
           <iframe
             id="community-iframe"
             src={communityUrl}

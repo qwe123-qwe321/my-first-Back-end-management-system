@@ -1,4 +1,3 @@
-// src/components/NavigationButtons.tsx
 import React from 'react';
 import { Button } from 'antd';
 import { LeftOutlined, RightOutlined, SyncOutlined } from '@ant-design/icons';

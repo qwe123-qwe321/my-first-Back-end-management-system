@@ -21,7 +21,6 @@ const MainLayout: React.FC = () => {
 
   const isDark = themeMode === 'dark';
 
-  // 让 CSS 能基于主题切换（例如滚动条颜色等），同时设置 Tailwind 的 `.dark` 类。
   React.useEffect(() => {
     document.documentElement.dataset.theme = themeMode;
     if (themeMode === 'dark') {
@@ -31,7 +30,6 @@ const MainLayout: React.FC = () => {
     }
   }, [themeMode]);
 
-  // 使用 useMemo 优化计算属性，避免每次渲染都重新计算
   const headerBackgroundClass = useMemo(
     () => (isDark ? 'bg-[#1a1a1a]' : 'bg-white'),
     [isDark]
@@ -52,8 +50,6 @@ const MainLayout: React.FC = () => {
     [isDark, isScrolled]
   );
 
-  // 监听页面内部滚动容器（例如 DashboardContainer）的滚动高度，
-  // 用于实现顶栏滚动态（阴影/边框/模糊度切换）和英雄档案滚动检测。
   React.useEffect(() => {
     setIsScrolled(false);
     setSelectedMenuKey(undefined);
@@ -63,7 +59,6 @@ const MainLayout: React.FC = () => {
 
     const getScrollTop = () => {
       if (containerEl) return containerEl.scrollTop;
-      // 兜底：如果不是内部容器滚动，就取 window/document 的滚动高度
       return window.scrollY || document.documentElement.scrollTop || 0;
     };
 
@@ -177,7 +172,6 @@ const MainLayout: React.FC = () => {
 
   return (
     <ConfigProvider theme={getThemeConfig(themeMode)}>
-      {/* 仅保留侧边栏和顶栏的主题样式，移除整体 Layout 的背景主题 */}
       <Layout className="h-screen overflow-hidden">
         <Sider
           trigger={null}

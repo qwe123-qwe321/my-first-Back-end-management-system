@@ -21,7 +21,6 @@ export const ChartFilter: React.FC<ChartFilterProps> = ({
   defaultHero = 'all',
   defaultChannel = 'all',
 }) => {
-  // 由于 Dashboard 本身使用深色底（KING_COLORS.bg 等固定深色），筛选条保持深色 UI，更贴合轮播/背景
   const filterBg =
     'linear-gradient(180deg, rgba(20,20,20,0.85), rgba(20,20,20,0.55))';
   const selectText = '#f5f5f5';

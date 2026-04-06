@@ -1,4 +1,3 @@
-// Dashboard页面核心容器组件：负责渲染页面全局背景、控制轮播图的显示/隐藏，承载后续所有业务模块（如数据卡片、滚动列表），并提供无内容时的兜底文案
 import React, { type PropsWithChildren } from 'react';
 import HeroCarousel from './HeroCarousel';
 

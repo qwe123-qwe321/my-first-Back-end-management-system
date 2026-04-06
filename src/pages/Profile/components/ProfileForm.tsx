@@ -39,7 +39,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
   const renderField = (
     label: string,
     icon: React.ReactNode,
-    field: string,
+    _field: string,
     renderEdit: () => React.ReactNode,
     renderView: () => React.ReactNode
   ) => (

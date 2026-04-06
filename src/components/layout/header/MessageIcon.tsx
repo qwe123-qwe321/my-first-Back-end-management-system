@@ -1,4 +1,3 @@
-// src/components/MessageIcon.tsx
 import { Badge, Popover } from 'antd';
 import React from 'react';
 

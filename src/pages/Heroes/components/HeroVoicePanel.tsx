@@ -30,9 +30,10 @@ export const HeroVoicePanel: React.FC<HeroVoicePanelProps> = ({
   onVoiceClick,
 }) => {
   const currentSkinData = skins[currentSkin] || skins[0];
-  const hasVoiceData = currentSkinData && currentSkinData.voiceLines && currentSkinData.voiceLines.some(
-    (line) => line.text || line.audio
-  );
+  const hasVoiceData =
+    currentSkinData &&
+    currentSkinData.voiceLines &&
+    currentSkinData.voiceLines.some((line) => line.text || line.audio);
 
   return (
     <div className="flex-1 h-full">
