@@ -29,8 +29,8 @@ export const HeroVoicePanel: React.FC<HeroVoicePanelProps> = ({
   isPlaying,
   onVoiceClick,
 }) => {
-  const currentSkinData = skins[currentSkin];
-  const hasVoiceData = currentSkinData.voiceLines.some(
+  const currentSkinData = skins[currentSkin] || skins[0];
+  const hasVoiceData = currentSkinData && currentSkinData.voiceLines && currentSkinData.voiceLines.some(
     (line) => line.text || line.audio
   );
 
@@ -39,7 +39,7 @@ export const HeroVoicePanel: React.FC<HeroVoicePanelProps> = ({
       <div className="bg-[#1a1a1a]/80 border border-[#1a1a1a] rounded-lg p-6 h-full flex flex-col">
         <div className="flex-1 overflow-y-auto">
           <div className="space-y-3">
-            {hasVoiceData ? (
+            {hasVoiceData && currentSkinData && currentSkinData.voiceLines ? (
               currentSkinData.voiceLines.map((line, index) => (
                 <div
                   key={line.id}

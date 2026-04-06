@@ -44,23 +44,23 @@ export const HeroDisplay: React.FC<HeroDisplayProps> = ({
 
   return (
     <div className="flex items-center relative w-full mb-10">
-      <div className="w-40 h-40 rounded-full border-2 border-[#e4c289] overflow-hidden relative z-10">
+      <div className="w-100 h-100 rounded-full border-2 border-[#e4c289] overflow-hidden relative z-10">
         <img
           src={currentSkinData.image || hero.image}
           alt={hero.name}
           className="w-full h-full object-cover"
         />
-        <div className="absolute bottom-2 left-0 w-full text-center">
-          <h2 className="text-[#eec275] font-bold text-lg drop-shadow-lg">
+        <div className="absolute bottom-7 left-0 w-full text-center">
+          <h2 className="text-[#eec275] font-bold text-xl drop-shadow-lg">
             {hasSkins ? `${currentSkinData.name} - ${hero.name}` : hero.name}
           </h2>
         </div>
       </div>
 
       <div
-        className="absolute left-1/2 h-40 w-[calc(100%-200px)] 
+        className="absolute left-50 h-100 w-[calc(100%-200px)] 
                   border border-[#e4c289] border-l-0 
-                  bg-[#1a1a1a] pl-20 pr-10 flex items-center gap-10"
+                  bg-[#1a1a1a] pl-55 pr-10 flex items-center gap-10"
       >
         {hasSkins && (
           <HeroSkinSelector
