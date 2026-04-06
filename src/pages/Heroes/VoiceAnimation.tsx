@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { heroesData } from './data/heroesData';
 import { HeroDisplay } from './components/HeroDisplay';
 import { HeroCarousel } from './components/HeroCarousel';
+import { DashboardContainer } from '../Dashboard/components/DashboardContainer';
 
 const VoiceAnimation: React.FC = () => {
   const location = useLocation();
@@ -75,7 +76,7 @@ const VoiceAnimation: React.FC = () => {
   const currentHero = heroesData[currentHeroIndex] || heroesData[0];
 
   return (
-    <div className="min-h-screen bg-cover bg-center bg-fixed" style={{ backgroundImage: 'url(https://game.gtimg.cn/images/yxzj/ip/bg.c7e8614f.jpg)' }}>
+    <DashboardContainer hasCarousel={false}>
       <div className="container mx-auto px-4 py-10">
         <div className="max-w-7xl mx-auto">
           <HeroDisplay
@@ -93,7 +94,7 @@ const VoiceAnimation: React.FC = () => {
           />
         </div>
       </div>
-    </div>
+    </DashboardContainer>
   );
 };
 

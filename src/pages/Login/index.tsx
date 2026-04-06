@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Flex, Form, Input, message } from 'antd';
 import { useNavigate } from 'react-router-dom';
@@ -12,15 +12,11 @@ interface LoginValues {
 const Login: React.FC = () => {
   const navigate = useNavigate();
 
-  // 使用 useCallback 优化事件处理函数，避免每次渲染都重新创建
-  const onFinish = useCallback(
-    (values: LoginValues) => {
-      console.log('Received values of form: ', values);
-      message.success('登录成功！');
-      navigate('/dashboard');
-    },
-    [navigate]
-  );
+  const onFinish = (values: LoginValues) => {
+    console.log('Received values of form: ', values);
+    message.success('登录成功！');
+    navigate('/dashboard');
+  };
 
   return (
     <div
