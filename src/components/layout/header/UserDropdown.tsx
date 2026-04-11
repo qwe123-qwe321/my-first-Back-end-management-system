@@ -5,11 +5,7 @@ import { UserOutlined, LogoutOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import { useUserStore } from '../../../config/user/useUserStore';
 
-interface UserDropdownProps {
-  isDark: boolean;
-}
-
-export const UserDropdown: React.FC<UserDropdownProps> = ({ isDark }) => {
+export const UserDropdown: React.FC = () => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const { profile } = useUserStore();
@@ -32,9 +28,7 @@ export const UserDropdown: React.FC<UserDropdownProps> = ({ isDark }) => {
       ]}
       renderItem={(item) => (
         <List.Item
-          className={`cursor-pointer hover:bg-gray-100/20 dark:hover:bg-gray-800/50 px-4 py-2 transition-colors ${
-            isDark ? 'text-white' : 'text-gray-900'
-          }`}
+          className="cursor-pointer hover:bg-gray-100/20 px-4 py-2 transition-colors text-gray-900"
           onClick={() => {
             item.action();
             setOpen(false);
@@ -56,17 +50,16 @@ export const UserDropdown: React.FC<UserDropdownProps> = ({ isDark }) => {
       open={open}
       onOpenChange={setOpen}
       placement="bottomRight"
-      overlayClassName={`${isDark ? 'dark-popover' : ''}`}
     >
       <div className="flex items-center gap-3 cursor-pointer group min-w-0">
         <div className="text-right hidden sm:block truncate max-w-40">
           <div
-            className={`text-base font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}
+            className="text-base font-semibold text-gray-900"
           >
             {profile.nickname}
           </div>
           <div
-            className={`text-xs ${isDark ? 'text-gray-400' : 'text-gray-600'}`}
+            className="text-xs text-gray-600"
           >
             等级:Lv.{profile.level}
           </div>
@@ -74,11 +67,7 @@ export const UserDropdown: React.FC<UserDropdownProps> = ({ isDark }) => {
         <Avatar
           size="large"
           src={profile.avatar}
-          className={`border-2 transition-colors cursor-pointer ${
-            isDark
-              ? 'border-gray-400 group-hover:border-blue-400'
-              : 'border-gray-300 group-hover:border-blue-500'
-          }`}
+          className="border-2 transition-colors cursor-pointer border-gray-300 group-hover:border-blue-500"
         />
       </div>
     </Popover>

@@ -67,7 +67,7 @@ export const HeroCarousel: React.FC<HeroCarouselProps> = ({
             {heroes.map((hero, index) => (
               <div
                 key={hero.id}
-                className={`flex-shrink-0 px-2 cursor-pointer transition-all duration-300 ${index === currentHeroIndex ? 'scale-110' : 'hover:scale-105'}`}
+                className={`shrink-0 px-2 cursor-pointer transition-all duration-300 ${index === currentHeroIndex ? 'scale-110' : 'hover:scale-105'}`}
                 style={{ width: `${100 / itemsPerRow}%` }}
                 onClick={() => onHeroClick(index)}
               >

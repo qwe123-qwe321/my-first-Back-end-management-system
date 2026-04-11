@@ -1,8 +1,6 @@
-// 主布局组件：包含侧边栏、顶栏和内容区域，处理滚动监听和主题切换
+// 主布局组件：包含侧边栏、顶栏和内容区域，处理滚动监听
 import React, { useMemo } from 'react';
 import { ConfigProvider, Layout } from 'antd';
-import { useTheme } from '../../config/theme/useTheme';
-import { getThemeConfig } from '../../config/theme/themeConfig';
 import { SiderContent } from '../../components/layout/sider/SiderContent';
 import { HeaderContent } from '../../components/layout/header/HeaderContent';
 import { Outlet, useLocation } from 'react-router-dom';
@@ -10,7 +8,6 @@ import { Outlet, useLocation } from 'react-router-dom';
 const { Header, Sider, Content } = Layout;
 
 const MainLayout: React.FC = () => {
-  const { themeMode, toggleTheme } = useTheme();
   const [collapsed, setCollapsed] = React.useState(false);
   const location = useLocation();
   const [isScrolled, setIsScrolled] = React.useState(false);
@@ -19,35 +16,14 @@ const MainLayout: React.FC = () => {
   >(undefined);
   const [menuOpenKeys, setMenuOpenKeys] = React.useState<string[]>([]);
 
-  const isDark = themeMode === 'dark';
-
-  React.useEffect(() => {
-    document.documentElement.dataset.theme = themeMode;
-    if (themeMode === 'dark') {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [themeMode]);
-
-  const headerBackgroundClass = useMemo(
-    () => (isDark ? 'bg-[#1a1a1a]' : 'bg-white'),
-    [isDark]
-  );
+  const headerBackgroundClass = 'bg-white';
   const headerBlurClass = useMemo(
     () => (isScrolled ? 'backdrop-blur-md' : 'backdrop-blur-xl'),
     [isScrolled]
   );
   const headerBorderClass = useMemo(
-    () =>
-      isDark
-        ? isScrolled
-          ? 'border-white/20'
-          : 'border-white/10'
-        : isScrolled
-          ? 'border-gray-200/60'
-          : 'border-gray-200',
-    [isDark, isScrolled]
+    () => isScrolled ? 'border-gray-200/60' : 'border-gray-200',
+    [isScrolled]
   );
 
   React.useEffect(() => {
@@ -171,7 +147,29 @@ const MainLayout: React.FC = () => {
    */
 
   return (
-    <ConfigProvider theme={getThemeConfig(themeMode)}>
+    <ConfigProvider
+      theme={{
+        token: {
+          colorPrimary: '#3b82f6',
+          borderRadius: 8,
+          colorBgBase: '#f8fafc',
+          colorBgContainer: '#ffffff',
+        },
+        components: {
+          Menu: {
+            itemBg: 'transparent',
+            itemHoverBg: '#3b82f610',
+            itemSelectedBg: '#3b82f630',
+            itemSelectedColor: '#1e293b',
+            itemColor: '#1e293b',
+          },
+          Layout: {
+            siderBg: '#ffffff',
+            headerBg: '#ffffff',
+          },
+        },
+      }}
+    >
       <Layout className="h-screen overflow-hidden">
         <Sider
           trigger={null}
@@ -179,11 +177,10 @@ const MainLayout: React.FC = () => {
           collapsed={collapsed}
           width={240}
           collapsedWidth={80}
-          className={`${isDark ? 'bg-[#1a1a1a]' : 'bg-white'} shadow-xl relative`}
+          className="bg-white shadow-xl relative"
         >
           <SiderContent
             collapsed={collapsed}
-            themeMode={themeMode}
             onCollapse={() => setCollapsed(!collapsed)}
             selectedKey={selectedMenuKey}
             openKeys={menuOpenKeys}
@@ -203,7 +200,7 @@ const MainLayout: React.FC = () => {
               .filter(Boolean)
               .join(' ')}
           >
-            <HeaderContent themeMode={themeMode} toggleTheme={toggleTheme} />
+            <HeaderContent />
           </Header>
 
           <Content className=" p-0 overflow-hidden relative">

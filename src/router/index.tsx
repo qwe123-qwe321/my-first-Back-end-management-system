@@ -5,58 +5,56 @@ import Dashboard from '../pages/Dashboard';
 import VoiceAnimation from '../pages/Heroes/VoiceAnimation';
 import Profile from '../pages/Profile';
 import Community from '../pages/Community';
-
-// 占位组件
-const Placeholder = ({ name }: { name: string }) => (
-  <div className="flex items-center justify-center h-full">
-    <div className="text-xl text-gray-500">{name}页面开发中...</div>
-  </div>
-);
+import { Placeholder } from '../components/common/Placeholder';
+import Error403 from '../pages/error/Error403';
+import Error404 from '../pages/error/Error404';
+import Error500 from '../pages/error/Error500';
 
 const router = createBrowserRouter([
   {
     path: '/login',
-    element: <Login />,
+    element: <Login />
   },
   {
     path: '/',
     element: <MainLayout />,
     children: [
       { index: true, element: <Navigate to="/dashboard" replace /> },
-
-      // 对应侧边栏菜单的路由
       {
         path: 'dashboard',
-        element: <Dashboard />,
-      }, // 首页
+        element: <Dashboard />
+      },
       {
         path: 'heroes',
         children: [
           { index: true, element: <Navigate to="/dashboard" replace /> },
           {
             path: 'profile',
-            element: <Dashboard />,
-          }, // 英雄档案
+            element: <Dashboard />
+          },
           {
             path: 'voice',
-            element: <VoiceAnimation />,
-          }, // 语音动画
-        ],
-      }, // 英雄
-      { path: 'skins', element: <Placeholder name="皮肤" /> }, // 皮肤
-      { path: 'explore', element: <Placeholder name="专题探索" /> }, // 专题探索
+            element: <VoiceAnimation />
+          }
+        ]
+      },
+      { path: 'skins', element: <Placeholder name="皮肤" /> },
+      { path: 'explore', element: <Placeholder name="专题探索" /> },
       {
         path: 'community',
-        element: <Community />,
-      }, // 玩家社区
+        element: <Community />
+      },
       {
         path: 'settings',
-        element: <Profile />,
-      }, // 个人主页
-      { path: 'about', element: <Placeholder name="关于" /> }, // 关于
-    ],
-  },
-  { path: '*', element: <Navigate to="/dashboard" replace /> },
+        element: <Profile />
+      },
+      { path: 'about', element: <Placeholder name="关于" /> },
+      { path: '403', element: <Error403 /> },
+      { path: '404', element: <Error404 /> },
+      { path: '500', element: <Error500 /> },
+      { path: '*', element: <Error404 /> }
+    ]
+  }
 ]);
 
 export default router;

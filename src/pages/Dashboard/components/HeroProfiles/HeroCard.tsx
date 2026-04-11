@@ -102,7 +102,7 @@ export const HeroCard: React.FC<HeroCardProps> = ({
               }}
             >
               {/* 标签：灰色 */}
-              <div className="flex items-center text-neutral-400 text-sm flex-shrink-0">
+              <div className="flex items-center text-neutral-400 text-sm shrink-0">
                 {/* 图标 */}
                 <img
                   src={item.icon}
@@ -112,7 +112,7 @@ export const HeroCard: React.FC<HeroCardProps> = ({
                 <em className="not-italic">{item.label}：</em>
               </div>
               {/* 数值：改为白色 */}
-              <span className="text-white text-sm font-medium ml-2 flex-shrink-0">
+              <span className="text-white text-sm font-medium ml-2 shrink-0">
                 {item.value}
               </span>
             </li>

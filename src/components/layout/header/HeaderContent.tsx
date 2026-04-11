@@ -1,8 +1,7 @@
 import { Space } from 'antd';
 import { BellOutlined, CommentOutlined, MailFilled } from '@ant-design/icons';
 import React from 'react';
-import { ThemeToggle } from '../../common/ThemeToggle';
-import { NavigationButtons } from '../header/NavigationButtons';
+import { TabManager } from '../header/TabManager';
 import { MessageIcon } from '../header/MessageIcon';
 import { UserDropdown } from '../header/UserDropdown';
 import { NotificationPopup } from './PopupProps/NotificationPopup';
@@ -10,46 +9,31 @@ import { CommentPopup } from './PopupProps/CommentPopup';
 import { MailPopup } from './PopupProps/MailPopup';
 import { messageConfig } from './constants';
 
-interface HeaderContentProps {
-  themeMode: 'dark' | 'light';
-  toggleTheme: () => void;
-}
-
-export const HeaderContent: React.FC<HeaderContentProps> = ({
-  themeMode,
-  toggleTheme,
-}) => {
-  const isDark = themeMode === 'dark';
-
+export const HeaderContent: React.FC = () => {
   return (
     <div className="flex items-center justify-between w-full gap-6">
-      {/* 左侧：箭头 + 更新按钮 */}
-      <NavigationButtons isDark={isDark} />
+      {/* 左侧：标签页管理器 */}
+      <TabManager />
 
       {/* 右侧 */}
       <Space size={16}>
-        <ThemeToggle mode={themeMode} onToggle={toggleTheme} />
-
         <MessageIcon
           icon={<BellOutlined />}
           count={messageConfig.notification.count}
-          content={<NotificationPopup isDark={isDark} />}
-          isDark={isDark}
+          content={<NotificationPopup />}
         />
         <MessageIcon
           icon={<CommentOutlined />}
           count={messageConfig.comment.count}
-          content={<CommentPopup isDark={isDark} />}
-          isDark={isDark}
+          content={<CommentPopup />}
         />
         <MessageIcon
           icon={<MailFilled />}
           count={messageConfig.mail.count}
-          content={<MailPopup isDark={isDark} />}
-          isDark={isDark}
+          content={<MailPopup />}
         />
 
-        <UserDropdown isDark={isDark} />
+        <UserDropdown />
       </Space>
     </div>
   );

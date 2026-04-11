@@ -5,15 +5,17 @@ import {
   HomeOutlined,
   DiscordOutlined,
   SettingOutlined,
-  BarChartOutlined,
   TeamOutlined,
   SkinOutlined,
   CopyrightOutlined,
+  ExclamationCircleOutlined,
+  StopOutlined,
+  WarningOutlined,
+  IssuesCloseOutlined,
 } from '@ant-design/icons';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 interface SiderMenuProps {
-  themeMode: 'dark' | 'light';
   selectedKey?: string;
   openKeys?: string[];
   onOpenChange?: (keys: string[]) => void;
@@ -32,14 +34,22 @@ const menuItems = [
     ],
   },
   { key: '/skins', icon: <SkinOutlined />, label: '皮肤' },
-  { key: '/explore', icon: <BarChartOutlined />, label: '专题探索' },
+  {
+    key: '/error-pages',
+    icon: <ExclamationCircleOutlined />,
+    label: '异常页面',
+    children: [
+      { key: '/error-pages/403', icon: <StopOutlined />, label: '403' },
+      { key: '/error-pages/404', icon: <WarningOutlined />, label: '404' },
+      { key: '/error-pages/500', icon: <IssuesCloseOutlined />, label: '500' },
+    ],
+  },
   { key: '/community', icon: <TeamOutlined />, label: '玩家社区' },
   { key: '/settings', icon: <SettingOutlined />, label: '个人主页' },
   { key: '/about', icon: <CopyrightOutlined />, label: '关于' },
 ];
 
 export const SiderMenu: React.FC<SiderMenuProps> = ({
-  themeMode,
   selectedKey,
   openKeys,
   onOpenChange,
@@ -54,14 +64,12 @@ export const SiderMenu: React.FC<SiderMenuProps> = ({
     }
   };
 
-  const isDark = themeMode === 'dark';
-
   return (
     <div
-      className={`flex-1 overflow-y-auto ${isDark ? 'bg-[#1a1a1a]' : 'bg-white'}`}
+      className="flex-1 overflow-y-auto bg-white"
     >
       <Menu
-        theme={themeMode}
+        theme="light"
         mode="inline"
         selectedKeys={[selectedKey || location.pathname]}
         openKeys={openKeys}
@@ -73,11 +81,7 @@ export const SiderMenu: React.FC<SiderMenuProps> = ({
           className: `
             rounded-xl mb-1.5 
             transition-all duration-300
-            ${
-              isDark
-                ? 'hover:bg-transparent text-gray-300'
-                : 'hover:bg-blue-500/10 text-gray-900'
-            }
+            hover:bg-blue-500/10 text-gray-900
           `.trim(),
         }))}
       />
