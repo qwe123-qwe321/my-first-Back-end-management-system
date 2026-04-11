@@ -1,4 +1,5 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
+import React, { lazy, Suspense } from 'react';
 import MainLayout from '../components/layout/MainLayout';
 import Login from '../pages/Login';
 import Dashboard from '../pages/Dashboard';
@@ -9,6 +10,19 @@ import { Placeholder } from '../components/common/Placeholder';
 import Error403 from '../pages/error/Error403';
 import Error404 from '../pages/error/Error404';
 import Error500 from '../pages/error/Error500';
+import { useAppStore } from '../store/appStore';
+
+const UserManagement = lazy(() => import('../pages/UserManagement'));
+
+const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
+  const token = useAppStore((state) => state.token);
+  const isAuthenticated = !!token || true;
+
+  if (!isAuthenticated) {
+    return <Navigate to="/login" replace />;
+  }
+  return children;
+};
 
 const router = createBrowserRouter([
   {
@@ -22,7 +36,11 @@ const router = createBrowserRouter([
       { index: true, element: <Navigate to="/dashboard" replace /> },
       {
         path: 'dashboard',
-        element: <Dashboard />
+        element: (
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        )
       },
       {
         path: 'heroes',
@@ -47,6 +65,16 @@ const router = createBrowserRouter([
       {
         path: 'settings',
         element: <Profile />
+      },
+      { 
+        path: 'users', 
+        element: (
+          <ProtectedRoute>
+            <Suspense fallback={<div className="p-8 text-center">加载中...</div>}>
+              <UserManagement />
+            </Suspense>
+          </ProtectedRoute>
+        ) 
       },
       { path: 'about', element: <Placeholder name="关于" /> },
       { path: '403', element: <Error403 /> },

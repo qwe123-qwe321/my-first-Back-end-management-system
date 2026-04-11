@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Tooltip } from 'antd';
 import { CloseOutlined } from '@ant-design/icons';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useAppStore } from '../../../store/appStore';
 
 interface TabItem {
   key: string;
@@ -10,6 +11,7 @@ interface TabItem {
 }
 
 export const TabManager: React.FC = () => {
+  const isDark = useAppStore((state) => state.isDark);
   const [tabs, setTabs] = useState<TabItem[]>([]);
   const [activeTab, setActiveTab] = useState<string>('');
   const location = useLocation();
@@ -131,7 +133,9 @@ export const TabManager: React.FC = () => {
               flex items-center gap-1 px-3 py-1 rounded-md cursor-pointer transition-all text-xs
               ${activeTab === tab.key
                 ? 'bg-blue-500 text-white'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                : isDark
+                  ? 'bg-gray-700 text-gray-200 hover:bg-gray-600'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }
             `}
           >

@@ -3,12 +3,17 @@ import { useState } from 'react';
 import { Avatar, Popover, List } from 'antd';
 import { UserOutlined, LogoutOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
-import { useUserStore } from '../../../config/user/useUserStore';
+import { useAppStore } from '../../../store/appStore';
 
 export const UserDropdown: React.FC = () => {
+  const isDark = useAppStore((state) => state.isDark);
+  const profile = useAppStore((state) => state.user);
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
-  const { profile } = useUserStore();
+
+  if (!profile) {
+    return null;
+  }
 
   const popoverContent = (
     <List
@@ -28,7 +33,7 @@ export const UserDropdown: React.FC = () => {
       ]}
       renderItem={(item) => (
         <List.Item
-          className="cursor-pointer hover:bg-gray-100/20 px-4 py-2 transition-colors text-gray-900"
+          className={`cursor-pointer hover:bg-gray-100/20 px-4 py-2 transition-colors ${isDark ? 'text-gray-200' : 'text-gray-900'}`}
           onClick={() => {
             item.action();
             setOpen(false);
@@ -50,16 +55,20 @@ export const UserDropdown: React.FC = () => {
       open={open}
       onOpenChange={setOpen}
       placement="bottomRight"
+      overlayStyle={{
+        background: isDark ? '#2a2a2a' : '#fff',
+        border: isDark ? '1px solid #374151' : '1px solid #e5e7eb',
+      }}
     >
       <div className="flex items-center gap-3 cursor-pointer group min-w-0">
         <div className="text-right hidden sm:block truncate max-w-40">
           <div
-            className="text-base font-semibold text-gray-900"
+            className={`text-base font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}
           >
             {profile.nickname}
           </div>
           <div
-            className="text-xs text-gray-600"
+            className={`text-xs ${isDark ? 'text-gray-400' : 'text-gray-600'}`}
           >
             等级:Lv.{profile.level}
           </div>
@@ -67,7 +76,7 @@ export const UserDropdown: React.FC = () => {
         <Avatar
           size="large"
           src={profile.avatar}
-          className="border-2 transition-colors cursor-pointer border-gray-300 group-hover:border-blue-500"
+          className={`border-2 transition-colors cursor-pointer ${isDark ? 'border-gray-600 group-hover:border-blue-400' : 'border-gray-300 group-hover:border-blue-500'}`}
         />
       </div>
     </Popover>

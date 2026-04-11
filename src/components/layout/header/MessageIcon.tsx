@@ -1,5 +1,6 @@
 import { Badge, Popover } from 'antd';
 import React from 'react';
+import { useAppStore } from '../../../store/appStore';
 
 interface MessageIconProps {
   icon: React.ReactNode;
@@ -9,24 +10,26 @@ interface MessageIconProps {
 
 export const MessageIcon: React.FC<MessageIconProps> = React.memo(
   ({ icon, count, content }) => {
+    const isDark = useAppStore((state) => state.isDark);
+
     return (
       <Popover
         content={content}
         trigger="click"
         placement="bottomRight"
         overlayStyle={{
-          background: '#fff',
-          border: 'none',
+          background: isDark ? '#2a2a2a' : '#fff',
+          border: isDark ? '1px solid #374151' : 'none',
           borderRadius: '8px',
           boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
         }}
       >
         <Badge count={count} size="small" offset={[-3, 4]}>
           <span
-            className="
+            className={`
             text-2xl rounded-full p-2 cursor-pointer transition-all
-            text-gray-900 hover:bg-gray-200/20
-          "
+            ${isDark ? 'text-gray-200 hover:bg-gray-700' : 'text-gray-900 hover:bg-gray-200/20'}
+          `}
           >
             {icon}
           </span>

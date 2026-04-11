@@ -7,8 +7,10 @@ import { SourceChart } from './Charts/SourceChart';
 import { WorldviewChart } from './Charts/WorldviewChart';
 import { HeroProfiles } from './HeroProfiles';
 import { KING_COLORS } from '../constants/chartConfig';
+import { useAppStore } from '../../../store/appStore';
 
 export const KingDashboard: React.FC = () => {
+  const isDark = useAppStore((state) => state.isDark);
   // 筛选状态管理
   const [time, setTime] = useState('week');
   const [hero, setHero] = useState('all');
@@ -18,6 +20,8 @@ export const KingDashboard: React.FC = () => {
   const handleTimeChange = (value: string) => setTime(value);
   const handleHeroChange = (value: string) => setHero(value);
   const handleChannelChange = (value: string) => setChannel(value);
+
+  const cardBg = isDark ? KING_COLORS.bg : '#ffffff';
 
   return (
     <div className="king-dashboard" style={{ padding: '20px 0' }}>
@@ -34,7 +38,7 @@ export const KingDashboard: React.FC = () => {
         <Col span={24}>
           <Card
             style={{
-              backgroundColor: KING_COLORS.bg,
+              backgroundColor: cardBg,
               border: 'none',
             }}
           >
@@ -46,7 +50,7 @@ export const KingDashboard: React.FC = () => {
         <Col span={12}>
           <Card
             style={{
-              backgroundColor: KING_COLORS.bg,
+              backgroundColor: cardBg,
               border: 'none',
             }}
           >
@@ -56,7 +60,7 @@ export const KingDashboard: React.FC = () => {
         <Col span={12}>
           <Card
             style={{
-              backgroundColor: KING_COLORS.bg,
+              backgroundColor: cardBg,
               border: 'none',
             }}
           >

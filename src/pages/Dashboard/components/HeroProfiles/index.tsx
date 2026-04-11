@@ -2,8 +2,10 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { HeroCard, type HeroCardProps } from './HeroCard';
 import { heroesData } from './data';
+import { useAppStore } from '../../../../store/appStore';
 
 export const HeroProfiles: React.FC = () => {
+  const isDark = useAppStore((state) => state.isDark);
   const navigate = useNavigate();
 
   const changE = {
@@ -34,7 +36,7 @@ export const HeroProfiles: React.FC = () => {
       <h2
         style={{
           textAlign: 'center',
-          color: '#fff',
+          color: isDark ? '#e5e7eb' : '#fff',
           marginBottom: '20px',
         }}
       >

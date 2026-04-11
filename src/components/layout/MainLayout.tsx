@@ -1,13 +1,15 @@
 // 主布局组件：包含侧边栏、顶栏和内容区域，处理滚动监听
 import React, { useMemo } from 'react';
-import { ConfigProvider, Layout } from 'antd';
+import { ConfigProvider, Layout, theme } from 'antd';
 import { SiderContent } from '../../components/layout/sider/SiderContent';
 import { HeaderContent } from '../../components/layout/header/HeaderContent';
 import { Outlet, useLocation } from 'react-router-dom';
+import { useAppStore } from '../../store/appStore';
 
 const { Header, Sider, Content } = Layout;
 
 const MainLayout: React.FC = () => {
+  const isDark = useAppStore((state) => state.isDark);
   const [collapsed, setCollapsed] = React.useState(false);
   const location = useLocation();
   const [isScrolled, setIsScrolled] = React.useState(false);
@@ -16,15 +18,62 @@ const MainLayout: React.FC = () => {
   >(undefined);
   const [menuOpenKeys, setMenuOpenKeys] = React.useState<string[]>([]);
 
-  const headerBackgroundClass = 'bg-white';
+  const headerBackgroundClass = useMemo(
+    () => (isDark ? 'bg-[#1a1a1a]' : 'bg-white'),
+    [isDark]
+  );
   const headerBlurClass = useMemo(
     () => (isScrolled ? 'backdrop-blur-md' : 'backdrop-blur-xl'),
     [isScrolled]
   );
   const headerBorderClass = useMemo(
-    () => isScrolled ? 'border-gray-200/60' : 'border-gray-200',
-    [isScrolled]
+    () => (isDark ? (isScrolled ? 'border-white/20' : 'border-white/10') : (isScrolled ? 'border-gray-200/60' : 'border-gray-200')),
+    [isDark, isScrolled]
   );
+
+  const siderClass = useMemo(
+    () => (isDark ? 'bg-[#1a1a1a] shadow-xl relative' : 'bg-white shadow-xl relative'),
+    [isDark]
+  );
+
+  const contentBgClass = useMemo(
+    () => (isDark ? 'bg-[#0f0f0f]' : 'bg-[#f0f2f5]'),
+    [isDark]
+  );
+
+  const antdTheme = useMemo(() => ({
+    token: {
+      colorPrimary: '#3b82f6',
+      borderRadius: 8,
+      colorBgBase: isDark ? '#1a1a1a' : '#f8fafc',
+      colorBgContainer: isDark ? '#1a1a1a' : '#ffffff',
+      colorBgElevated: isDark ? '#2a2a2a' : '#ffffff',
+      colorText: isDark ? '#e5e7eb' : '#1f2937',
+      colorTextSecondary: isDark ? '#9ca3af' : '#6b7280',
+      colorBorder: isDark ? '#374151' : '#e5e7eb',
+      colorBorderSecondary: isDark ? '#374151' : '#f3f4f6',
+    },
+    algorithm: isDark ? theme.darkAlgorithm : theme.defaultAlgorithm,
+    components: {
+      Menu: {
+        itemBg: 'transparent',
+        itemHoverBg: isDark ? 'rgba(255,255,255,0.08)' : '#3b82f610',
+        itemSelectedBg: isDark ? '#2a2a2a' : '#3b82f630',
+        itemSelectedColor: isDark ? '#ffffff' : '#1e293b',
+        itemColor: isDark ? '#9ca3af' : '#1e293b',
+        darkItemBg: isDark ? '#1a1a1a' : '#ffffff',
+        darkItemHoverBg: isDark ? 'rgba(255,255,255,0.08)' : '#3b82f610',
+        darkItemSelectedBg: isDark ? '#2a2a2a' : '#3b82f630',
+        darkItemSelectedColor: isDark ? '#ffffff' : '#1e293b',
+        darkItemColor: isDark ? '#9ca3af' : '#1e293b',
+      },
+      Layout: {
+        siderBg: isDark ? '#1a1a1a' : '#ffffff',
+        headerBg: isDark ? '#1a1a1a' : '#ffffff',
+        bodyBg: isDark ? '#0f0f0f' : '#f0f2f5',
+      },
+    },
+  }), [isDark]);
 
   React.useEffect(() => {
     setIsScrolled(false);
@@ -147,29 +196,7 @@ const MainLayout: React.FC = () => {
    */
 
   return (
-    <ConfigProvider
-      theme={{
-        token: {
-          colorPrimary: '#3b82f6',
-          borderRadius: 8,
-          colorBgBase: '#f8fafc',
-          colorBgContainer: '#ffffff',
-        },
-        components: {
-          Menu: {
-            itemBg: 'transparent',
-            itemHoverBg: '#3b82f610',
-            itemSelectedBg: '#3b82f630',
-            itemSelectedColor: '#1e293b',
-            itemColor: '#1e293b',
-          },
-          Layout: {
-            siderBg: '#ffffff',
-            headerBg: '#ffffff',
-          },
-        },
-      }}
-    >
+    <ConfigProvider theme={antdTheme}>
       <Layout className="h-screen overflow-hidden">
         <Sider
           trigger={null}
@@ -177,7 +204,7 @@ const MainLayout: React.FC = () => {
           collapsed={collapsed}
           width={240}
           collapsedWidth={80}
-          className="bg-white shadow-xl relative"
+          className={siderClass}
         >
           <SiderContent
             collapsed={collapsed}
@@ -203,7 +230,7 @@ const MainLayout: React.FC = () => {
             <HeaderContent />
           </Header>
 
-          <Content className=" p-0 overflow-hidden relative">
+          <Content className={`p-0 overflow-hidden relative ${contentBgClass}`}>
             <div className="relative z-10 h-full overflow-x-auto">
               <Outlet />
             </div>

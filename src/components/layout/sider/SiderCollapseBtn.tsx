@@ -1,5 +1,6 @@
 import React from 'react';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
+import { useAppStore } from '../../../store/appStore';
 
 interface SiderCollapseBtnProps {
   collapsed: boolean;
@@ -8,23 +9,25 @@ interface SiderCollapseBtnProps {
 
 export const SiderCollapseBtn: React.FC<SiderCollapseBtnProps> = React.memo(
   ({ collapsed, onCollapse }) => {
+    const isDark = useAppStore((state) => state.isDark);
+
     return (
       <div
-        className="
+        className={`
         absolute bottom-0 left-0 right-0 h-10
         flex items-center justify-center
-        bg-gray-100 border-t border-gray-200
+        ${isDark ? 'bg-[#1a1a1a] border-t border-gray-700/50' : 'bg-gray-100 border-t border-gray-200'}
         cursor-pointer hover:bg-blue-600/20 transition-colors duration-200
-      "
+      `}
         onClick={onCollapse}
       >
         {collapsed ? (
           <MenuUnfoldOutlined
-            className="text-2xl text-blue-600"
+            className={`text-2xl ${isDark ? 'text-gray-400' : 'text-blue-600'}`}
           />
         ) : (
           <MenuFoldOutlined
-            className="text-2xl text-gray-900"
+            className={`text-2xl ${isDark ? 'text-gray-400' : 'text-gray-900'}`}
           />
         )}
       </div>

@@ -12,8 +12,10 @@ import {
   StopOutlined,
   WarningOutlined,
   IssuesCloseOutlined,
+  UserOutlined,
 } from '@ant-design/icons';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useAppStore } from '../../../store/appStore';
 
 interface SiderMenuProps {
   selectedKey?: string;
@@ -34,6 +36,7 @@ const menuItems = [
     ],
   },
   { key: '/skins', icon: <SkinOutlined />, label: '皮肤' },
+  { key: '/users', icon: <UserOutlined />, label: '用户管理' },
   {
     key: '/error-pages',
     icon: <ExclamationCircleOutlined />,
@@ -54,6 +57,7 @@ export const SiderMenu: React.FC<SiderMenuProps> = ({
   openKeys,
   onOpenChange,
 }) => {
+  const isDark = useAppStore((state) => state.isDark);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -66,10 +70,10 @@ export const SiderMenu: React.FC<SiderMenuProps> = ({
 
   return (
     <div
-      className="flex-1 overflow-y-auto bg-white"
+      className={`flex-1 overflow-y-auto ${isDark ? 'bg-[#1a1a1a]' : 'bg-white'}`}
     >
       <Menu
-        theme="light"
+        theme={isDark ? 'dark' : 'light'}
         mode="inline"
         selectedKeys={[selectedKey || location.pathname]}
         openKeys={openKeys}
@@ -79,9 +83,9 @@ export const SiderMenu: React.FC<SiderMenuProps> = ({
         items={menuItems.map((item) => ({
           ...item,
           className: `
-            rounded-xl mb-1.5 
+            rounded-xl mb-1.5
             transition-all duration-300
-            hover:bg-blue-500/10 text-gray-900
+            ${isDark ? 'hover:!bg-[#2a2a2a] !text-gray-200' : 'hover:!bg-blue-500/10 !text-gray-900'}
           `.trim(),
         }))}
       />
