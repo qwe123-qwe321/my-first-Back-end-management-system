@@ -29,7 +29,7 @@ const MainLayout: React.FC = () => {
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
-  }, []);
+  }, [collapsed]);
 
   const siderClass = useMemo(
     () => (isDark ? 'bg-[#1a1a1a] relative' : 'bg-white relative'),
@@ -96,6 +96,7 @@ const MainLayout: React.FC = () => {
   }), [isDark]);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setSelectedMenuKey(undefined);
     let containerEl: HTMLElement | null = null;
     let rafId = 0;
@@ -183,7 +184,7 @@ const MainLayout: React.FC = () => {
             collapsed={collapsed}
             width={220}
             collapsedWidth={64}
-            className={`${siderClass} !border-r !border-gray-200 dark:!border-gray-800`}
+            className={`${siderClass} border-r! border-gray-200! dark:border-gray-800!`}
             style={{
               position: 'sticky',
               top: 0,
@@ -204,10 +205,10 @@ const MainLayout: React.FC = () => {
         <Layout className="flex-1 flex flex-col min-w-0">
           <Header
             className={`
-              !h-14 !px-4 lg:!px-6
+              h-14! px-4! lg:px-6!
               flex items-center justify-between
-              !bg-white dark:!bg-[#141414]
-              !border-b !border-gray-200 dark:!border-gray-800
+              bg-white! dark:bg-[#141414]!
+              border-b! border-gray-200! dark:border-gray-800!
               sticky top-0 z-50
               shadow-[0_1px_2px_0_rgba(0,0,0,0.03)]
             `}
@@ -227,26 +228,26 @@ const MainLayout: React.FC = () => {
               )}
               <GlobalBreadcrumb className="hidden md:block flex-1 min-w-0" />
             </div>
-            <div className="flex-shrink-0">
+            <div className="shrink-0">
               <HeaderContent />
             </div>
           </Header>
 
-          <Content className={`flex-1 !p-4 lg:!p-6 ${contentBgClass}`}>
+          <Content className={`flex-1 p-4! lg:p-6! ${contentBgClass}`}>
             {isMobile && collapsed === false && (
               <div
                 className="fixed inset-0 bg-black/40 z-40"
                 onClick={() => setCollapsed(true)}
               />
             )}
-            <div className="max-w-[1600px] mx-auto">
-              <PageTransition mode="fade">
+            <div className="max-w-400 mx-auto">
+              <PageTransition>
                 <Outlet />
               </PageTransition>
             </div>
           </Content>
 
-          <AntFooter className="!p-0 !h-12 !border-t !border-gray-200 dark:!border-gray-800 !bg-white dark:!bg-[#141414]">
+          <AntFooter className="p-0! h-12! border-t! border-gray-200! dark:border-gray-800! bg-white! dark:bg-[#141414]!">
             <Footer />
           </AntFooter>
         </Layout>

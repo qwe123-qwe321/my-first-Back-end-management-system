@@ -51,7 +51,7 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
   };
 
   return (
-    <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-gray-900 dark:to-gray-800 rounded-2xl shadow-lg p-6 mb-6 border border-blue-100 dark:border-gray-800">
+    <div className="bg-linear-to-r from-blue-50 to-indigo-50 dark:from-gray-900 dark:to-gray-800 rounded-2xl shadow-lg p-6 mb-6 border border-blue-100 dark:border-gray-800">
       <div className="flex flex-col md:flex-row items-center md:items-start gap-6">
         {/* 头像区域 */}
         <div className="relative group">
@@ -63,7 +63,7 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
                 className="w-32 h-32 rounded-full border-4 border-white dark:border-gray-700 shadow-lg object-cover"
               />
             ) : (
-              <div className="w-32 h-32 rounded-full border-4 border-white dark:border-gray-700 shadow-lg bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
+              <div className="w-32 h-32 rounded-full border-4 border-white dark:border-gray-700 shadow-lg bg-linear-to-r from-blue-500 to-purple-600 flex items-center justify-center">
                 <span className="text-white text-4xl font-bold">
                   {profile.nickname.charAt(0)}
                 </span>
@@ -128,7 +128,7 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
           <div className="mb-6">
             <div className="flex items-center justify-between mb-2">
               <div className="flex items-center gap-3">
-                <span className="bg-gradient-to-r from-yellow-400 to-orange-500 text-gray-900 font-bold px-3 py-1 rounded-full text-sm">
+                <span className="bg-linear-to-r from-yellow-400 to-orange-500 text-gray-900 font-bold px-3 py-1 rounded-full text-sm">
                   Lv.{profile.level}
                 </span>
                 <span className="text-gray-700 dark:text-gray-300 text-sm">
@@ -141,7 +141,7 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
             </div>
             <div className="h-2 bg-gray-300 dark:bg-gray-700 rounded-full overflow-hidden">
               <div
-                className="h-full bg-gradient-to-r from-blue-500 to-purple-600 rounded-full transition-all duration-500"
+                className="h-full bg-linear-to-r from-blue-500 to-purple-600 rounded-full transition-all duration-500"
                 style={{ width: `${experienceProgress}%` }}
               ></div>
             </div>

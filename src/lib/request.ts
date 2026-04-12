@@ -18,17 +18,17 @@ export interface RequestError extends Error {
   response?: Response;
 }
 
-const errorMessages: Record<number, string> = {
-  400: '请求参数错误',
-  401: '未授权，请重新登录',
-  403: '无权限访问',
-  404: '请求的资源不存在',
-  500: '服务器错误',
-  502: '网关错误',
-  503: '服务不可用',
-  504: '网关超时',
-  network: '网络错误，请检查网络连接',
-  timeout: '请求超时，请稍后重试',
+const errorMessages: Record<string, string> = {
+  '400': '请求参数错误',
+  '401': '未授权，请重新登录',
+  '403': '无权限访问',
+  '404': '请求的资源不存在',
+  '500': '服务器错误',
+  '502': '网关错误',
+  '503': '服务不可用',
+  '504': '网关超时',
+  'network': '网络错误，请检查网络连接',
+  'timeout': '请求超时，请稍后重试',
 };
 
 class HttpRequest {
@@ -58,11 +58,11 @@ class HttpRequest {
     let errorMsg = error.message;
 
     if (error.status) {
-      errorMsg = errorMessages[error.status] || errorMessages[500];
+      errorMsg = errorMessages[String(error.status)] || errorMessages['500'];
     } else if (errorMsg.includes('AbortError')) {
-      errorMsg = errorMessages.timeout;
+      errorMsg = errorMessages['timeout'];
     } else if (errorMsg.includes('fetch')) {
-      errorMsg = errorMessages.network;
+      errorMsg = errorMessages['network'];
     }
 
     message.error(errorMsg);

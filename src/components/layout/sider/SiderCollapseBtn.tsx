@@ -20,8 +20,8 @@ export const SiderCollapseBtn: React.FC<SiderCollapseBtnProps> = React.memo(
         transition-all duration-300 ease-out
         ${
           isDark
-            ? 'bg-gradient-to-r from-[#1a1a1a] to-[#1a1a1a] border-t border-gray-700/50 hover:from-blue-900/30 hover:to-purple-900/30'
-            : 'bg-gradient-to-r from-gray-50 to-gray-100 border-t border-gray-200 hover:from-blue-50 hover:to-purple-50'
+            ? 'bg-linear-to-r from-[#1a1a1a] to-[#1a1a1a] border-t border-gray-700/50 hover:from-blue-900/30 hover:to-purple-900/30'
+            : 'bg-linear-to-r from-gray-50 to-gray-100 border-t border-gray-200 hover:from-blue-50 hover:to-purple-50'
         }
       `}
         onClick={onCollapse}

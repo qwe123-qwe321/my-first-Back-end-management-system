@@ -1,6 +1,6 @@
-import React, { useMemo } from 'react';
-import { Table, TableProps } from 'antd';
-import type { ColumnsType, TablePaginationConfig } from 'antd/es/table';
+import { useMemo } from 'react';
+import { Table } from 'antd';
+import type { TableProps, ColumnsType, TablePaginationConfig } from 'antd/es/table';
 import type { FilterValue, SorterResult } from 'antd/es/table/interface';
 import { useAppStore } from '../../store/appStore';
 

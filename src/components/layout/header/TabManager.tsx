@@ -17,6 +17,7 @@ export const TabManager: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const pathToTitle: Record<string, string> = {
     '/dashboard': '首页',
     '/heroes/profile': '英雄档案',
@@ -33,6 +34,7 @@ export const TabManager: React.FC = () => {
   };
 
   useEffect(() => {
+     
     setTabs([{
       key: '/dashboard',
       title: '首页',
@@ -45,6 +47,7 @@ export const TabManager: React.FC = () => {
     const currentPath = location.pathname;
     const currentTitle = pathToTitle[currentPath] || '未知页面';
 
+     
     setTabs(prevTabs => {
       const existingTabIndex = prevTabs.findIndex(tab => tab.key === currentPath);
 
@@ -77,7 +80,7 @@ export const TabManager: React.FC = () => {
       setActiveTab(currentPath);
       return updatedTabs;
     });
-  }, [location.pathname]);
+  }, [location.pathname, pathToTitle]);
 
   const handleTabChange = (key: string) => {
     const tab = tabs.find(tab => tab.key === key);
@@ -118,8 +121,8 @@ export const TabManager: React.FC = () => {
               transition-all duration-200 text-sm font-medium whitespace-nowrap
               ${activeTab === tab.key
                 ? isDark
-                  ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg shadow-blue-500/25'
-                  : 'bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg shadow-blue-500/25'
+                  ? 'bg-linear-to-r from-blue-600 to-purple-600 text-white shadow-lg shadow-blue-500/25'
+                  : 'bg-linear-to-r from-blue-500 to-blue-600 text-white shadow-lg shadow-blue-500/25'
                 : isDark
                   ? 'text-gray-400 hover:text-gray-200 hover:bg-gray-700/50'
                   : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'

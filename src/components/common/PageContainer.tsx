@@ -1,6 +1,5 @@
-import React from 'react';
+import type { ReactNode } from 'react';
 import { Breadcrumb } from 'antd';
-import { HomeOutlined } from '@ant-design/icons';
 import { Link, useLocation } from 'react-router-dom';
 import { useAppStore } from '../../store/appStore';
 
@@ -13,8 +12,8 @@ interface PageContainerProps {
   title: string;
   subtitle?: string;
   breadcrumbs?: BreadcrumbItem[];
-  actions?: React.ReactNode;
-  children: React.ReactNode;
+  actions?: ReactNode;
+  children: ReactNode;
   className?: string;
 }
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ConfigProvider, theme } from 'antd';
+import { ConfigProvider } from 'antd';
 import { useSkinStore } from '../../store/skinStore';
 import { Card, Button } from 'antd';
 import { CheckOutlined } from '@ant-design/icons';

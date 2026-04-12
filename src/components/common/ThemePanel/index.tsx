@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Popover, Switch } from 'antd';
 import { SunOutlined, MoonOutlined, CheckOutlined } from '@ant-design/icons';
 import { useThemeStore } from '../../../hooks/useTheme';
@@ -43,7 +43,7 @@ const themeConfigs: {
 ];
 
 export const ThemePanel: React.FC = () => {
-  const { themeMode, colorTheme, setThemeMode, setColorTheme, toggleTheme } = useThemeStore();
+  const { themeMode, colorTheme, setThemeMode, setColorTheme } = useThemeStore();
   const [open, setOpen] = useState(false);
 
   const isDark = themeMode === 'dark';

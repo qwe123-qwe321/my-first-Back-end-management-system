@@ -63,7 +63,7 @@ const Community: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 p-4 md:p-6 transition-colors duration-300">
+    <div className="min-h-screen bg-linear-to-br from-blue-50 via-white to-indigo-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 p-4 md:p-6 transition-colors duration-300">
       <div className="max-w-7xl mx-auto">
         {/* 页面标题和操作栏 */}
         <div className="mb-6">
@@ -151,7 +151,7 @@ const Community: React.FC = () => {
             id="community-iframe"
             src={communityUrl}
             title="TapTap玩家社区"
-            className="w-full h-[calc(100vh-280px)] min-h-[600px] border-0"
+            className="w-full h-[calc(100vh-280px)] min-h-150 border-0"
             allow="fullscreen"
             onLoad={handleIframeLoad}
             onError={handleIframeError}

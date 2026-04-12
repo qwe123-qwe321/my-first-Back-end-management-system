@@ -1,5 +1,4 @@
-import React, { lazy, Suspense } from 'react';
-import { Skeleton } from 'antd';
+import { lazy, Suspense } from 'react';
 
 const TrendChart = lazy(() => import('./TrendChart'));
 const SourceChart = lazy(() => import('./SourceChart'));

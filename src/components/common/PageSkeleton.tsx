@@ -39,7 +39,7 @@ export const PageSkeleton: React.FC<PageSkeletonProps> = ({ type = 'dashboard' }
 
   const renderProfileSkeleton = () => (
     <div className="p-6 space-y-6">
-      <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-gray-900 dark:to-gray-800 rounded-2xl shadow-lg p-6">
+      <div className="bg-linear-to-r from-blue-50 to-indigo-50 dark:from-gray-900 dark:to-gray-800 rounded-2xl shadow-lg p-6">
         <div className="flex flex-col md:flex-row items-center md:items-start gap-6">
           <Skeleton.Avatar size={128} shape="circle" active />
           <div className="flex-1 space-y-3">

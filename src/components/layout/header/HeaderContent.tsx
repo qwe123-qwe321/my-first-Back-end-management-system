@@ -17,7 +17,7 @@ export const HeaderContent: React.FC = () => {
         <TabManager />
       </div>
 
-      <Space size={12} className="flex-shrink-0">
+      <Space size={12} className="shrink-0">
         <ThemePanel />
 
         <MessageIcon

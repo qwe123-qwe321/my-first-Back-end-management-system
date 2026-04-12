@@ -1,8 +1,9 @@
-import React, { useCallback } from 'react';
-import { Form, FormProps, Button, Space } from 'antd';
+import { useCallback } from 'react';
+import { Form, Button, Space } from 'antd';
+import type { FormProps } from 'antd';
 import { useAppStore } from '../../store/appStore';
 
-export interface CommonFormProps<T = unknown> extends Omit<FormProps<T>, 'layout'> {
+export interface CommonFormProps<T = unknown> extends Omit<FormProps<T>, 'layout' | 'children'> {
   layout?: 'horizontal' | 'vertical' | 'inline';
   loading?: boolean;
   submitText?: string;
@@ -10,6 +11,7 @@ export interface CommonFormProps<T = unknown> extends Omit<FormProps<T>, 'layout
   showActions?: boolean;
   onSubmit?: (values: T) => void;
   onCancel?: () => void;
+  children?: React.ReactNode;
 }
 
 export function CommonForm<T = unknown>({
@@ -50,7 +52,7 @@ export function CommonForm<T = unknown>({
 
       {showActions && (
         <Form.Item
-          className={layout === 'inline' ? '!mb-0' : ''}
+          className={layout === 'inline' ? 'mb-0!' : ''}
           style={layout !== 'inline' ? { marginTop: 24 } : undefined}
         >
           <Space>
@@ -58,7 +60,7 @@ export function CommonForm<T = unknown>({
               type="primary"
               htmlType="submit"
               loading={loading}
-              className={isDark ? '!bg-blue-500' : ''}
+              className={isDark ? 'bg-blue-500!' : ''}
             >
               {submitText}
             </Button>

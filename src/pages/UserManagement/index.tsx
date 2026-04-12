@@ -259,6 +259,7 @@ export default function UserManagement() {
     [deleteMutation, form]
   );
 
+  // eslint-disable-next-line react-hooks/incompatible-library
   const table = useReactTable({
     data: users,
     columns,

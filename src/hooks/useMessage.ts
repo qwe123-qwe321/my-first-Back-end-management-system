@@ -1,5 +1,6 @@
 import { message, notification } from 'antd';
 import type { NotificationArgsProps } from 'antd';
+import type { ReactNode } from 'react';
 
 type MessageType = 'success' | 'error' | 'info' | 'warning' | 'loading';
 
@@ -10,7 +11,7 @@ interface UseMessageReturn {
     error: (content: string, duration?: number) => void;
     info: (content: string, duration?: number) => void;
     warning: (content: string, duration?: number) => void;
-    loading: (content: string, duration?: number) => Promise<() => void>;
+    loading: (content: string, duration?: number) => void;
   };
   notification: {
     show: (props: NotificationArgsProps) => void;
@@ -19,8 +20,8 @@ interface UseMessageReturn {
     info: (title: string, description?: string) => void;
     warning: (title: string, description?: string) => void;
   };
-  contextHolder: JSX.Element;
-  notificationContextHolder: JSX.Element;
+  contextHolder: ReactNode;
+  notificationContextHolder: ReactNode;
 }
 
 export const useMessage = (): UseMessageReturn => {
@@ -50,8 +51,8 @@ export const useMessage = (): UseMessageReturn => {
     warning: (content: string, duration = 3) => {
       messageApi.warning(content, duration);
     },
-    loading: async (content: string, duration = 0): Promise<() => void> => {
-      return messageApi.loading(content, duration);
+    loading: (content: string, duration = 0) => {
+      messageApi.loading(content, duration);
     },
   };
 

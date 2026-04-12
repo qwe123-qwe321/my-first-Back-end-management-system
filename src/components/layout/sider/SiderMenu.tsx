@@ -80,7 +80,7 @@ export const SiderMenu: React.FC<SiderMenuProps> = ({
         openKeys={openKeys}
         onOpenChange={onOpenChange}
         onClick={({ key }) => handleClick(key)}
-        className="!bg-transparent !border-none !px-2"
+        className="bg-transparent! border-none! px-2!"
         items={menuItems.map((item) => ({
           ...item,
           className: `

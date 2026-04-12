@@ -10,6 +10,7 @@ export const PageTransition: React.FC<PageTransitionProps> = ({ children }) => {
   const [shouldRender, setShouldRender] = useState(true);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setShouldRender(false);
     const timer = setTimeout(() => setShouldRender(true), 50);
     return () => clearTimeout(timer);
