@@ -9,33 +9,76 @@ body,
 }
 
 /* ========================================
-   Design System CSS Variables
+   Theme Color Variables (Default Blue)
    ======================================== */
-:root {
-  /* Primary Colors - 王者荣耀蓝 */
+:root,
+:root.theme-default {
   --color-primary: 59, 130, 246;
   --color-primary-light: 96, 165, 250;
   --color-primary-dark: 37, 99, 235;
+  --gradient-primary: linear-gradient(135deg, rgb(59, 130, 246), rgb(37, 99, 235));
+}
 
-  /* Accent Colors - 王者荣耀金 */
+:root.theme-purple {
+  --color-primary: 139, 92, 246;
+  --color-primary-light: 167, 139, 250;
+  --color-primary-dark: 109, 40, 217;
+  --gradient-primary: linear-gradient(135deg, rgb(139, 92, 246), rgb(109, 40, 217));
+}
+
+:root.theme-green {
+  --color-primary: 16, 185, 129;
+  --color-primary-light: 52, 211, 153;
+  --color-primary-dark: 5, 150, 105;
+  --gradient-primary: linear-gradient(135deg, rgb(16, 185, 129), rgb(5, 150, 105));
+}
+
+/* Dark Mode Theme Overrides */
+.dark,
+.dark.theme-default {
+  --color-primary: 96, 165, 250;
+  --color-primary-light: 147, 197, 253;
+  --color-primary-dark: 59, 130, 246;
+  --gradient-primary: linear-gradient(135deg, rgb(96, 165, 250), rgb(59, 130, 246));
+}
+
+.dark.theme-purple {
+  --color-primary: 167, 139, 250;
+  --color-primary-light: 196, 181, 253;
+  --color-primary-dark: 139, 92, 246;
+  --gradient-primary: linear-gradient(135deg, rgb(167, 139, 250), rgb(139, 92, 246));
+}
+
+.dark.theme-green {
+  --color-primary: 52, 211, 153;
+  --color-primary-light: 110, 231, 183;
+  --color-primary-dark: 16, 185, 129;
+  --gradient-primary: linear-gradient(135deg, rgb(52, 211, 153), rgb(16, 185, 129));
+}
+
+/* ========================================
+   Accent Colors
+   ======================================== */
+:root {
   --color-accent: 245, 158, 11;
   --color-accent-light: 251, 191, 36;
   --color-accent-dark: 217, 119, 6;
-
-  /* Gradient Colors */
-  --gradient-primary: linear-gradient(135deg, rgb(var(--color-primary)), rgb(var(--color-primary-dark)));
-  --gradient-accent: linear-gradient(135deg, rgb(var(--color-accent-light)), rgb(var(--color-accent)));
+  --gradient-accent: linear-gradient(135deg, rgb(251, 191, 36), rgb(245, 158, 11));
   --gradient-hero: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   --gradient-kog: linear-gradient(135deg, #f093fb 0%, #f5576c 50%, #ffd89b 100%);
+}
 
-  /* Shadows */
+/* ========================================
+   Shadows
+   ======================================== */
+:root {
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-  --shadow-card: 0 4px 20px -2px rgba(59, 130, 246, 0.15);
-  --shadow-card-hover: 0 8px 30px -4px rgba(59, 130, 246, 0.25);
-  --shadow-glow: 0 0 20px rgba(59, 130, 246, 0.3);
+  --shadow-card: 0 4px 20px -2px rgba(var(--color-primary), 0.15);
+  --shadow-card-hover: 0 8px 30px -4px rgba(var(--color-primary), 0.25);
+  --shadow-glow: 0 0 20px rgba(var(--color-primary), 0.3);
   --shadow-glow-accent: 0 0 20px rgba(245, 158, 11, 0.3);
 
   /* Border Radius */
@@ -66,20 +109,14 @@ body,
   --z-tooltip: 1070;
 }
 
-/* Dark Mode Variables */
 .dark {
-  --color-primary: 96, 165, 250;
-  --color-primary-light: 147, 197, 253;
-  --color-primary-dark: 59, 130, 246;
-
+  --shadow-card: 0 4px 20px -2px rgba(0, 0, 0, 0.4);
+  --shadow-card-hover: 0 8px 30px -4px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 20px rgba(var(--color-primary), 0.2);
+  --shadow-glow-accent: 0 0 20px rgba(251, 191, 36, 0.2);
   --glass-bg: rgba(26, 26, 26, 0.85);
   --glass-border: rgba(255, 255, 255, 0.08);
   --glass-shadow: 0 8px 32px 0 rgb(0 0 0 / 0.3);
-
-  --shadow-card: 0 4px 20px -2px rgba(0, 0, 0, 0.4);
-  --shadow-card-hover: 0 8px 30px -4px rgba(0, 0, 0, 0.5);
-  --shadow-glow: 0 0 20px rgba(96, 165, 250, 0.2);
-  --shadow-glow-accent: 0 0 20px rgba(251, 191, 36, 0.2);
 }
 
 /* ========================================

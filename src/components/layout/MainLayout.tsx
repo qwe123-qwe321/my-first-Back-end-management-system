@@ -6,15 +6,15 @@ import { Outlet, useLocation } from 'react-router-dom';
 import { useAppStore } from '../../store/appStore';
 import { PageTransition } from '../common/PageTransition';
 import { GlobalBreadcrumb } from '../common/GlobalBreadcrumb';
+import { Footer } from './footer/Footer';
 
-const { Header, Sider, Content } = Layout;
+const { Header, Sider, Content, Footer: AntFooter } = Layout;
 
 const MainLayout: React.FC = () => {
   const isDark = useAppStore((state) => state.isDark);
   const [collapsed, setCollapsed] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const location = useLocation();
-  const [isScrolled, setIsScrolled] = useState(false);
   const [selectedMenuKey, setSelectedMenuKey] = useState<string | undefined>(undefined);
   const [menuOpenKeys, setMenuOpenKeys] = useState<string[]>([]);
 
@@ -31,74 +31,74 @@ const MainLayout: React.FC = () => {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  const headerBackgroundClass = useMemo(
-    () => (isDark ? 'bg-[#1a1a1a]' : 'bg-white'),
-    [isDark]
-  );
-  const headerBlurClass = useMemo(
-    () => (isScrolled ? 'backdrop-blur-md' : 'backdrop-blur-xl'),
-    [isScrolled]
-  );
-  const headerBorderClass = useMemo(
-    () => (isDark ? (isScrolled ? 'border-white/20' : 'border-white/10') : (isScrolled ? 'border-gray-200/60' : 'border-gray-200')),
-    [isDark, isScrolled]
-  );
-
   const siderClass = useMemo(
-    () => (isDark ? 'bg-[#1a1a1a] shadow-xl relative' : 'bg-white shadow-xl relative'),
+    () => (isDark ? 'bg-[#1a1a1a] relative' : 'bg-white relative'),
     [isDark]
   );
 
   const contentBgClass = useMemo(
-    () => (isDark ? 'bg-[#0f0f0f]' : 'bg-[#f0f2f5]'),
+    () => (isDark ? 'bg-[#f0f2f5]' : 'bg-[#f0f2f5]'),
     [isDark]
   );
 
   const antdTheme = useMemo(() => ({
     token: {
-      colorPrimary: '#3b82f6',
-      borderRadius: 8,
-      colorBgBase: isDark ? '#1a1a1a' : '#f8fafc',
-      colorBgContainer: isDark ? '#1a1a1a' : '#ffffff',
-      colorBgElevated: isDark ? '#2a2a2a' : '#ffffff',
+      colorPrimary: '#1677ff',
+      borderRadius: 6,
+      colorBgBase: isDark ? '#1a1a1a' : '#fafafa',
+      colorBgContainer: '#ffffff',
+      colorBgElevated: '#ffffff',
       colorText: isDark ? '#e5e7eb' : '#1f2937',
       colorTextSecondary: isDark ? '#9ca3af' : '#6b7280',
       colorBorder: isDark ? '#374151' : '#e5e7eb',
-      colorBorderSecondary: isDark ? '#374151' : '#f3f4f6',
+      colorBorderSecondary: isDark ? '#30363d' : '#f3f4f6',
+      fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
+      fontSize: 14,
+      lineHeight: 1.5714,
     },
     algorithm: isDark ? theme.darkAlgorithm : theme.defaultAlgorithm,
     components: {
       Menu: {
         itemBg: 'transparent',
-        itemHoverBg: isDark ? 'rgba(255,255,255,0.08)' : '#3b82f610',
-        itemSelectedBg: isDark ? '#2a2a2a' : '#3b82f630',
-        itemSelectedColor: isDark ? '#ffffff' : '#1e293b',
-        itemColor: isDark ? '#9ca3af' : '#1e293b',
+        itemHoverBg: isDark ? 'rgba(255,255,255,0.06)' : 'rgba(22,119,255,0.06)',
+        itemSelectedBg: isDark ? 'rgba(22,119,255,0.15)' : 'rgba(22,119,255,0.1)',
+        itemSelectedColor: '#1677ff',
+        itemColor: isDark ? '#a0a0a0' : '#595959',
         darkItemBg: isDark ? '#1a1a1a' : '#ffffff',
-        darkItemHoverBg: isDark ? 'rgba(255,255,255,0.08)' : '#3b82f610',
-        darkItemSelectedBg: isDark ? '#2a2a2a' : '#3b82f630',
-        darkItemSelectedColor: isDark ? '#ffffff' : '#1e293b',
-        darkItemColor: isDark ? '#9ca3af' : '#1e293b',
+        darkItemHoverBg: isDark ? 'rgba(255,255,255,0.06)' : 'rgba(22,119,255,0.06)',
+        darkItemSelectedBg: isDark ? 'rgba(22,119,255,0.15)' : 'rgba(22,119,255,0.1)',
+        darkItemSelectedColor: '#1677ff',
+        darkItemColor: isDark ? '#a0a0a0' : '#595959',
       },
       Layout: {
         siderBg: isDark ? '#1a1a1a' : '#ffffff',
-        headerBg: isDark ? '#1a1a1a' : '#ffffff',
-        bodyBg: isDark ? '#0f0f0f' : '#f0f2f5',
+        headerBg: '#ffffff',
+        bodyBg: '#f0f2f5',
+        triggerBg: isDark ? '#2a2a2a' : '#ffffff',
+        triggerColor: isDark ? '#a0a0a0' : '#595959',
+      },
+      Card: {
+        borderRadiusLG: 8,
+      },
+      Button: {
+        borderRadius: 6,
+      },
+      Input: {
+        borderRadius: 6,
+      },
+      Select: {
+        borderRadius: 6,
+      },
+      Table: {
+        borderRadius: 8,
       },
     },
   }), [isDark]);
 
   useEffect(() => {
-    setIsScrolled(false);
     setSelectedMenuKey(undefined);
-
     let containerEl: HTMLElement | null = null;
     let rafId = 0;
-
-    const getScrollTop = () => {
-      if (containerEl) return containerEl.scrollTop;
-      return window.scrollY || document.documentElement.scrollTop || 0;
-    };
 
     const scrollToHeroProfiles = () => {
       const heroProfilesEl = document.querySelector<HTMLElement>('.danganlist');
@@ -134,16 +134,11 @@ const MainLayout: React.FC = () => {
       }
     };
 
-    const update = () => {
-      setIsScrolled(getScrollTop() > 16);
-      checkHeroProfilesVisibility();
-    };
-
     const onScroll = () => {
       if (rafId) return;
       rafId = window.requestAnimationFrame(() => {
         rafId = 0;
-        update();
+        checkHeroProfilesVisibility();
       });
     };
 
@@ -157,7 +152,7 @@ const MainLayout: React.FC = () => {
     };
 
     tryAttachContainer();
-    update();
+    checkHeroProfilesVisibility();
 
     if (location.pathname === '/heroes/profile') {
       setTimeout(() => scrollToHeroProfiles(), 300);
@@ -165,7 +160,7 @@ const MainLayout: React.FC = () => {
 
     const timer = window.setTimeout(() => {
       tryAttachContainer();
-      update();
+      checkHeroProfilesVisibility();
     }, 200);
 
     window.addEventListener('scroll', onScroll, { passive: true });
@@ -180,15 +175,21 @@ const MainLayout: React.FC = () => {
 
   return (
     <ConfigProvider theme={antdTheme}>
-      <Layout className="h-screen overflow-hidden">
+      <Layout className="min-h-screen">
         {!isMobile && (
           <Sider
             trigger={null}
             collapsible
             collapsed={collapsed}
-            width={240}
-            collapsedWidth={80}
-            className={siderClass}
+            width={220}
+            collapsedWidth={64}
+            className={`${siderClass} !border-r !border-gray-200 dark:!border-gray-800`}
+            style={{
+              position: 'sticky',
+              top: 0,
+              height: '100vh',
+              overflow: 'auto',
+            }}
           >
             <SiderContent
               collapsed={collapsed}
@@ -200,48 +201,54 @@ const MainLayout: React.FC = () => {
           </Sider>
         )}
 
-        <Layout className="flex-1 flex flex-col">
+        <Layout className="flex-1 flex flex-col min-w-0">
           <Header
-            className={[
-              headerBackgroundClass,
-              headerBlurClass,
-              'border-b px-4 md:px-6 h-16 flex items-center justify-between transition-all duration-300 z-50',
-              headerBorderClass,
-              isScrolled ? 'shadow-md' : '',
-              isDark ? 'bg-[#1a1a1a]/80' : 'bg-white/80',
-            ].filter(Boolean).join(' ')}
+            className={`
+              !h-14 !px-4 lg:!px-6
+              flex items-center justify-between
+              !bg-white dark:!bg-[#141414]
+              !border-b !border-gray-200 dark:!border-gray-800
+              sticky top-0 z-50
+              shadow-[0_1px_2px_0_rgba(0,0,0,0.03)]
+            `}
           >
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4 flex-1 min-w-0">
               {isMobile && (
                 <button
                   onClick={() => setCollapsed(!collapsed)}
-                  className={`p-2 rounded-lg transition-colors ${
-                    isDark ? 'hover:bg-white/10' : 'hover:bg-gray-100'
+                  className={`p-2 rounded-md transition-colors ${
+                    isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-100'
                   }`}
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 6h16M4 12h16M4 18h16" />
                   </svg>
                 </button>
               )}
-              <GlobalBreadcrumb className="hidden sm:block" />
+              <GlobalBreadcrumb className="hidden md:block flex-1 min-w-0" />
             </div>
-            <HeaderContent />
+            <div className="flex-shrink-0">
+              <HeaderContent />
+            </div>
           </Header>
 
-          <Content className={`p-0 overflow-hidden relative ${contentBgClass}`}>
+          <Content className={`flex-1 !p-4 lg:!p-6 ${contentBgClass}`}>
             {isMobile && collapsed === false && (
               <div
-                className="fixed inset-0 bg-black/50 z-40 transition-opacity"
+                className="fixed inset-0 bg-black/40 z-40"
                 onClick={() => setCollapsed(true)}
               />
             )}
-            <div className="relative z-10 h-full overflow-x-auto">
+            <div className="max-w-[1600px] mx-auto">
               <PageTransition mode="fade">
                 <Outlet />
               </PageTransition>
             </div>
           </Content>
+
+          <AntFooter className="!p-0 !h-12 !border-t !border-gray-200 dark:!border-gray-800 !bg-white dark:!bg-[#141414]">
+            <Footer />
+          </AntFooter>
         </Layout>
       </Layout>
     </ConfigProvider>

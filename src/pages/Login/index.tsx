@@ -4,6 +4,8 @@ import { Button, Checkbox, Flex, Form, Input, message } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import bgImage from '../../assets/bgimg/wallhaven-z8oy2g.jpg';
 import smallbgImage from '../../assets/bgimg/image.jpg';
+import { useAppStore } from '../../store/appStore';
+
 interface LoginValues {
   username?: string;
   password?: string;
@@ -11,9 +13,20 @@ interface LoginValues {
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
+  const setToken = useAppStore((state) => state.setToken);
+  const setUser = useAppStore((state) => state.setUser);
 
   const onFinish = (values: LoginValues) => {
     console.log('Received values of form: ', values);
+
+    setToken('mock-token-' + Date.now());
+    setUser({
+      id: '1',
+      nickname: values.username || 'Admin',
+      level: 12,
+      avatar: '',
+    });
+
     message.success('登录成功！');
     navigate('/dashboard');
   };

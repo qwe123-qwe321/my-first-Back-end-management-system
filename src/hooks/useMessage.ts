@@ -10,7 +10,7 @@ interface UseMessageReturn {
     error: (content: string, duration?: number) => void;
     info: (content: string, duration?: number) => void;
     warning: (content: string, duration?: number) => void;
-    loading: (content: string, duration?: number) => Promise<void>;
+    loading: (content: string, duration?: number) => Promise<() => void>;
   };
   notification: {
     show: (props: NotificationArgsProps) => void;
@@ -19,6 +19,8 @@ interface UseMessageReturn {
     info: (title: string, description?: string) => void;
     warning: (title: string, description?: string) => void;
   };
+  contextHolder: JSX.Element;
+  notificationContextHolder: JSX.Element;
 }
 
 export const useMessage = (): UseMessageReturn => {
@@ -27,7 +29,14 @@ export const useMessage = (): UseMessageReturn => {
 
   const messageUtil = {
     show: (type: MessageType, content: string, duration = 3) => {
-      (messageApi as any)[type](content, duration);
+      const methods: Record<MessageType, (msg: string, dur: number) => void> = {
+        success: messageApi.success,
+        error: messageApi.error,
+        info: messageApi.info,
+        warning: messageApi.warning,
+        loading: messageApi.loading,
+      };
+      methods[type](content, duration);
     },
     success: (content: string, duration = 3) => {
       messageApi.success(content, duration);
@@ -41,11 +50,8 @@ export const useMessage = (): UseMessageReturn => {
     warning: (content: string, duration = 3) => {
       messageApi.warning(content, duration);
     },
-    loading: async (content: string, duration = 0) => {
-      const hide = messageApi.loading(content, duration);
-      if (duration > 0) {
-        setTimeout(hide, duration * 1000);
-      }
+    loading: async (content: string, duration = 0): Promise<() => void> => {
+      return messageApi.loading(content, duration);
     },
   };
 
@@ -70,7 +76,7 @@ export const useMessage = (): UseMessageReturn => {
   return {
     message: messageUtil,
     notification: notificationUtil,
+    contextHolder,
+    notificationContextHolder,
   };
 };
-
-export { contextHolder, notificationContextHolder };
