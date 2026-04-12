@@ -9,10 +9,6 @@ import zhCN from 'antd/locale/zh_CN';
 import router from './router';
 import './index.css';
 
-if (import.meta.env.DEV) {
-  import('./mocks/browser');
-}
-
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -28,10 +24,21 @@ const AppInitializer = () => {
   return <RouterProvider router={router} />;
 };
 
+const initMSW = async () => {
+  if (import.meta.env.DEV) {
+    const { worker } = await import('./mocks/browser');
+    worker.start({
+      onUnhandledRequest: 'bypass',
+    });
+  }
+};
+
+initMSW();
+
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <ConfigProvider 
+      <ConfigProvider
         locale={zhCN}
         theme={{
           algorithm: useAppStore.getState().isDark ? theme.darkAlgorithm : theme.defaultAlgorithm,

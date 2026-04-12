@@ -3,7 +3,6 @@ import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
 import path from 'path';
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   resolve: {
@@ -12,11 +11,12 @@ export default defineConfig({
     },
   },
   build: {
-    // 配置代码分割
+    target: 'es2020',
+    cssCodeSplit: true,
+    chunkSizeWarningLimit: 1000,
     rollupOptions: {
       output: {
-        // 手动配置代码分割
-        manualChunks(id) {
+        manualChunks: (id) => {
           if (id.includes('node_modules')) {
             if (
               id.includes('react') ||
@@ -37,12 +37,19 @@ export default defineConfig({
             ) {
               return 'state';
             }
+            if (id.includes('lucide-react')) {
+              return 'icons';
+            }
+            if (id.includes('react-hook-form') || id.includes('zod')) {
+              return 'form';
+            }
+            if (id.includes('msw')) {
+              return 'mock';
+            }
             return 'vendor';
           }
         },
       },
     },
-    // 启用代码分割
-    chunkSizeWarningLimit: 1000,
   },
 });

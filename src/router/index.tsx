@@ -1,18 +1,32 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 import React, { lazy, Suspense } from 'react';
 import MainLayout from '../components/layout/MainLayout';
-import Login from '../pages/Login';
-import Dashboard from '../pages/Dashboard';
-import VoiceAnimation from '../pages/Heroes/VoiceAnimation';
-import Profile from '../pages/Profile';
-import Community from '../pages/Community';
 import { Placeholder } from '../components/common/Placeholder';
-import Error403 from '../pages/error/Error403';
-import Error404 from '../pages/error/Error404';
-import Error500 from '../pages/error/Error500';
 import { useAppStore } from '../store/appStore';
 
+const Login = lazy(() => import('../pages/Login'));
+const Dashboard = lazy(() => import('../pages/Dashboard'));
+const VoiceAnimation = lazy(() => import('../pages/Heroes/VoiceAnimation'));
+const Profile = lazy(() => import('../pages/Profile'));
+const Community = lazy(() => import('../pages/Community'));
+const Error403 = lazy(() => import('../pages/error/Error403'));
+const Error404 = lazy(() => import('../pages/error/Error404'));
+const Error500 = lazy(() => import('../pages/error/Error500'));
 const UserManagement = lazy(() => import('../pages/UserManagement'));
+const Skin = lazy(() => import('../pages/skin/Skin'));
+
+const LoadingFallback = () => (
+  <div className="flex items-center justify-center h-screen">
+    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+  </div>
+);
+
+const PageLoading = () => (
+  <div className="p-8 text-center">
+    <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+    <p className="mt-4 text-gray-500">加载中...</p>
+  </div>
+);
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const token = useAppStore((state) => state.token);
@@ -27,7 +41,11 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
 const router = createBrowserRouter([
   {
     path: '/login',
-    element: <Login />
+    element: (
+      <Suspense fallback={<LoadingFallback />}>
+        <Login />
+      </Suspense>
+    ),
   },
   {
     path: '/',
@@ -38,9 +56,11 @@ const router = createBrowserRouter([
         path: 'dashboard',
         element: (
           <ProtectedRoute>
-            <Dashboard />
+            <Suspense fallback={<PageLoading />}>
+              <Dashboard />
+            </Suspense>
           </ProtectedRoute>
-        )
+        ),
       },
       {
         path: 'heroes',
@@ -48,41 +68,114 @@ const router = createBrowserRouter([
           { index: true, element: <Navigate to="/dashboard" replace /> },
           {
             path: 'profile',
-            element: <Dashboard />
+            element: (
+              <Suspense fallback={<PageLoading />}>
+                <Dashboard />
+              </Suspense>
+            ),
           },
           {
             path: 'voice',
-            element: <VoiceAnimation />
-          }
-        ]
+            element: (
+              <Suspense fallback={<PageLoading />}>
+                <VoiceAnimation />
+              </Suspense>
+            ),
+          },
+        ],
       },
-      { path: 'skins', element: <Placeholder name="皮肤" /> },
-      { path: 'explore', element: <Placeholder name="专题探索" /> },
+      {
+        path: 'skins',
+        element: (
+          <Suspense fallback={<PageLoading />}>
+            <Skin />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'explore',
+        element: (
+          <Suspense fallback={<PageLoading />}>
+            <Placeholder name="专题探索" />
+          </Suspense>
+        ),
+      },
       {
         path: 'community',
-        element: <Community />
+        element: (
+          <Suspense fallback={<PageLoading />}>
+            <Community />
+          </Suspense>
+        ),
       },
       {
         path: 'settings',
-        element: <Profile />
+        element: (
+          <Suspense fallback={<PageLoading />}>
+            <Profile />
+          </Suspense>
+        ),
       },
-      { 
-        path: 'users', 
+      {
+        path: 'users',
         element: (
           <ProtectedRoute>
-            <Suspense fallback={<div className="p-8 text-center">加载中...</div>}>
+            <Suspense fallback={<PageLoading />}>
               <UserManagement />
             </Suspense>
           </ProtectedRoute>
-        ) 
+        ),
       },
-      { path: 'about', element: <Placeholder name="关于" /> },
-      { path: '403', element: <Error403 /> },
-      { path: '404', element: <Error404 /> },
-      { path: '500', element: <Error500 /> },
-      { path: '*', element: <Error404 /> }
-    ]
-  }
+      {
+        path: 'about',
+        element: (
+          <Suspense fallback={<PageLoading />}>
+            <Placeholder name="关于" />
+          </Suspense>
+        ),
+      },
+      {
+        path: '403',
+        element: (
+          <Suspense fallback={<PageLoading />}>
+            <Error403 />
+          </Suspense>
+        ),
+      },
+      {
+        path: '404',
+        element: (
+          <Suspense fallback={<PageLoading />}>
+            <Error404 />
+          </Suspense>
+        ),
+      },
+      {
+        path: '500',
+        element: (
+          <Suspense fallback={<PageLoading />}>
+            <Error500 />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'skin',
+        element: (
+          <Suspense fallback={<PageLoading />}>
+            <Skin />
+          </Suspense>
+        ),
+      },
+      {
+        path: '*',
+        element: (
+          <Suspense fallback={<PageLoading />}>
+            <Error404 />
+          </Suspense>
+        ),
+      },
+    ],
+  },
 ]);
 
 export default router;

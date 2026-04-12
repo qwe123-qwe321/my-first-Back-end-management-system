@@ -24,6 +24,35 @@ export interface UserData {
   createdAt: string;
 }
 
+export interface ProfileData {
+  id: string;
+  nickname: string;
+  level: number;
+  avatar: string;
+  email?: string;
+  bio?: string;
+}
+
+const defaultProfile: ProfileData = {
+  id: '1',
+  nickname: '云中君',
+  level: 12,
+  avatar: '',
+  email: 'cloud@honor.com',
+  bio: '王者荣耀玩家，热爱云中君',
+};
+
+const getStoredProfile = (): ProfileData => {
+  if (typeof window === 'undefined') return defaultProfile;
+  const stored = localStorage.getItem('profile');
+  return stored ? JSON.parse(stored) : defaultProfile;
+};
+
+const setStoredProfile = (profile: ProfileData) => {
+  if (typeof window === 'undefined') return;
+  localStorage.setItem('profile', JSON.stringify(profile));
+};
+
 export const mockUsers: UserData[] = [
   {
     id: 1,
@@ -127,6 +156,21 @@ export const mockHeroes: Hero[] = [
 let currentUsers = [...mockUsers];
 
 export const handlers = [
+  http.get('/api/user/profile', async () => {
+    await delay(200);
+    const profile = getStoredProfile();
+    return HttpResponse.json({ success: true, data: profile });
+  }),
+
+  http.put('/api/user/profile', async ({ request }) => {
+    const updatedProfile = await request.json();
+    await delay(300);
+    const currentProfile = getStoredProfile();
+    const newProfile = { ...currentProfile, ...(updatedProfile as Partial<ProfileData>) };
+    setStoredProfile(newProfile);
+    return HttpResponse.json({ success: true, data: newProfile });
+  }),
+
   http.get('/api/users', async () => {
     await delay(300);
     return HttpResponse.json({ success: true, data: currentUsers });

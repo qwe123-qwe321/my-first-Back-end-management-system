@@ -36,7 +36,6 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
       return;
     }
 
-    // 创建本地预览
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
@@ -46,7 +45,6 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
       alert('头像上传成功！');
     };
 
-    // 重置文件输入
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
     }
@@ -58,11 +56,19 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
         {/* 头像区域 */}
         <div className="relative group">
           <div className="relative">
-            <img
-              src={profile.avatar}
-              alt="用户头像"
-              className="w-32 h-32 rounded-full border-4 border-white dark:border-gray-700 shadow-lg"
-            />
+            {profile.avatar ? (
+              <img
+                src={profile.avatar}
+                alt="用户头像"
+                className="w-32 h-32 rounded-full border-4 border-white dark:border-gray-700 shadow-lg object-cover"
+              />
+            ) : (
+              <div className="w-32 h-32 rounded-full border-4 border-white dark:border-gray-700 shadow-lg bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
+                <span className="text-white text-4xl font-bold">
+                  {profile.nickname.charAt(0)}
+                </span>
+              </div>
+            )}
             {!isEditing && (
               <div className="absolute inset-0 bg-black/50 rounded-full flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer">
                 <EditOutlined className="text-white text-xl mb-1" />

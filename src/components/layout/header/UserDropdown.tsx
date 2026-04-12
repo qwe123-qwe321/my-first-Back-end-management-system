@@ -4,10 +4,11 @@ import { Avatar, Popover, List } from 'antd';
 import { UserOutlined, LogoutOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import { useAppStore } from '../../../store/appStore';
+import { useUserStore } from '../../../config/user/useUserStore';
 
 export const UserDropdown: React.FC = () => {
   const isDark = useAppStore((state) => state.isDark);
-  const profile = useAppStore((state) => state.user);
+  const profile = useUserStore((state) => state.profile);
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
 

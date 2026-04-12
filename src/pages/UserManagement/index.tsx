@@ -131,30 +131,30 @@ export default function UserManagement() {
       {
         id: 'select',
         header: ({ table }) => (
-          <button
+          <div
             onClick={() => {
               table.toggleAllRowsSelected();
             }}
-            className="p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded"
+            className="p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded cursor-pointer inline-block"
           >
             {table.getIsAllRowsSelected() ? (
               <CheckSquare className="w-4 h-4" />
             ) : (
               <Square className="w-4 h-4" />
             )}
-          </button>
+          </div>
         ),
         cell: ({ row }) => (
-          <button
+          <div
             onClick={() => row.toggleSelected()}
-            className="p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded"
+            className="p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded cursor-pointer inline-block"
           >
             {row.getIsSelected() ? (
               <CheckSquare className="w-4 h-4" />
             ) : (
               <Square className="w-4 h-4" />
             )}
-          </button>
+          </div>
         ),
         size: 50,
       },
@@ -362,7 +362,7 @@ export default function UserManagement() {
                             style={{ width: header.getSize() }}
                           >
                             {header.isPlaceholder ? null : (
-                              <button
+                              <div
                                 className={`flex items-center gap-1 font-medium ${
                                   header.column.getCanSort() ? 'cursor-pointer select-none hover:text-gray-700 dark:hover:text-gray-200' : ''
                                 }`}
@@ -379,7 +379,7 @@ export default function UserManagement() {
                                     }`}
                                   />
                                 )}
-                              </button>
+                              </div>
                             )}
                           </th>
                         ))}
