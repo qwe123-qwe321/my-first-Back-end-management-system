@@ -123,3 +123,5 @@ export const WorldviewChart: React.FC<WorldviewChartProps> = ({
     </div>
   );
 };
+
+export default WorldviewChart;

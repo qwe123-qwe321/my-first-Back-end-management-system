@@ -94,3 +94,5 @@ export const SourceChart: React.FC<SourceChartProps> = ({
     </div>
   );
 };
+
+export default SourceChart;

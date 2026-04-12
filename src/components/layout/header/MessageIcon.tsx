@@ -19,17 +19,31 @@ export const MessageIcon: React.FC<MessageIconProps> = React.memo(
         placement="bottomRight"
         overlayStyle={{
           background: isDark ? '#2a2a2a' : '#fff',
-          border: isDark ? '1px solid #374151' : 'none',
-          borderRadius: '8px',
-          boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+          border: isDark ? '1px solid #374151' : '1px solid #e5e7eb',
+          borderRadius: '12px',
+          boxShadow: isDark
+            ? '0 8px 30px rgba(0,0,0,0.4)'
+            : '0 8px 30px rgba(59,130,246,0.15)',
         }}
       >
-        <Badge count={count} size="small" offset={[-3, 4]}>
+        <Badge
+          count={count}
+          size="small"
+          offset={[-2, 2]}
+          style={{
+            backgroundColor: count > 0 ? '#ef4444' : 'transparent',
+            boxShadow: count > 0 ? '0 0 0 2px white' : 'none',
+          }}
+        >
           <span
             className={`
-            text-2xl rounded-full p-2 cursor-pointer transition-all
-            ${isDark ? 'text-gray-200 hover:bg-gray-700' : 'text-gray-900 hover:bg-gray-200/20'}
-          `}
+              text-xl rounded-xl p-2 cursor-pointer transition-all duration-200
+              ${isDark
+                ? 'text-gray-300 hover:text-white hover:bg-white/10'
+                : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+              }
+              hover:scale-110 active:scale-95
+            `}
           >
             {icon}
           </span>
@@ -38,10 +52,3 @@ export const MessageIcon: React.FC<MessageIconProps> = React.memo(
     );
   }
 );
-
-// 添加组件优化注释
-/**
- * MessageIcon 组件使用 React.memo 进行优化
- * 目的：避免在父组件重新渲染时，无状态的 MessageIcon 组件不必要的重新渲染
- * 效果：只有当 icon、count 或 content props 发生变化时，组件才会重新渲染
- */

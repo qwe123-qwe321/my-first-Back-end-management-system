@@ -17,39 +17,43 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: (id) => {
-          if (id.includes('node_modules')) {
-            if (
-              id.includes('react') ||
-              id.includes('react-dom') ||
-              id.includes('react-router-dom')
-            ) {
-              return 'vendor';
+          if (!id.includes('node_modules')) return;
+
+          const patterns = [
+            { group: 'react-vendor', pkg: ['react', 'react-dom', 'react-router-dom'] },
+            { group: 'antd', pkg: ['antd', '@ant-design/icons', '@ant-design/cssinjs'] },
+            { group: 'charts', pkg: ['echarts', 'echarts-for-react'] },
+            { group: 'state', pkg: ['zustand', '@tanstack/react-query', '@tanstack/react-query-devtools'] },
+            { group: 'form', pkg: ['react-hook-form', '@hookform/resolvers', 'zod'] },
+            { group: 'table', pkg: ['@tanstack/react-table'] },
+            { group: 'utils', pkg: ['clsx', 'tailwind-merge', 'class-variance-authority', 'lucide-react'] },
+            { group: 'msw', pkg: ['msw'] },
+          ];
+
+          for (const { group, pkg } of patterns) {
+            if (pkg.some(p => id.includes(p))) {
+              return group;
             }
-            if (id.includes('antd') || id.includes('@ant-design/icons')) {
-              return 'antd';
-            }
-            if (id.includes('echarts') || id.includes('echarts-for-react')) {
-              return 'charts';
-            }
-            if (
-              id.includes('zustand') ||
-              id.includes('@tanstack/react-query')
-            ) {
-              return 'state';
-            }
-            if (id.includes('lucide-react')) {
-              return 'icons';
-            }
-            if (id.includes('react-hook-form') || id.includes('zod')) {
-              return 'form';
-            }
-            if (id.includes('msw')) {
-              return 'mock';
-            }
-            return 'vendor';
           }
+
+          return 'vendor';
         },
+        chunkFileNames: 'assets/js/[name]-[hash].js',
+        entryFileNames: 'assets/js/[name]-[hash].js',
+        assetFileNames: 'assets/[ext]/[name]-[hash].[ext]',
       },
     },
+    reportCompressedSize: true,
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+      },
+    },
+  },
+  optimizeDeps: {
+    include: ['react', 'react-dom', 'react-router-dom'],
+    exclude: ['msw'],
   },
 });

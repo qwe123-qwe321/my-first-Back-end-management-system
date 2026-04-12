@@ -14,17 +14,11 @@ const Error404 = lazy(() => import('../pages/error/Error404'));
 const Error500 = lazy(() => import('../pages/error/Error500'));
 const UserManagement = lazy(() => import('../pages/UserManagement'));
 const Skin = lazy(() => import('../pages/skin/Skin'));
+const About = lazy(() => import('../pages/About'));
 
 const LoadingFallback = () => (
   <div className="flex items-center justify-center h-screen">
     <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-  </div>
-);
-
-const PageLoading = () => (
-  <div className="p-8 text-center">
-    <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
-    <p className="mt-4 text-gray-500">加载中...</p>
   </div>
 );
 
@@ -56,7 +50,7 @@ const router = createBrowserRouter([
         path: 'dashboard',
         element: (
           <ProtectedRoute>
-            <Suspense fallback={<PageLoading />}>
+            <Suspense fallback={<LoadingFallback />}>
               <Dashboard />
             </Suspense>
           </ProtectedRoute>
@@ -69,7 +63,7 @@ const router = createBrowserRouter([
           {
             path: 'profile',
             element: (
-              <Suspense fallback={<PageLoading />}>
+              <Suspense fallback={<LoadingFallback />}>
                 <Dashboard />
               </Suspense>
             ),
@@ -77,7 +71,7 @@ const router = createBrowserRouter([
           {
             path: 'voice',
             element: (
-              <Suspense fallback={<PageLoading />}>
+              <Suspense fallback={<LoadingFallback />}>
                 <VoiceAnimation />
               </Suspense>
             ),
@@ -87,7 +81,7 @@ const router = createBrowserRouter([
       {
         path: 'skins',
         element: (
-          <Suspense fallback={<PageLoading />}>
+          <Suspense fallback={<LoadingFallback />}>
             <Skin />
           </Suspense>
         ),
@@ -95,7 +89,7 @@ const router = createBrowserRouter([
       {
         path: 'explore',
         element: (
-          <Suspense fallback={<PageLoading />}>
+          <Suspense fallback={<LoadingFallback />}>
             <Placeholder name="专题探索" />
           </Suspense>
         ),
@@ -103,7 +97,7 @@ const router = createBrowserRouter([
       {
         path: 'community',
         element: (
-          <Suspense fallback={<PageLoading />}>
+          <Suspense fallback={<LoadingFallback />}>
             <Community />
           </Suspense>
         ),
@@ -111,7 +105,7 @@ const router = createBrowserRouter([
       {
         path: 'settings',
         element: (
-          <Suspense fallback={<PageLoading />}>
+          <Suspense fallback={<LoadingFallback />}>
             <Profile />
           </Suspense>
         ),
@@ -120,7 +114,7 @@ const router = createBrowserRouter([
         path: 'users',
         element: (
           <ProtectedRoute>
-            <Suspense fallback={<PageLoading />}>
+            <Suspense fallback={<LoadingFallback />}>
               <UserManagement />
             </Suspense>
           </ProtectedRoute>
@@ -129,15 +123,15 @@ const router = createBrowserRouter([
       {
         path: 'about',
         element: (
-          <Suspense fallback={<PageLoading />}>
-            <Placeholder name="关于" />
+          <Suspense fallback={<LoadingFallback />}>
+            <About />
           </Suspense>
         ),
       },
       {
         path: '403',
         element: (
-          <Suspense fallback={<PageLoading />}>
+          <Suspense fallback={<LoadingFallback />}>
             <Error403 />
           </Suspense>
         ),
@@ -145,7 +139,7 @@ const router = createBrowserRouter([
       {
         path: '404',
         element: (
-          <Suspense fallback={<PageLoading />}>
+          <Suspense fallback={<LoadingFallback />}>
             <Error404 />
           </Suspense>
         ),
@@ -153,7 +147,7 @@ const router = createBrowserRouter([
       {
         path: '500',
         element: (
-          <Suspense fallback={<PageLoading />}>
+          <Suspense fallback={<LoadingFallback />}>
             <Error500 />
           </Suspense>
         ),
@@ -161,7 +155,7 @@ const router = createBrowserRouter([
       {
         path: 'skin',
         element: (
-          <Suspense fallback={<PageLoading />}>
+          <Suspense fallback={<LoadingFallback />}>
             <Skin />
           </Suspense>
         ),
@@ -169,7 +163,7 @@ const router = createBrowserRouter([
       {
         path: '*',
         element: (
-          <Suspense fallback={<PageLoading />}>
+          <Suspense fallback={<LoadingFallback />}>
             <Error404 />
           </Suspense>
         ),

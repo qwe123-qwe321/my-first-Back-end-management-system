@@ -15,14 +15,35 @@
 
 ## 🚀 功能亮点
 
-- **完整的主题切换** - 支持亮色/暗黑模式，使用 Tailwind CSS 原生 dark: 类
-- **浏览器式标签页** - 支持标签页打开、切换、关闭、固定首页标签
-- **用户管理模块** - 基于 react-hook-form + zod 的完整表单验证
-- **高级数据表格** - 使用 @tanstack/react-table 实现排序、搜索、分页
-- **API 模拟** - MSW 完整的 REST API 模拟，支持 CRUD 操作
-- **状态管理** - Zustand 统一管理用户、Token、主题状态
-- **权限路由** - 路由守卫 + 组件懒加载
-- **完整错误页面** - 403/404/500 错误页面设计
+### 视觉与交互
+- **毛玻璃 Header** - 滚动时自动增强模糊效果，半透明背景提升层次感
+- **渐变标签页** - 浏览器式标签页支持打开/切换/关闭/固定，渐变高亮当前页
+- **主题无缝切换** - 一键切换亮色/暗黑模式，CSS 变量驱动实时响应
+- **页面过渡动画** - 路由切换淡入淡出动画，提升操作流畅感
+- **响应式布局** - 小屏自动折叠侧边栏，汉堡菜单 + 遮罩层
+
+### 状态与数据
+- **Zustand 状态管理** - 统一管理用户信息、Token、主题偏好，支持 localStorage 持久化
+- **MSW API 模拟** - 开发环境完整的 REST API Mock，数据持久化到 localStorage
+- **React Query** - useQuery + useMutation 实现缓存管理和乐观更新
+- **Personal Profile API** - 头像、昵称等个人资料独立接口，与 UI 状态零冲突
+
+### 表格与表单
+- **@tanstack/react-table** - 无头表格实现排序、搜索、分页、列配置
+- **react-hook-form + zod** - 高性能表单验证，类型安全的 Schema 校验
+- **用户管理 CRUD** - 完整的增删改查操作，表单预填充与验证反馈
+
+### 前端工程化
+- **Vite 分包策略** - manualChunks 拆分 antd/echarts/react 等大包，首屏加载优化
+- **React.lazy 懒加载** - 所有页面组件按需加载，Suspense 骨架屏保底
+- **Echarts 动态 import** - 图表组件独立 chunk，避免首屏体积膨胀
+- **TypeScript 严格模式** - 全链路类型推导，IDE 智能提示
+
+### 王者荣耀主题
+- **KOG HUB Logo** - 渐变发光 Logo 设计，金色装饰浮动动画
+- **侧边栏选中动效** - 左侧蓝色发光指示器，hover 图标缩放动画
+- **卡片悬停效果** - 阴影 + 边框发光 + 上浮 Transform
+- **首页背景** - 游戏原画背景图，沉浸式视觉体验
 
 ## 🛠️ 技术栈
 
@@ -85,6 +106,7 @@ src/
 ├── store/            # Zustand 状态管理
 ├── router/           # 路由配置
 ├── mocks/            # MSW 模拟数据
+├── hooks/            # 自定义 Hooks
 ├── schemas/          # Zod 验证模式
 ├── lib/              # 工具函数
 └── context/          # React Context

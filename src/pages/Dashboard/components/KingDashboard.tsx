@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { Row, Col, Card } from 'antd';
 import { ChartFilter } from './ChartFilter';
-import { TrendChart } from './Charts/TrendChart';
-import { SourceChart } from './Charts/SourceChart';
-import { WorldviewChart } from './Charts/WorldviewChart';
+import { DynamicChart } from './Charts/DynamicChart';
 import { HeroProfiles } from './HeroProfiles';
 import { KING_COLORS } from '../constants/chartConfig';
 import { useAppStore } from '../../../store/appStore';
@@ -35,8 +33,11 @@ export const KingDashboard: React.FC = () => {
               backgroundColor: cardBg,
               border: 'none',
             }}
+            styles={{
+              body: { padding: '20px 24px' }
+            }}
           >
-            <TrendChart time={time} hero={hero} channel={channel} />
+            <DynamicChart type="trend" time={time} hero={hero} channel={channel} />
           </Card>
         </Col>
 
@@ -46,8 +47,11 @@ export const KingDashboard: React.FC = () => {
               backgroundColor: cardBg,
               border: 'none',
             }}
+            styles={{
+              body: { padding: '20px 24px' }
+            }}
           >
-            <SourceChart time={time} hero={hero} channel={channel} />
+            <DynamicChart type="source" time={time} hero={hero} channel={channel} />
           </Card>
         </Col>
         <Col span={12}>
@@ -56,8 +60,11 @@ export const KingDashboard: React.FC = () => {
               backgroundColor: cardBg,
               border: 'none',
             }}
+            styles={{
+              body: { padding: '20px 24px' }
+            }}
           >
-            <WorldviewChart time={time} hero={hero} channel={channel} />
+            <DynamicChart type="worldview" time={time} hero={hero} channel={channel} />
           </Card>
         </Col>
       </Row>

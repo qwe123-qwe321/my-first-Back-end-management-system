@@ -14,30 +14,36 @@ export const SiderCollapseBtn: React.FC<SiderCollapseBtnProps> = React.memo(
     return (
       <div
         className={`
-        absolute bottom-0 left-0 right-0 h-10
+        absolute bottom-0 left-0 right-0 h-12
         flex items-center justify-center
-        ${isDark ? 'bg-[#1a1a1a] border-t border-gray-700/50' : 'bg-gray-100 border-t border-gray-200'}
-        cursor-pointer hover:bg-blue-600/20 transition-colors duration-200
+        cursor-pointer
+        transition-all duration-300 ease-out
+        ${
+          isDark
+            ? 'bg-gradient-to-r from-[#1a1a1a] to-[#1a1a1a] border-t border-gray-700/50 hover:from-blue-900/30 hover:to-purple-900/30'
+            : 'bg-gradient-to-r from-gray-50 to-gray-100 border-t border-gray-200 hover:from-blue-50 hover:to-purple-50'
+        }
       `}
         onClick={onCollapse}
       >
-        {collapsed ? (
-          <MenuUnfoldOutlined
-            className={`text-2xl ${isDark ? 'text-gray-400' : 'text-blue-600'}`}
-          />
-        ) : (
-          <MenuFoldOutlined
-            className={`text-2xl ${isDark ? 'text-gray-400' : 'text-gray-900'}`}
-          />
-        )}
+        <div
+          className={`
+          p-2 rounded-lg
+          transition-all duration-300 ease-out
+          ${
+            isDark
+              ? 'hover:bg-white/10 text-gray-400 hover:text-blue-400'
+              : 'hover:bg-blue-500/10 text-gray-600 hover:text-blue-600'
+          }
+        `}
+        >
+          {collapsed ? (
+            <MenuUnfoldOutlined className="text-xl" />
+          ) : (
+            <MenuFoldOutlined className="text-xl" />
+          )}
+        </div>
       </div>
     );
   }
 );
-
-// 添加组件优化注释
-/**
- * SiderCollapseBtn 组件使用 React.memo 进行优化
- * 目的：避免在状态变化时，无状态的 SiderCollapseBtn 组件不必要的重新渲染
- * 效果：只有当 collapsed 或 onCollapse props 发生变化时，组件才会重新渲染
- */

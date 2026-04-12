@@ -1,22 +1,35 @@
-// 主布局组件：包含侧边栏、顶栏和内容区域，处理滚动监听
-import React, { useMemo } from 'react';
+import React, { useMemo, useEffect, useState } from 'react';
 import { ConfigProvider, Layout, theme } from 'antd';
-import { SiderContent } from '../../components/layout/sider/SiderContent';
-import { HeaderContent } from '../../components/layout/header/HeaderContent';
+import { SiderContent } from './sider/SiderContent';
+import { HeaderContent } from './header/HeaderContent';
 import { Outlet, useLocation } from 'react-router-dom';
 import { useAppStore } from '../../store/appStore';
+import { PageTransition } from '../common/PageTransition';
+import { GlobalBreadcrumb } from '../common/GlobalBreadcrumb';
 
 const { Header, Sider, Content } = Layout;
 
 const MainLayout: React.FC = () => {
   const isDark = useAppStore((state) => state.isDark);
-  const [collapsed, setCollapsed] = React.useState(false);
+  const [collapsed, setCollapsed] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const location = useLocation();
-  const [isScrolled, setIsScrolled] = React.useState(false);
-  const [selectedMenuKey, setSelectedMenuKey] = React.useState<
-    string | undefined
-  >(undefined);
-  const [menuOpenKeys, setMenuOpenKeys] = React.useState<string[]>([]);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [selectedMenuKey, setSelectedMenuKey] = useState<string | undefined>(undefined);
+  const [menuOpenKeys, setMenuOpenKeys] = useState<string[]>([]);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
+      if (mobile && !collapsed) {
+        setCollapsed(true);
+      }
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const headerBackgroundClass = useMemo(
     () => (isDark ? 'bg-[#1a1a1a]' : 'bg-white'),
@@ -75,7 +88,7 @@ const MainLayout: React.FC = () => {
     },
   }), [isDark]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setIsScrolled(false);
     setSelectedMenuKey(undefined);
 
@@ -90,19 +103,11 @@ const MainLayout: React.FC = () => {
     const scrollToHeroProfiles = () => {
       const heroProfilesEl = document.querySelector<HTMLElement>('.danganlist');
       if (heroProfilesEl) {
-        const containerEl = document.querySelector<HTMLElement>(
-          '[data-page-scroll-container="true"]'
-        );
+        const containerEl = document.querySelector<HTMLElement>('[data-page-scroll-container="true"]');
         if (containerEl) {
-          containerEl.scrollTo({
-            top: heroProfilesEl.offsetTop - 80,
-            behavior: 'smooth',
-          });
+          containerEl.scrollTo({ top: heroProfilesEl.offsetTop - 80, behavior: 'smooth' });
         } else {
-          window.scrollTo({
-            top: heroProfilesEl.offsetTop - 80,
-            behavior: 'smooth',
-          });
+          window.scrollTo({ top: heroProfilesEl.offsetTop - 80, behavior: 'smooth' });
         }
       }
     };
@@ -114,16 +119,13 @@ const MainLayout: React.FC = () => {
         setMenuOpenKeys([]);
         return;
       }
-
       const rect = heroProfilesEl.getBoundingClientRect();
-      // 调整触发条件，当英雄档案标题接近顶部时触发
       const isVisible = rect.top <= 150 && rect.bottom >= 100;
 
       if (isVisible) {
         setSelectedMenuKey('/heroes/profile');
         setMenuOpenKeys(['/heroes']);
       } else if (rect.top > 300) {
-        // 当英雄档案向上滑动后，回选到首页
         setSelectedMenuKey('/dashboard');
         setMenuOpenKeys([]);
       } else {
@@ -146,38 +148,26 @@ const MainLayout: React.FC = () => {
     };
 
     const tryAttachContainer = () => {
-      const el = document.querySelector<HTMLElement>(
-        '[data-page-scroll-container="true"]'
-      );
+      const el = document.querySelector<HTMLElement>('[data-page-scroll-container="true"]');
       if (!el) return;
       if (containerEl === el) return;
-
-      if (containerEl) {
-        containerEl.removeEventListener('scroll', onScroll);
-      }
-
+      if (containerEl) containerEl.removeEventListener('scroll', onScroll);
       containerEl = el;
       containerEl.addEventListener('scroll', onScroll, { passive: true });
     };
 
-    // 页面刚切换进来时先尝试一次
     tryAttachContainer();
     update();
 
-    // 如果路径是英雄档案，滚动到英雄档案区域
     if (location.pathname === '/heroes/profile') {
-      setTimeout(() => {
-        scrollToHeroProfiles();
-      }, 300);
+      setTimeout(() => scrollToHeroProfiles(), 300);
     }
 
-    // 再延迟尝试一次（避免渲染时机问题）
     const timer = window.setTimeout(() => {
       tryAttachContainer();
       update();
     }, 200);
 
-    // 兜底监听 window：避免内部滚动容器未生效时无变化
     window.addEventListener('scroll', onScroll, { passive: true });
 
     return () => {
@@ -188,51 +178,68 @@ const MainLayout: React.FC = () => {
     };
   }, [location.pathname]);
 
-  // 添加性能优化注释
-  /**
-   * 性能优化说明：
-   * 1. 使用 useMemo 优化计算属性，避免每次渲染都重新计算
-   * 2. 这些优化可以减少不必要的重新渲染，提升组件性能
-   */
-
   return (
     <ConfigProvider theme={antdTheme}>
       <Layout className="h-screen overflow-hidden">
-        <Sider
-          trigger={null}
-          collapsible
-          collapsed={collapsed}
-          width={240}
-          collapsedWidth={80}
-          className={siderClass}
-        >
-          <SiderContent
+        {!isMobile && (
+          <Sider
+            trigger={null}
+            collapsible
             collapsed={collapsed}
-            onCollapse={() => setCollapsed(!collapsed)}
-            selectedKey={selectedMenuKey}
-            openKeys={menuOpenKeys}
-            onOpenChange={setMenuOpenKeys}
-          />
-        </Sider>
+            width={240}
+            collapsedWidth={80}
+            className={siderClass}
+          >
+            <SiderContent
+              collapsed={collapsed}
+              onCollapse={() => setCollapsed(!collapsed)}
+              selectedKey={selectedMenuKey}
+              openKeys={menuOpenKeys}
+              onOpenChange={setMenuOpenKeys}
+            />
+          </Sider>
+        )}
 
         <Layout className="flex-1 flex flex-col">
           <Header
             className={[
               headerBackgroundClass,
               headerBlurClass,
-              'border-b px-6 h-16 flex items-center justify-between transition-all duration-300',
+              'border-b px-4 md:px-6 h-16 flex items-center justify-between transition-all duration-300 z-50',
               headerBorderClass,
               isScrolled ? 'shadow-md' : '',
-            ]
-              .filter(Boolean)
-              .join(' ')}
+              isDark ? 'bg-[#1a1a1a]/80' : 'bg-white/80',
+            ].filter(Boolean).join(' ')}
           >
+            <div className="flex items-center gap-4">
+              {isMobile && (
+                <button
+                  onClick={() => setCollapsed(!collapsed)}
+                  className={`p-2 rounded-lg transition-colors ${
+                    isDark ? 'hover:bg-white/10' : 'hover:bg-gray-100'
+                  }`}
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                  </svg>
+                </button>
+              )}
+              <GlobalBreadcrumb className="hidden sm:block" />
+            </div>
             <HeaderContent />
           </Header>
 
           <Content className={`p-0 overflow-hidden relative ${contentBgClass}`}>
+            {isMobile && collapsed === false && (
+              <div
+                className="fixed inset-0 bg-black/50 z-40 transition-opacity"
+                onClick={() => setCollapsed(true)}
+              />
+            )}
             <div className="relative z-10 h-full overflow-x-auto">
-              <Outlet />
+              <PageTransition mode="fade">
+                <Outlet />
+              </PageTransition>
             </div>
           </Content>
         </Layout>
