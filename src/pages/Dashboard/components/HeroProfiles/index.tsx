@@ -47,9 +47,11 @@ export const HeroProfiles: React.FC = () => {
         style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(4, 1fr)',
+          gridAutoRows: 'minmax(0, 1fr)',
           gap: '20px',
           maxWidth: '1800px',
           margin: '0 auto',
+          alignItems: 'stretch',
         }}
       >
         {allHeroes.map((hero: HeroCardProps, index: number) => (

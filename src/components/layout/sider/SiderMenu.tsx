@@ -139,23 +139,34 @@ export const SiderMenu: React.FC<SiderMenuProps> = ({
           opacity: 0.5;
         }
         
-        .ant-menu-item-selected,
-        .ant-menu-submenu-selected {
+        .ant-menu-item-selected {
           background: linear-gradient(90deg, rgb(var(--color-primary)), rgb(var(--color-primary-dark))) !important;
           color: #ffffff !important;
         }
-        
-        .ant-menu-item-selected .ant-menu-title-content,
-        .ant-menu-submenu-selected .ant-menu-title-content {
+
+        .ant-menu-submenu-selected:not(.ant-menu-item-selected) {
+          background: transparent !important;
+          color: ${isDark ? '#a0a0a0' : '#595959'} !important;
+        }
+
+        .ant-menu-submenu-selected:not(.ant-menu-item-selected)::before {
+          opacity: 0;
+        }
+
+        .ant-menu-item-selected .ant-menu-title-content {
           color: #ffffff !important;
         }
-        
+
+        .ant-menu-submenu-open > .ant-menu-submenu-title .ant-menu-title-content {
+          color: ${isDark ? '#a0a0a0' : '#595959'} !important;
+        }
+
         .ant-menu-item .anticon,
         .ant-menu-submenu-title .anticon {
           transition: all 0.3s ease !important;
           color: ${isDark ? '#a0a0a0' : '#595959'};
         }
-        
+
         .ant-menu-item:hover .anticon,
         .ant-menu-submenu-title:hover .anticon {
           transform: scale(1.1);
@@ -165,10 +176,13 @@ export const SiderMenu: React.FC<SiderMenuProps> = ({
         .ant-menu-submenu-title:not(.ant-menu-submenu-selected):hover .anticon {
           color: rgb(var(--color-primary)) !important;
         }
-        
-        .ant-menu-item-selected .anticon,
-        .ant-menu-submenu-selected .anticon {
+
+        .ant-menu-item-selected .anticon {
           color: #ffffff !important;
+        }
+
+        .ant-menu-submenu:not(.ant-menu-submenu-selected) .ant-menu-submenu-title .anticon {
+          color: ${isDark ? '#a0a0a0' : '#595959'} !important;
         }
         
         .ant-menu-submenu .ant-menu {

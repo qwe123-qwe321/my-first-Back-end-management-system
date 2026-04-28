@@ -99,7 +99,6 @@ const MainLayout: React.FC = () => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setSelectedMenuKey(undefined);
     let containerEl: HTMLElement | null = null;
-    let rafId = 0;
 
     const scrollToHeroProfiles = () => {
       const heroProfilesEl = document.querySelector<HTMLElement>('.danganlist');
@@ -121,12 +120,12 @@ const MainLayout: React.FC = () => {
         return;
       }
       const rect = heroProfilesEl.getBoundingClientRect();
-      const isVisible = rect.top <= 150 && rect.bottom >= 100;
 
-      if (isVisible) {
+      if (rect.top <= 80 && rect.bottom > 80) {
         setSelectedMenuKey('/heroes/profile');
         setMenuOpenKeys(['/heroes']);
-      } else if (rect.top > 300) {
+        setCollapsed(false);
+      } else if (rect.bottom > 80) {
         setSelectedMenuKey('/dashboard');
         setMenuOpenKeys([]);
       } else {
@@ -136,11 +135,7 @@ const MainLayout: React.FC = () => {
     };
 
     const onScroll = () => {
-      if (rafId) return;
-      rafId = window.requestAnimationFrame(() => {
-        rafId = 0;
-        checkHeroProfilesVisibility();
-      });
+      checkHeroProfilesVisibility();
     };
 
     const tryAttachContainer = () => {
@@ -170,7 +165,6 @@ const MainLayout: React.FC = () => {
       window.clearTimeout(timer);
       if (containerEl) containerEl.removeEventListener('scroll', onScroll);
       window.removeEventListener('scroll', onScroll);
-      if (rafId) window.cancelAnimationFrame(rafId);
     };
   }, [location.pathname]);
 

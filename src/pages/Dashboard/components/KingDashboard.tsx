@@ -37,7 +37,7 @@ export const KingDashboard: React.FC = () => {
               body: { padding: '20px 24px' }
             }}
           >
-            <DynamicChart type="trend" time={time} hero={hero} channel={channel} />
+            <DynamicChart type="trend" time={time} hero={hero} channel={channel} isDark={isDark} />
           </Card>
         </Col>
 
@@ -51,7 +51,7 @@ export const KingDashboard: React.FC = () => {
               body: { padding: '20px 24px' }
             }}
           >
-            <DynamicChart type="source" time={time} hero={hero} channel={channel} />
+            <DynamicChart type="source" time={time} hero={hero} channel={channel} isDark={isDark} />
           </Card>
         </Col>
         <Col span={12}>
@@ -64,7 +64,7 @@ export const KingDashboard: React.FC = () => {
               body: { padding: '20px 24px' }
             }}
           >
-            <DynamicChart type="worldview" time={time} hero={hero} channel={channel} />
+            <DynamicChart type="worldview" time={time} hero={hero} channel={channel} isDark={isDark} />
           </Card>
         </Col>
       </Row>

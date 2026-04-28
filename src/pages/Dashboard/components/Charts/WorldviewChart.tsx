@@ -1,4 +1,4 @@
-// 世界观内容类别占比图表组件：显示玩家在不同时间范围内的世界观内容类别占比柱状图
+// 世界观内容类别占比图表组件
 import React, { useMemo } from 'react';
 import { type EChartsOption } from 'echarts';
 import ReactECharts from 'echarts-for-react';
@@ -14,12 +14,14 @@ interface WorldviewChartProps {
   time: string;
   hero: string;
   channel: string;
+  isDark: boolean;
 }
 
 export const WorldviewChart: React.FC<WorldviewChartProps> = ({
   time,
   hero,
   channel,
+  isDark,
 }) => {
   const chartData = useMemo(
     () =>
@@ -31,12 +33,10 @@ export const WorldviewChart: React.FC<WorldviewChartProps> = ({
     const adjusted = applySelectionToSeries(chartData, hero, channel, 0, 1000);
     const sum = adjusted.reduce((acc, v) => acc + v, 0) || 1;
 
-    // 百分比归一化（保证最后加总=100）
     const raw = adjusted.map((v) => (v / sum) * 100);
     const rounded = raw.map((v) => Math.floor(v));
     const rest = 100 - rounded.reduce((acc, v) => acc + v, 0);
 
-    // 把剩余的差值分配给小数部分最大的项
     const indexed = raw.map((v, i) => ({ i, frac: v - Math.floor(v) }));
     indexed.sort((a, b) => b.frac - a.frac);
     if (rest > 0) {
@@ -53,72 +53,90 @@ export const WorldviewChart: React.FC<WorldviewChartProps> = ({
     return rounded;
   }, [chartData, hero, channel]);
 
+  const colors = [
+    CHART_ACCENTS.primary,
+    CHART_ACCENTS.secondary,
+    CHART_ACCENTS.tertiary,
+    CHART_ACCENTS.quaternary,
+    CHART_ACCENTS.danger,
+  ];
+
+  const textColor = isDark ? KING_COLORS.text : '#1f2937';
+  const gridColor = isDark ? KING_COLORS.grid : '#e5e7eb';
+
   const option: EChartsOption = {
-    backgroundColor: KING_COLORS.bg,
-    textStyle: { color: KING_COLORS.text },
+    backgroundColor: 'transparent',
+    textStyle: { color: textColor },
     title: {
       text: '世界观内容类别占比',
       left: 'center',
-      textStyle: { color: KING_COLORS.text, fontSize: 16 },
+      textStyle: { color: textColor, fontSize: 16, fontWeight: 600 },
+      top: 5,
     },
     tooltip: {
       trigger: 'item',
-      backgroundColor: 'rgba(0,0,0,0.8)',
-      textStyle: { color: KING_COLORS.text },
-      borderColor: 'rgba(34, 211, 238, 0.65)',
+      backgroundColor: 'rgba(31, 41, 55, 0.95)',
+      textStyle: { color: '#e5e7eb' },
+      borderColor: '#3b82f6',
       borderWidth: 1,
+      borderRadius: 8,
+      padding: [10, 14],
     },
     legend: {
       orient: 'vertical',
-      top: 'middle',
-      right: '5%',
-      textStyle: {
-        color: KING_COLORS.text,
-        fontSize: 12,
-        fontWeight: 'bold',
-      },
+      top: 'center',
+      right: 10,
+      textStyle: { color: textColor, fontSize: 11 },
       itemWidth: 12,
       itemHeight: 12,
-      itemGap: 12,
+      itemGap: 8,
     },
     series: [
       {
         name: '内容占比',
         type: 'pie',
-        radius: ['40%', '70%'],
-        center: ['35%', '50%'],
-        data: CHART_CATEGORIES.worldview.map((name, index) => ({
-          name,
-          value: selectedWorldview[index],
-        })),
+        radius: ['38%', '65%'],
+        center: ['35%', '55%'],
+        avoidLabelOverlap: true,
+        padAngle: 2,
         itemStyle: {
-          color: (params) => {
-            const colors = [
-              CHART_ACCENTS.primary,
-              CHART_ACCENTS.secondary,
-              CHART_ACCENTS.tertiary,
-              CHART_ACCENTS.quaternary,
-              CHART_ACCENTS.danger,
-            ];
-            return colors[params.dataIndex % colors.length];
-          },
-          borderColor: KING_COLORS.bg,
+          borderRadius: 4,
+          borderColor: 'transparent',
           borderWidth: 2,
         },
         label: {
-          color: KING_COLORS.text,
-          formatter: '{b}: {c}%',
-          fontSize: 12,
-          fontWeight: 'bold',
-          textShadowColor: 'rgba(0, 0, 0, 0.8)',
-          textShadowBlur: 2,
+          show: true,
+          position: 'outside',
+          color: textColor,
+          fontSize: 11,
+          formatter: '{b}\n{c}%',
+          lineHeight: 16,
+          padding: [0, -45, 0, -45],
         },
+        labelLine: {
+          show: true,
+          length: 10,
+          length2: 35,
+          lineStyle: { color: gridColor, width: 1 },
+        },
+        emphasis: {
+          itemStyle: {
+            shadowBlur: 8,
+            shadowColor: 'rgba(0, 0, 0, 0.2)',
+          },
+          label: { fontSize: 13, fontWeight: 600 },
+        },
+        data: CHART_CATEGORIES.worldview.map((name, index) => ({
+          name,
+          value: selectedWorldview[index],
+          itemStyle: { color: colors[index % colors.length] },
+        })),
       },
     ],
   };
 
   return (
-    <div style={{ height: '350px', width: '100%' }}>
+    <div style={{ height: '320px', width: '100%' }}>
       <ReactECharts option={option} style={{ height: '100%' }} />
     </div>
   );

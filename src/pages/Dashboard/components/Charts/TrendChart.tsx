@@ -1,4 +1,4 @@
-// 英雄登场率/胜率趋势图表组件：显示英雄在不同时间范围内的登场率和胜率趋势线
+// 英雄登场率/胜率趋势图表组件
 import React, { useMemo } from 'react';
 import { type EChartsOption } from 'echarts';
 import ReactECharts from 'echarts-for-react';
@@ -10,17 +10,18 @@ import {
 } from '../../constants/chartConfig';
 
 interface TrendChartProps {
-  time: string; // week/month/season
+  time: string;
   hero: string;
   channel: string;
+  isDark: boolean;
 }
 
 export const TrendChart: React.FC<TrendChartProps> = ({
   time,
   hero,
   channel,
+  isDark,
 }) => {
-  // 根据筛选条件获取对应数据
   const chartData = useMemo(
     () => MOCK_CHART_DATA.trend[time as keyof typeof MOCK_CHART_DATA.trend],
     [time]
@@ -36,61 +37,97 @@ export const TrendChart: React.FC<TrendChartProps> = ({
     [chartData.win, hero, channel]
   );
 
-  // ECharts配置（暗黑主题 + 王者配色）
+  const bg = isDark ? KING_COLORS.bg : '#ffffff';
+  const textColor = isDark ? KING_COLORS.text : '#1f2937';
+  const gridColor = isDark ? KING_COLORS.grid : '#e5e7eb';
+
   const option: EChartsOption = {
-    backgroundColor: KING_COLORS.bg,
-    textStyle: { color: KING_COLORS.text },
+    backgroundColor: 'transparent',
+    textStyle: { color: textColor },
     title: {
       text: '英雄登场率/胜率趋势',
       left: 'center',
-      textStyle: { color: KING_COLORS.text, fontSize: 16 },
+      textStyle: { color: textColor, fontSize: 16, fontWeight: 600 },
+      top: 5,
     },
     grid: {
-      left: '3%',
-      right: '4%',
-      bottom: '3%',
+      left: 40,
+      right: 20,
+      top: 50,
+      bottom: 30,
       containLabel: true,
-      borderColor: KING_COLORS.grid,
     },
     xAxis: {
       type: 'category',
       data: chartData.xAxis,
-      axisLine: { lineStyle: { color: KING_COLORS.grid } },
-      axisLabel: { color: KING_COLORS.text },
+      axisLine: { lineStyle: { color: gridColor } },
+      axisLabel: { color: textColor, fontSize: 11 },
+      axisTick: { show: false },
     },
     yAxis: {
       type: 'value',
       max: 100,
-      axisLine: { lineStyle: { color: KING_COLORS.grid } },
-      axisLabel: { color: KING_COLORS.text },
-      splitLine: { lineStyle: { color: KING_COLORS.grid } },
+      min: 0,
+      axisLine: { show: false },
+      axisLabel: { color: textColor, fontSize: 11, formatter: '{value}%' },
+      splitLine: { lineStyle: { color: gridColor, type: 'dashed' } },
     },
     series: [
       {
         name: '登场率',
         type: 'line',
         data: selectedRate,
-        itemStyle: { color: CHART_ACCENTS.primary },
+        symbol: 'circle',
+        symbolSize: 8,
+        showSymbol: true,
+        itemStyle: {
+          color: CHART_ACCENTS.primary,
+          borderColor: bg,
+          borderWidth: 2,
+        },
         lineStyle: {
           color: CHART_ACCENTS.primary,
           width: 3,
-          shadowColor: 'rgba(59, 130, 246, 0.4)',
-          shadowBlur: 8,
         },
-        smooth: true,
+        areaStyle: {
+          color: {
+            type: 'linear',
+            x: 0, y: 0, x2: 0, y2: 1,
+            colorStops: [
+              { offset: 0, color: 'rgba(59, 130, 246, 0.35)' },
+              { offset: 1, color: 'rgba(59, 130, 246, 0.02)' },
+            ],
+          },
+        },
+        smooth: 0.4,
       },
       {
         name: '胜率',
         type: 'line',
         data: selectedWin,
-        itemStyle: { color: CHART_ACCENTS.secondary },
+        symbol: 'circle',
+        symbolSize: 8,
+        showSymbol: true,
+        itemStyle: {
+          color: CHART_ACCENTS.secondary,
+          borderColor: bg,
+          borderWidth: 2,
+        },
         lineStyle: {
           color: CHART_ACCENTS.secondary,
           width: 3,
-          shadowColor: 'rgba(99, 102, 241, 0.4)',
-          shadowBlur: 8,
         },
-        smooth: true,
+        areaStyle: {
+          color: {
+            type: 'linear',
+            x: 0, y: 0, x2: 0, y2: 1,
+            colorStops: [
+              { offset: 0, color: 'rgba(99, 102, 241, 0.35)' },
+              { offset: 1, color: 'rgba(99, 102, 241, 0.02)' },
+            ],
+          },
+        },
+        smooth: 0.4,
       },
     ],
     tooltip: {
@@ -102,10 +139,16 @@ export const TrendChart: React.FC<TrendChartProps> = ({
       borderRadius: 8,
       padding: [10, 14],
     },
+    legend: {
+      data: ['登场率', '胜率'],
+      top: 8,
+      right: 15,
+      textStyle: { color: textColor, fontSize: 12 },
+    },
   };
 
   return (
-    <div style={{ height: '400px', width: '100%' }}>
+    <div style={{ height: '320px', width: '100%' }}>
       <ReactECharts option={option} style={{ height: '100%' }} />
     </div>
   );

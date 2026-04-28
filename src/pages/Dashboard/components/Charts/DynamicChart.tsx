@@ -15,6 +15,7 @@ interface DynamicChartProps {
   time: string;
   hero: string;
   channel: string;
+  isDark: boolean;
 }
 
 export const DynamicChart: React.FC<DynamicChartProps> = ({
@@ -22,15 +23,16 @@ export const DynamicChart: React.FC<DynamicChartProps> = ({
   time,
   hero,
   channel,
+  isDark,
 }) => {
   const renderChart = () => {
     switch (type) {
       case 'trend':
-        return <TrendChart time={time} hero={hero} channel={channel} />;
+        return <TrendChart time={time} hero={hero} channel={channel} isDark={isDark} />;
       case 'source':
-        return <SourceChart time={time} hero={hero} channel={channel} />;
+        return <SourceChart time={time} hero={hero} channel={channel} isDark={isDark} />;
       case 'worldview':
-        return <WorldviewChart time={time} hero={hero} channel={channel} />;
+        return <WorldviewChart time={time} hero={hero} channel={channel} isDark={isDark} />;
       default:
         return null;
     }
