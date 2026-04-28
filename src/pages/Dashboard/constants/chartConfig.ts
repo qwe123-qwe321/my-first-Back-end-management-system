@@ -18,25 +18,25 @@ export const CHART_FILTERS = {
   ],
 };
 
-// 王者金红配色（暗黑主题适配）
+// 柔和深色配色（适配深色主题）
 export const KING_COLORS = {
-  gold: '#FFD700',
-  red: '#E6212A',
-  darkGold: '#B8860B',
-  darkRed: '#8B0000',
-  bg: '#1a1a1a',
-  text: '#F5F5F5',
-  grid: '#333333',
+  gold: '#f59e0b',
+  red: '#ef4444',
+  darkGold: '#d97706',
+  darkRed: '#dc2626',
+  bg: '#1f2937',
+  text: '#e5e7eb',
+  grid: '#374151',
 };
 
-// 图表配色：贴合王者荣耀风格，使用更协调的色彩
+// 图表配色：柔和专业风格
 export const CHART_ACCENTS = {
-  primary: '#ffd700', // 金色
-  secondary: '#60a5fa', // 蓝色
-  tertiary: '#f472b6', // 粉色
-  quaternary: '#10b981', // 绿色
-  danger: '#ef4444', // 红色
-  lineGlow: 'rgba(255, 215, 0, 0.35)',
+  primary: '#3b82f6', // 蓝色
+  secondary: '#6366f1', // 靛蓝
+  tertiary: '#8b5cf6', // 紫色
+  quaternary: '#06b6d4', // 青色
+  danger: '#f43f5e', // 玫瑰红
+  lineGlow: 'rgba(59, 130, 246, 0.3)',
 };
 
 type SelectionKey =

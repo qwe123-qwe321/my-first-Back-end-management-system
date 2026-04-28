@@ -74,17 +74,20 @@ export const SourceChart: React.FC<SourceChartProps> = ({
             ];
             return colors[params.dataIndex % colors.length];
           },
-          borderRadius: [8, 8, 0, 0],
+          borderRadius: [6, 6, 0, 0],
         },
-        barWidth: '60%',
+        barWidth: '50%',
+        barCategoryGap: '30%',
       },
     ],
     tooltip: {
       trigger: 'item',
-      backgroundColor: 'rgba(0,0,0,0.8)',
-      textStyle: { color: KING_COLORS.text },
-      borderColor: 'rgba(34, 211, 238, 0.65)',
+      backgroundColor: 'rgba(31, 41, 55, 0.95)',
+      textStyle: { color: '#e5e7eb' },
+      borderColor: '#3b82f6',
       borderWidth: 1,
+      borderRadius: 8,
+      padding: [10, 14],
     },
   };
 

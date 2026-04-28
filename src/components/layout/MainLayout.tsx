@@ -60,14 +60,14 @@ const MainLayout: React.FC = () => {
     components: {
       Menu: {
         itemBg: 'transparent',
-        itemHoverBg: isDark ? 'rgba(255,255,255,0.06)' : 'rgba(22,119,255,0.06)',
-        itemSelectedBg: isDark ? 'rgba(22,119,255,0.15)' : 'rgba(22,119,255,0.1)',
-        itemSelectedColor: '#1677ff',
+        itemHoverBg: isDark ? 'rgba(255,255,255,0.06)' : 'rgba(22,119,255,0.08)',
+        itemSelectedBg: 'linear-gradient(90deg, rgb(var(--color-primary)), rgb(var(--color-primary-dark)))',
+        itemSelectedColor: '#ffffff',
         itemColor: isDark ? '#a0a0a0' : '#595959',
         darkItemBg: isDark ? '#1a1a1a' : '#ffffff',
-        darkItemHoverBg: isDark ? 'rgba(255,255,255,0.06)' : 'rgba(22,119,255,0.06)',
-        darkItemSelectedBg: isDark ? 'rgba(22,119,255,0.15)' : 'rgba(22,119,255,0.1)',
-        darkItemSelectedColor: '#1677ff',
+        darkItemHoverBg: isDark ? 'rgba(255,255,255,0.06)' : 'rgba(22,119,255,0.08)',
+        darkItemSelectedBg: 'linear-gradient(90deg, rgb(var(--color-primary)), rgb(var(--color-primary-dark)))',
+        darkItemSelectedColor: '#ffffff',
         darkItemColor: isDark ? '#a0a0a0' : '#595959',
       },
       Layout: {

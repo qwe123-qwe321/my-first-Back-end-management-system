@@ -129,28 +129,33 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '403',
-        element: (
-          <Suspense fallback={<PageLoading />}>
-            <Error403 />
-          </Suspense>
-        ),
-      },
-      {
-        path: '404',
-        element: (
-          <Suspense fallback={<PageLoading />}>
-            <Error404 />
-          </Suspense>
-        ),
-      },
-      {
-        path: '500',
-        element: (
-          <Suspense fallback={<PageLoading />}>
-            <Error500 />
-          </Suspense>
-        ),
+        path: 'error-pages',
+        children: [
+          {
+            path: '403',
+            element: (
+              <Suspense fallback={<PageLoading />}>
+                <Error403 />
+              </Suspense>
+            ),
+          },
+          {
+            path: '404',
+            element: (
+              <Suspense fallback={<PageLoading />}>
+                <Error404 />
+              </Suspense>
+            ),
+          },
+          {
+            path: '500',
+            element: (
+              <Suspense fallback={<PageLoading />}>
+                <Error500 />
+              </Suspense>
+            ),
+          },
+        ],
       },
       {
         path: 'skin',

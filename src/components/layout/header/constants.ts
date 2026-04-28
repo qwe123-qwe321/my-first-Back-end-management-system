@@ -28,12 +28,29 @@ export const notificationList = [
 
 // 未读评论数据
 export const unreadComments = [
-  '李白在你的攻略下回复了你',
-  '马可波罗说你出装很强',
+  {
+    color: 'bg-blue-500',
+    title: '李白回复了你',
+    desc: '你的攻略写得很详细，学到了很多',
+    time: '10 分钟前',
+  },
+  {
+    color: 'bg-green-500',
+    title: '马可波罗回复了你',
+    desc: '感谢你的建议，出装确实很强',
+    time: '2 小时前',
+  },
 ];
 
 // 未读邮件数据
-export const unreadMails = ['系统发送了赛季结算报告'];
+export const unreadMails = [
+  {
+    color: 'bg-purple-500',
+    title: '系统通知',
+    desc: '赛季结算报告已生成，请查收',
+    time: '昨天',
+  },
+];
 
 // 消息配置（统一管理图标对应的count和内容类型）
 export const messageConfig = {

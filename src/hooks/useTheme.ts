@@ -1,37 +1,37 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-export type ThemeMode = 'light' | 'dark';
 export type ColorTheme = 'default' | 'purple' | 'green';
 
 interface ThemeState {
-  themeMode: ThemeMode;
   colorTheme: ColorTheme;
-  isDark: boolean;
-  setThemeMode: (mode: ThemeMode) => void;
   setColorTheme: (theme: ColorTheme) => void;
-  toggleTheme: () => void;
 }
+
+const colorMap = {
+  default: { primary: '59, 130, 246', primaryLight: '96, 165, 250', primaryDark: '37, 99, 235' },
+  purple: { primary: '139, 92, 246', primaryLight: '167, 139, 250', primaryDark: '109, 40, 217' },
+  green: { primary: '16, 185, 129', primaryLight: '52, 211, 153', primaryDark: '5, 150, 105' },
+};
+
+const applyThemeClass = (colorTheme: ColorTheme) => {
+  const root = document.documentElement;
+  root.classList.remove('theme-default', 'theme-purple', 'theme-green');
+  root.classList.add(`theme-${colorTheme}`);
+
+  const colors = colorMap[colorTheme];
+  root.style.setProperty('--color-primary', colors.primary);
+  root.style.setProperty('--color-primary-light', colors.primaryLight);
+  root.style.setProperty('--color-primary-dark', colors.primaryDark);
+};
 
 export const useThemeStore = create<ThemeState>()(
   persist(
-    (set, get) => ({
-      themeMode: 'light',
+    (set) => ({
       colorTheme: 'default',
-      isDark: false,
-      setThemeMode: (mode) => {
-        set({ themeMode: mode, isDark: mode === 'dark' });
-        applyThemeClass(mode, get().colorTheme);
-      },
       setColorTheme: (theme) => {
         set({ colorTheme: theme });
-        applyThemeClass(get().themeMode, theme);
-      },
-      toggleTheme: () => {
-        const { themeMode, colorTheme } = get();
-        const nextMode = themeMode === 'light' ? 'dark' : 'light';
-        set({ themeMode: nextMode, isDark: nextMode === 'dark' });
-        applyThemeClass(nextMode, colorTheme);
+        applyThemeClass(theme);
       },
     }),
     {
@@ -40,17 +40,7 @@ export const useThemeStore = create<ThemeState>()(
   )
 );
 
-const applyThemeClass = (mode: ThemeMode, colorTheme: ColorTheme) => {
-  const root = document.documentElement;
-
-  root.classList.remove('dark', 'light');
-  root.classList.remove('theme-default', 'theme-purple', 'theme-green');
-
-  root.classList.add(mode);
-  root.classList.add(`theme-${colorTheme}`);
-};
-
 if (typeof window !== 'undefined') {
   const state = useThemeStore.getState();
-  applyThemeClass(state.themeMode, state.colorTheme);
+  applyThemeClass(state.colorTheme);
 }

@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { Popover, Switch } from 'antd';
-import { SunOutlined, MoonOutlined, CheckOutlined } from '@ant-design/icons';
+import { Popover } from 'antd';
+import { CheckOutlined } from '@ant-design/icons';
 import { useThemeStore } from '../../../hooks/useTheme';
 import type { ColorTheme } from '../../../hooks/useTheme';
 
@@ -43,10 +43,8 @@ const themeConfigs: {
 ];
 
 export const ThemePanel: React.FC = () => {
-  const { themeMode, colorTheme, setThemeMode, setColorTheme } = useThemeStore();
+  const { colorTheme, setColorTheme } = useThemeStore();
   const [open, setOpen] = useState(false);
-
-  const isDark = themeMode === 'dark';
 
   const content = (
     <div className="w-80 p-1">
@@ -63,7 +61,7 @@ export const ThemePanel: React.FC = () => {
                 : 'hover:scale-102'
               }
             `}
-            style={{ backgroundColor: isDark ? '#262626' : '#fafafa' }}
+            style={{ backgroundColor: '#f5f5f5' }}
           >
             <div
               className="h-10 rounded-lg mb-2"
@@ -90,28 +88,6 @@ export const ThemePanel: React.FC = () => {
           </button>
         ))}
       </div>
-
-      <div className="border-t border-gray-200 dark:border-gray-700 pt-3 mt-3">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            {isDark ? (
-              <MoonOutlined className="text-gray-600 dark:text-gray-300" />
-            ) : (
-              <SunOutlined className="text-gray-600 dark:text-gray-300" />
-            )}
-            <span className="text-sm text-gray-700 dark:text-gray-200">
-              {isDark ? '深色模式' : '浅色模式'}
-            </span>
-          </div>
-          <Switch
-            checked={isDark}
-            onChange={() => setThemeMode(isDark ? 'light' : 'dark')}
-            checkedChildren={<MoonOutlined />}
-            unCheckedChildren={<SunOutlined />}
-            className="bg-gray-300 dark:bg-blue-600"
-          />
-        </div>
-      </div>
     </div>
   );
 
@@ -124,21 +100,16 @@ export const ThemePanel: React.FC = () => {
       placement="bottomRight"
       overlayClassName="theme-panel-popover"
       overlayStyle={{
-        background: isDark ? '#262626' : '#ffffff',
+        background: '#ffffff',
         borderRadius: '12px',
-        boxShadow: isDark
-          ? '0 8px 30px rgba(0,0,0,0.4)'
-          : '0 8px 30px rgba(0,0,0,0.12)',
+        boxShadow: '0 8px 30px rgba(0,0,0,0.12)',
       }}
     >
       <button
         className={`
           p-2.5 rounded-xl cursor-pointer transition-all duration-200
           flex items-center justify-center
-          ${isDark
-            ? 'text-gray-200 hover:bg-white/10'
-            : 'text-gray-600 hover:bg-gray-100'
-          }
+          text-gray-600 hover:bg-gray-100
           hover:scale-105 active:scale-95
         `}
       >

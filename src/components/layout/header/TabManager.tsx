@@ -17,7 +17,6 @@ export const TabManager: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const pathToTitle: Record<string, string> = {
     '/dashboard': '首页',
     '/heroes/profile': '英雄档案',
@@ -28,13 +27,12 @@ export const TabManager: React.FC = () => {
     '/explore': '专题探索',
     '/about': '关于',
     '/users': '用户管理',
-    '/403': '403错误',
-    '/404': '404错误',
-    '/500': '500错误',
+    '/error-pages/403': '403错误',
+    '/error-pages/404': '404错误',
+    '/error-pages/500': '500错误',
   };
 
   useEffect(() => {
-     
     setTabs([{
       key: '/dashboard',
       title: '首页',
@@ -47,7 +45,6 @@ export const TabManager: React.FC = () => {
     const currentPath = location.pathname;
     const currentTitle = pathToTitle[currentPath] || '未知页面';
 
-     
     setTabs(prevTabs => {
       const existingTabIndex = prevTabs.findIndex(tab => tab.key === currentPath);
 
@@ -120,9 +117,7 @@ export const TabManager: React.FC = () => {
               group flex items-center gap-1.5 px-3 py-1.5 rounded-lg cursor-pointer
               transition-all duration-200 text-sm font-medium whitespace-nowrap
               ${activeTab === tab.key
-                ? isDark
-                  ? 'bg-linear-to-r from-blue-600 to-purple-600 text-white shadow-lg shadow-blue-500/25'
-                  : 'bg-linear-to-r from-blue-500 to-blue-600 text-white shadow-lg shadow-blue-500/25'
+                ? 'bg-gradient-to-r from-[rgb(var(--color-primary))] to-[rgb(var(--color-primary-dark))] text-white shadow-lg'
                 : isDark
                   ? 'text-gray-400 hover:text-gray-200 hover:bg-gray-700/50'
                   : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
@@ -155,3 +150,5 @@ export const TabManager: React.FC = () => {
     </div>
   );
 };
+
+export default TabManager;
