@@ -71,7 +71,7 @@ const defaultProfile: UserProfile = {
   location: '北京市',
   birthday: '1995-06-15',
   bio: '王者荣耀资深玩家，擅长法师和射手位置。最高段位：荣耀王者，常用英雄：嫦娥、伽罗、海月。喜欢研究战术配合和英雄技能。',
-  avatar: '',
+  avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=glory&backgroundColor=8b5cf6',
   gender: 'male',
   level: 30,
   experience: 8500,

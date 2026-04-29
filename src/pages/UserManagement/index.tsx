@@ -17,46 +17,53 @@ import { Card, CardContent, CardHeader, CardTitle } from '../../components/ui/ca
 import { userFormSchema, type UserFormValues } from '../../schemas/userSchema';
 import type { UserData } from '../../mocks/handlers';
 
+const fetchWithTimeout = async (url: string, options?: RequestInit, timeout = 8000) => {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeout);
+  try {
+    const res = await fetch(url, { ...options, signal: controller.signal });
+    const data = await res.json();
+    return data;
+  } finally {
+    clearTimeout(timer);
+  }
+};
+
 const fetchUsers = async (): Promise<UserData[]> => {
-  const res = await fetch('/api/users');
-  const data = await res.json();
+  const data = await fetchWithTimeout('/api/users');
   return data.data;
 };
 
 const createUser = async (user: UserFormValues): Promise<UserData> => {
-  const res = await fetch('/api/users', {
+  const data = await fetchWithTimeout('/api/users', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(user),
   });
-  const data = await res.json();
   return data.data;
 };
 
 const updateUser = async (user: UserFormValues & { id: number }): Promise<UserData> => {
   const { id, ...rest } = user;
-  const res = await fetch(`/api/users/${id}`, {
+  const data = await fetchWithTimeout(`/api/users/${id}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(rest),
   });
-  const data = await res.json();
   return data.data;
 };
 
 const deleteUser = async (id: number): Promise<number> => {
-  const res = await fetch(`/api/users/${id}`, { method: 'DELETE' });
-  const data = await res.json();
+  const data = await fetchWithTimeout(`/api/users/${id}`, { method: 'DELETE' });
   return data.id;
 };
 
 const batchDeleteUsers = async (ids: number[]): Promise<number[]> => {
-  const res = await fetch('/api/users/batch-delete', {
+  const data = await fetchWithTimeout('/api/users/batch-delete', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ ids }),
   });
-  const data = await res.json();
   return data.ids;
 };
 
@@ -82,12 +89,21 @@ export default function UserManagement() {
       setDialogMode(null);
       form.reset();
     },
+    onError: () => {
+      setDialogMode(null);
+      form.reset();
+    },
   });
 
   const updateMutation = useMutation({
     mutationFn: updateUser,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['users'] });
+      setDialogMode(null);
+      setEditingUser(null);
+      form.reset();
+    },
+    onError: () => {
       setDialogMode(null);
       setEditingUser(null);
       form.reset();

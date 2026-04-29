@@ -25,7 +25,7 @@ export const useAppStore = create<AppState>()(
         id: '1',
         nickname: '云中君',
         level: 12,
-        avatar: 'https://picsum.photos/40',
+        avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=cloud&backgroundColor=3b82f6',
       },
       token: null,
       setUser: (user) => set({ user }),

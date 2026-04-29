@@ -23,12 +23,11 @@ const AppInitializer = () => {
 };
 
 const initMSW = async () => {
-  if (import.meta.env.DEV) {
-    const { worker } = await import('./mocks/browser');
-    worker.start({
-      onUnhandledRequest: 'bypass',
-    });
-  }
+  const { worker } = await import('./mocks/browser');
+  worker.start({
+    onUnhandledRequest: 'bypass',
+    quiet: true,
+  });
 };
 
 initMSW();
