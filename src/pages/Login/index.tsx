@@ -33,10 +33,10 @@ const Login: React.FC = () => {
 
   return (
     <div
-      className="flex items-center justify-start min-h-screen w-full bg-cover bg-center px-[10%] dark:bg-gray-950"
+      className="flex items-center justify-start min-h-screen w-full bg-cover bg-center px-[10%]"
       style={{ backgroundImage: `url(${bgImage})` }}
     >
-      <div className="flex flex-row bg-gray-300 backdrop-blur-md rounded-3xl shadow-2xl overflow-hidden w-full max-w-212.5 min-h-125 border border-gray-500 dark:bg-gray-800 dark:border-gray-700">
+      <div className="flex flex-row bg-gray-300 backdrop-blur-md rounded-3xl shadow-2xl overflow-hidden w-full max-w-212.5 min-h-125 border border-gray-500">
         {/* 左侧栏：放置小图片的空间 */}
         <div
           className="hidden md:flex md:w-1/2 "
@@ -44,12 +44,12 @@ const Login: React.FC = () => {
         ></div>
 
         {/* 右侧栏：登录表单 */}
-        <div className="w-full md:w-1/2 p-12 flex flex-col justify-center bg-gray-800 bg-opacity-80 rounded-r-3xl dark:bg-gray-900">
+        <div className="w-full md:w-1/2 p-12 flex flex-col justify-center bg-gray-800 bg-opacity-80 rounded-r-3xl">
           <div className="mb-8">
-            <h1 className="text-3xl font-bold text-gray-500 dark:text-gray-300 flex items-center justify-center">
+            <h1 className="text-3xl font-bold text-gray-500 flex items-center justify-center">
               欢迎登录
             </h1>
-            <p className="text-gray-400 dark:text-gray-400 mt-2">
+            <p className="text-gray-400 mt-2">
               Welcome back! Please enter your details.
             </p>
           </div>

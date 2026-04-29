@@ -89,7 +89,7 @@ const About: React.FC = () => {
   ];
 
   return (
-    <div className="p-6 bg-linear-to-br from-blue-50 via-white to-indigo-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-950 min-h-screen">
+    <div className="p-6 bg-linear-to-br from-blue-50 via-white to-indigo-50 min-h-screen">
       <div className="max-w-5xl mx-auto">
         <div className="mb-6 flex items-center justify-between">
           <div>

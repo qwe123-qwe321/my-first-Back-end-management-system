@@ -17,16 +17,16 @@ export const PageSkeleton: React.FC<PageSkeletonProps> = ({ type = 'dashboard' }
         </div>
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="bg-white dark:bg-[#1a1a1a] rounded-2xl p-6 shadow-sm">
+        <div className="bg-white rounded-2xl p-6 shadow-sm">
           <Skeleton.Input style={{ width: 150, height: 24 }} className="mb-4" active />
           <Skeleton.Node active style={{ width: '100%', height: 350 }} />
         </div>
-        <div className="bg-white dark:bg-[#1a1a1a] rounded-2xl p-6 shadow-sm">
+        <div className="bg-white rounded-2xl p-6 shadow-sm">
           <Skeleton.Input style={{ width: 150, height: 24 }} className="mb-4" active />
           <Skeleton.Node active style={{ width: '100%', height: 350 }} />
         </div>
       </div>
-      <div className="bg-white dark:bg-[#1a1a1a] rounded-2xl p-6 shadow-sm">
+      <div className="bg-white rounded-2xl p-6 shadow-sm">
         <Skeleton.Input style={{ width: 150, height: 24 }} className="mb-4" active />
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {[1, 2, 3, 4, 5, 6].map((i) => (
@@ -39,7 +39,7 @@ export const PageSkeleton: React.FC<PageSkeletonProps> = ({ type = 'dashboard' }
 
   const renderProfileSkeleton = () => (
     <div className="p-6 space-y-6">
-      <div className="bg-linear-to-r from-blue-50 to-indigo-50 dark:from-gray-900 dark:to-gray-800 rounded-2xl shadow-lg p-6">
+      <div className="bg-linear-to-r from-blue-50 to-indigo-50 rounded-2xl shadow-lg p-6">
         <div className="flex flex-col md:flex-row items-center md:items-start gap-6">
           <Skeleton.Avatar size={128} shape="circle" active />
           <div className="flex-1 space-y-3">
@@ -54,7 +54,7 @@ export const PageSkeleton: React.FC<PageSkeletonProps> = ({ type = 'dashboard' }
           </div>
         </div>
       </div>
-      <div className="bg-white dark:bg-[#1a1a1a] rounded-2xl p-6 shadow-sm">
+      <div className="bg-white rounded-2xl p-6 shadow-sm">
         <Skeleton.Input style={{ width: 150, height: 24 }} className="mb-4" active />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {[1, 2, 3, 4, 5, 6].map((i) => (
@@ -77,7 +77,7 @@ export const PageSkeleton: React.FC<PageSkeletonProps> = ({ type = 'dashboard' }
           <Skeleton.Button style={{ width: 80 }} active />
         </div>
       </div>
-      <div className="bg-white dark:bg-[#1a1a1a] rounded-2xl p-4 shadow-sm">
+      <div className="bg-white rounded-2xl p-4 shadow-sm">
         <div className="flex gap-4 mb-4">
           {[1, 2, 3, 4, 5].map((i) => (
             <Skeleton.Button key={i} style={{ width: 100 }} active />
@@ -105,7 +105,7 @@ export const PageSkeleton: React.FC<PageSkeletonProps> = ({ type = 'dashboard' }
       </div>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
-          <div key={i} className="bg-white dark:bg-[#1a1a1a] rounded-2xl overflow-hidden shadow-sm">
+          <div key={i} className="bg-white rounded-2xl overflow-hidden shadow-sm">
             <Skeleton.Node active style={{ width: '100%', height: 200 }} />
             <div className="p-4 space-y-2">
               <Skeleton.Input style={{ width: '80%' }} active />
@@ -125,7 +125,7 @@ export const PageSkeleton: React.FC<PageSkeletonProps> = ({ type = 'dashboard' }
       </div>
       <div className="space-y-4">
         {[1, 2, 3, 4, 5].map((i) => (
-          <div key={i} className="bg-white dark:bg-[#1a1a1a] rounded-2xl p-6 shadow-sm">
+          <div key={i} className="bg-white rounded-2xl p-6 shadow-sm">
             <div className="flex items-start gap-4">
               <Skeleton.Avatar size="large" active />
               <div className="flex-1 space-y-2">
@@ -145,13 +145,13 @@ export const PageSkeleton: React.FC<PageSkeletonProps> = ({ type = 'dashboard' }
         <Skeleton.Input size="large" style={{ width: 200, height: 32 }} active />
         <Skeleton.Input style={{ width: 150 }} className="mt-2" active />
       </div>
-      <div className="bg-white dark:bg-[#1a1a1a] rounded-2xl p-6 shadow-sm">
+      <div className="bg-white rounded-2xl p-6 shadow-sm">
         <Skeleton paragraph={{ rows: 3 }} />
       </div>
-      <div className="bg-white dark:bg-[#1a1a1a] rounded-2xl p-6 shadow-sm">
+      <div className="bg-white rounded-2xl p-6 shadow-sm">
         <Skeleton paragraph={{ rows: 8 }} />
       </div>
-      <div className="bg-white dark:bg-[#1a1a1a] rounded-2xl p-6 shadow-sm">
+      <div className="bg-white rounded-2xl p-6 shadow-sm">
         <Skeleton paragraph={{ rows: 8 }} />
       </div>
     </div>

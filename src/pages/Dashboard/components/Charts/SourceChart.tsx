@@ -1,4 +1,3 @@
-// 访问来源图表组件
 import React, { useMemo } from 'react';
 import { type EChartsOption } from 'echarts';
 import ReactECharts from 'echarts-for-react';
@@ -6,7 +5,6 @@ import {
   applySelectionToSeries,
   CHART_ACCENTS,
   CHART_CATEGORIES,
-  KING_COLORS,
   MOCK_CHART_DATA,
 } from '../../constants/chartConfig';
 
@@ -14,14 +12,12 @@ interface SourceChartProps {
   time: string;
   hero: string;
   channel: string;
-  isDark: boolean;
 }
 
 export const SourceChart: React.FC<SourceChartProps> = ({
   time,
   hero,
   channel,
-  isDark,
 }) => {
   const chartData = useMemo(
     () => MOCK_CHART_DATA.source[time as keyof typeof MOCK_CHART_DATA.source],
@@ -35,26 +31,32 @@ export const SourceChart: React.FC<SourceChartProps> = ({
 
   const colors = [
     CHART_ACCENTS.primary,
-    CHART_ACCENTS.secondary,
-    CHART_ACCENTS.tertiary,
     CHART_ACCENTS.quaternary,
+    CHART_ACCENTS.tertiary,
+    CHART_ACCENTS.secondary,
     CHART_ACCENTS.danger,
   ];
 
-  const textColor = isDark ? KING_COLORS.text : '#1f2937';
-  const gridColor = isDark ? KING_COLORS.grid : '#e5e7eb';
+  const axisLabelColor = 'rgba(255,255,255,0.5)';
+  const gridColor = 'rgba(255,255,255,0.08)';
 
   const option: EChartsOption = {
     backgroundColor: 'transparent',
-    textStyle: { color: textColor },
+    textStyle: { color: '#e5e7eb' },
     title: {
       text: '玩家访问来源',
       left: 'center',
-      textStyle: { color: textColor, fontSize: 16, fontWeight: 600 },
+      textStyle: {
+        color: '#f0f0f0',
+        fontSize: 16,
+        fontWeight: 600,
+        textShadowColor: 'rgba(59,130,246,0.15)',
+        textShadowBlur: 10,
+      },
       top: 5,
     },
     grid: {
-      left: 45,
+      left: 50,
       right: 20,
       top: 50,
       bottom: 40,
@@ -64,13 +66,13 @@ export const SourceChart: React.FC<SourceChartProps> = ({
       type: 'category',
       data: CHART_CATEGORIES.source,
       axisLine: { lineStyle: { color: gridColor } },
-      axisLabel: { color: textColor, fontSize: 11, interval: 0 },
+      axisLabel: { color: axisLabelColor, fontSize: 11, interval: 0 },
       axisTick: { show: false },
     },
     yAxis: {
       type: 'value',
       axisLine: { show: false },
-      axisLabel: { color: textColor, fontSize: 11 },
+      axisLabel: { color: axisLabelColor, fontSize: 11 },
       splitLine: { lineStyle: { color: gridColor, type: 'dashed' } },
     },
     series: [
@@ -85,21 +87,26 @@ export const SourceChart: React.FC<SourceChartProps> = ({
               x: 0, y: 0, x2: 0, y2: 1,
               colorStops: [
                 { offset: 0, color: colors[index % colors.length] },
-                { offset: 1, color: colors[index % colors.length] + '99' },
+                { offset: 0.6, color: colors[index % colors.length] + 'cc' },
+                { offset: 1, color: colors[index % colors.length] + '66' },
               ],
             },
-            borderRadius: [4, 4, 0, 0],
+            borderRadius: [6, 6, 0, 0],
+            shadowBlur: 10,
+            shadowColor: colors[index % colors.length] + '40',
           },
         })),
-        barWidth: '55%',
-        barCategoryGap: '25%',
+        barWidth: '50%',
+        barCategoryGap: '30%',
+        animationDuration: 1200,
+        animationEasing: 'elasticOut',
       },
     ],
     tooltip: {
       trigger: 'item',
-      backgroundColor: 'rgba(31, 41, 55, 0.95)',
-      textStyle: { color: '#e5e7eb' },
-      borderColor: '#3b82f6',
+      backgroundColor: 'rgba(15,15,25,0.92)',
+      textStyle: { color: '#f0f0f0' },
+      borderColor: 'rgba(59,130,246,0.4)',
       borderWidth: 1,
       borderRadius: 8,
       padding: [10, 14],

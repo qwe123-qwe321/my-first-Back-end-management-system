@@ -3,11 +3,16 @@ import { Row, Col, Card } from 'antd';
 import { ChartFilter } from './ChartFilter';
 import { DynamicChart } from './Charts/DynamicChart';
 import { HeroProfiles } from './HeroProfiles';
-import { KING_COLORS } from '../constants/chartConfig';
-import { useAppStore } from '../../../store/appStore';
+
+const cardStyle: React.CSSProperties = {
+  background: 'linear-gradient(135deg, rgba(20,20,30,0.92), rgba(15,15,25,0.88))',
+  backdropFilter: 'blur(16px)',
+  border: '1px solid rgba(255,255,255,0.06)',
+  borderRadius: '12px',
+  boxShadow: '0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05)',
+};
 
 export const KingDashboard: React.FC = () => {
-  const isDark = useAppStore((state) => state.isDark);
   const [time, setTime] = useState('week');
   const [hero, setHero] = useState('all');
   const [channel, setChannel] = useState('all');
@@ -15,8 +20,6 @@ export const KingDashboard: React.FC = () => {
   const handleTimeChange = (value: string) => setTime(value);
   const handleHeroChange = (value: string) => setHero(value);
   const handleChannelChange = (value: string) => setChannel(value);
-
-  const cardBg = isDark ? KING_COLORS.bg : '#ffffff';
 
   return (
     <div className="king-dashboard" style={{ padding: '20px 0' }}>
@@ -29,42 +32,33 @@ export const KingDashboard: React.FC = () => {
       <Row gutter={[24, 24]}>
         <Col span={24}>
           <Card
-            style={{
-              backgroundColor: cardBg,
-              border: 'none',
-            }}
+            style={cardStyle}
             styles={{
               body: { padding: '20px 24px' }
             }}
           >
-            <DynamicChart type="trend" time={time} hero={hero} channel={channel} isDark={isDark} />
+            <DynamicChart type="trend" time={time} hero={hero} channel={channel} />
           </Card>
         </Col>
 
         <Col span={12}>
           <Card
-            style={{
-              backgroundColor: cardBg,
-              border: 'none',
-            }}
+            style={cardStyle}
             styles={{
               body: { padding: '20px 24px' }
             }}
           >
-            <DynamicChart type="source" time={time} hero={hero} channel={channel} isDark={isDark} />
+            <DynamicChart type="source" time={time} hero={hero} channel={channel} />
           </Card>
         </Col>
         <Col span={12}>
           <Card
-            style={{
-              backgroundColor: cardBg,
-              border: 'none',
-            }}
+            style={cardStyle}
             styles={{
               body: { padding: '20px 24px' }
             }}
           >
-            <DynamicChart type="worldview" time={time} hero={hero} channel={channel} isDark={isDark} />
+            <DynamicChart type="worldview" time={time} hero={hero} channel={channel} />
           </Card>
         </Col>
       </Row>

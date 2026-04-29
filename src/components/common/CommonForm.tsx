@@ -1,7 +1,6 @@
 import { useCallback } from 'react';
 import { Form, Button, Space } from 'antd';
 import type { FormProps } from 'antd';
-import { useAppStore } from '../../store/appStore';
 
 export interface CommonFormProps<T = unknown> extends Omit<FormProps<T>, 'layout' | 'children'> {
   layout?: 'horizontal' | 'vertical' | 'inline';
@@ -25,7 +24,6 @@ export function CommonForm<T = unknown>({
   children,
   ...formProps
 }: CommonFormProps<T>) {
-  const isDark = useAppStore((state) => state.isDark);
   const [form] = Form.useForm<T>();
 
   const handleSubmit = useCallback((values: T) => {
@@ -60,7 +58,6 @@ export function CommonForm<T = unknown>({
               type="primary"
               htmlType="submit"
               loading={loading}
-              className={isDark ? 'bg-blue-500!' : ''}
             >
               {submitText}
             </Button>

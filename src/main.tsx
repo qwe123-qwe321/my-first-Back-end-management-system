@@ -18,8 +18,6 @@ const queryClient = new QueryClient({
   },
 });
 
-import { useAppStore } from './store/appStore';
-
 const AppInitializer = () => {
   return <RouterProvider router={router} />;
 };
@@ -41,7 +39,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       <ConfigProvider
         locale={zhCN}
         theme={{
-          algorithm: useAppStore.getState().isDark ? theme.darkAlgorithm : theme.defaultAlgorithm,
+          algorithm: theme.defaultAlgorithm,
           token: {
             colorPrimary: '#3b82f6',
             borderRadius: 8,

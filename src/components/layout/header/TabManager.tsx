@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Tooltip } from 'antd';
 import { CloseOutlined, HomeOutlined } from '@ant-design/icons';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useAppStore } from '../../../store/appStore';
 
 interface TabItem {
   key: string;
@@ -11,7 +10,6 @@ interface TabItem {
 }
 
 export const TabManager: React.FC = () => {
-  const isDark = useAppStore((state) => state.isDark);
   const [tabs, setTabs] = useState<TabItem[]>([]);
   const [activeTab, setActiveTab] = useState<string>('');
   const location = useLocation();
@@ -33,12 +31,16 @@ export const TabManager: React.FC = () => {
   };
 
   useEffect(() => {
-    setTabs([{
-      key: '/dashboard',
-      title: '首页',
-      path: '/dashboard',
-    }]);
-    setActiveTab('/dashboard');
+    // 使用函数式更新避免同步调用setState
+    const initializeTabs = () => {
+      setTabs([{
+        key: '/dashboard',
+        title: '首页',
+        path: '/dashboard',
+      }]);
+      setActiveTab('/dashboard');
+    };
+    initializeTabs();
   }, []);
 
   useEffect(() => {
@@ -77,7 +79,7 @@ export const TabManager: React.FC = () => {
       setActiveTab(currentPath);
       return updatedTabs;
     });
-  }, [location.pathname, pathToTitle]);
+  }, [location.pathname]);
 
   const handleTabChange = (key: string) => {
     const tab = tabs.find(tab => tab.key === key);
@@ -118,9 +120,7 @@ export const TabManager: React.FC = () => {
               transition-all duration-200 text-sm font-medium whitespace-nowrap
               ${activeTab === tab.key
                 ? 'bg-gradient-to-r from-[rgb(var(--color-primary))] to-[rgb(var(--color-primary-dark))] text-white shadow-lg'
-                : isDark
-                  ? 'text-gray-400 hover:text-gray-200 hover:bg-gray-700/50'
-                  : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+                : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
               }
             `}
           >
@@ -136,7 +136,7 @@ export const TabManager: React.FC = () => {
                     ml-0.5 p-0.5 rounded transition-all duration-150
                     ${activeTab === tab.key
                       ? 'hover:bg-white/20 text-white/70 hover:text-white'
-                      : 'opacity-0 group-hover:opacity-100 hover:bg-gray-200 dark:hover:bg-gray-600'
+                      : 'opacity-0 group-hover:opacity-100 hover:bg-gray-200'
                     }
                   `}
                 >

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
-import { useAppStore } from '../../store/appStore';
 
 interface ErrorPageProps {
   code: string;
@@ -9,7 +8,6 @@ interface ErrorPageProps {
 }
 
 const ErrorPage: React.FC<ErrorPageProps> = ({ code, message }) => {
-  const isDark = useAppStore((state) => state.isDark);
   const navigate = useNavigate();
 
   const goHome = () => {
@@ -17,7 +15,7 @@ const ErrorPage: React.FC<ErrorPageProps> = ({ code, message }) => {
   };
 
   return (
-    <div className="p-8">
+    <div className="flex items-center justify-center min-h-screen bg-gray-50">
       <div className="max-w-2xl mx-auto text-center">
         <div className="relative w-full h-72 mx-auto mb-8">
           {code === '403' && (
@@ -26,7 +24,7 @@ const ErrorPage: React.FC<ErrorPageProps> = ({ code, message }) => {
                 🔒
               </div>
               <div className="relative w-full h-full">
-                <div className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-52 h-52 rounded-full ${isDark ? 'bg-gray-800' : 'bg-blue-50'} z-1`}></div>
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-52 h-52 rounded-full bg-blue-50 z-1"></div>
                 <div className="absolute top-10 left-16 w-5 h-5 rounded-full bg-white/60"></div>
                 <div className="absolute bottom-10 right-16 w-8 h-8 rounded-full bg-white/60"></div>
                 <div className="absolute top-20 right-10 w-10 h-10 rounded-full bg-white/60"></div>
@@ -62,7 +60,7 @@ const ErrorPage: React.FC<ErrorPageProps> = ({ code, message }) => {
                 ?
               </div>
               <div className="relative w-full h-full">
-                <div className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-52 h-52 rounded-full ${isDark ? 'bg-gray-800' : 'bg-blue-50'} z-1`}></div>
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-52 h-52 rounded-full bg-blue-50 z-1"></div>
                 <div className="absolute top-10 left-16 w-5 h-5 rounded-full bg-white/60"></div>
                 <div className="absolute bottom-10 right-16 w-8 h-8 rounded-full bg-white/60"></div>
                 <div className="absolute top-20 right-10 w-10 h-10 rounded-full bg-white/60"></div>
@@ -82,7 +80,7 @@ const ErrorPage: React.FC<ErrorPageProps> = ({ code, message }) => {
                 </div>
 
                 <div className="absolute top-32 left-36 w-16 h-10 bg-white border-2 border-gray-200 z-4">
-                  <div className={`absolute top-[-8px] left-1/2 transform -translate-x-1/2 w-10 h-3 ${isDark ? 'bg-gray-700' : 'bg-gray-200'} rounded-t`}></div>
+                  <div className="absolute top-[-8px] left-1/2 transform -translate-x-1/2 w-10 h-3 bg-gray-200 rounded-t"></div>
                 </div>
 
                 <div className="absolute bottom-8 right-16 z-3">
@@ -102,7 +100,7 @@ const ErrorPage: React.FC<ErrorPageProps> = ({ code, message }) => {
                 !
               </div>
               <div className="relative w-full h-full">
-                <div className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-52 h-52 rounded-full ${isDark ? 'bg-gray-800' : 'bg-blue-50'} z-1`}></div>
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-52 h-52 rounded-full bg-blue-50 z-1"></div>
                 <div className="absolute top-10 left-16 w-5 h-5 rounded-full bg-white/60"></div>
                 <div className="absolute bottom-10 right-16 w-8 h-8 rounded-full bg-white/60"></div>
                 <div className="absolute top-20 right-10 w-10 h-10 rounded-full bg-white/60"></div>
@@ -122,11 +120,11 @@ const ErrorPage: React.FC<ErrorPageProps> = ({ code, message }) => {
                 </div>
 
                 <div className="absolute top-32 right-20 z-4">
-                  <div className={`w-20 h-24 bg-gray-200 rounded z-4`}>
-                    <div className={`w-16 h-4 ${isDark ? 'bg-gray-600' : 'bg-gray-400'} mx-auto mt-5 rounded`}></div>
-                    <div className={`w-16 h-4 ${isDark ? 'bg-gray-600' : 'bg-gray-400'} mx-auto mt-4 rounded`}></div>
+                  <div className="w-20 h-24 bg-gray-200 rounded z-4">
+                    <div className="w-16 h-4 bg-gray-400 mx-auto mt-5 rounded"></div>
+                    <div className="w-16 h-4 bg-gray-400 mx-auto mt-4 rounded"></div>
                   </div>
-                  <div className={`w-24 h-3 ${isDark ? 'bg-gray-600' : 'bg-gray-400'} mx-auto mt-1 rounded`}></div>
+                  <div className="w-24 h-3 bg-gray-400 mx-auto mt-1 rounded"></div>
                 </div>
 
                 <div className="absolute bottom-8 right-40 z-3 transform scale-75">
@@ -141,8 +139,8 @@ const ErrorPage: React.FC<ErrorPageProps> = ({ code, message }) => {
           )}
         </div>
 
-        <h1 className={`text-5xl font-bold mb-3 ${isDark ? 'text-white' : 'text-gray-800'}`}>{code}</h1>
-        <p className={`text-lg mb-8 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>{message}</p>
+        <h1 className="text-5xl font-bold mb-3 text-gray-800">{code}</h1>
+        <p className="text-lg mb-8 text-gray-600">{message}</p>
         <Button type="primary" onClick={goHome} className="text-base px-6 py-2">
           <span className="mr-2">←</span> 返回首页
         </Button>

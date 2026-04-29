@@ -3,7 +3,6 @@ import { ConfigProvider, Layout, theme } from 'antd';
 import { SiderContent } from './sider/SiderContent';
 import { HeaderContent } from './header/HeaderContent';
 import { Outlet, useLocation } from 'react-router-dom';
-import { useAppStore } from '../../store/appStore';
 import { PageTransition } from '../common/PageTransition';
 import { GlobalBreadcrumb } from '../common/GlobalBreadcrumb';
 import { Footer } from './footer/Footer';
@@ -11,7 +10,6 @@ import { Footer } from './footer/Footer';
 const { Header, Sider, Content, Footer: AntFooter } = Layout;
 
 const MainLayout: React.FC = () => {
-  const isDark = useAppStore((state) => state.isDark);
   const [collapsed, setCollapsed] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const location = useLocation();
@@ -31,51 +29,45 @@ const MainLayout: React.FC = () => {
     return () => window.removeEventListener('resize', checkMobile);
   }, [collapsed]);
 
-  const siderClass = useMemo(
-    () => (isDark ? 'bg-[#1a1a1a] relative' : 'bg-white relative'),
-    [isDark]
-  );
+  const siderClass = 'bg-white relative';
 
-  const contentBgClass = useMemo(
-    () => (isDark ? 'bg-[#f0f2f5]' : 'bg-[#f0f2f5]'),
-    [isDark]
-  );
+  const contentBgClass = 'bg-[#f0f2f5]';
 
   const antdTheme = useMemo(() => ({
     token: {
       colorPrimary: '#1677ff',
       borderRadius: 6,
-      colorBgBase: isDark ? '#1a1a1a' : '#fafafa',
+      colorBgBase: '#fafafa',
       colorBgContainer: '#ffffff',
       colorBgElevated: '#ffffff',
-      colorText: isDark ? '#e5e7eb' : '#1f2937',
-      colorTextSecondary: isDark ? '#9ca3af' : '#6b7280',
-      colorBorder: isDark ? '#374151' : '#e5e7eb',
-      colorBorderSecondary: isDark ? '#30363d' : '#f3f4f6',
+      colorText: '#1f2937',
+      colorTextSecondary: '#6b7280',
+      colorBorder: '#e5e7eb',
+      colorBorderSecondary: '#f3f4f6',
       fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
       fontSize: 14,
       lineHeight: 1.5714,
     },
-    algorithm: isDark ? theme.darkAlgorithm : theme.defaultAlgorithm,
+    algorithm: theme.defaultAlgorithm,
     components: {
       Menu: {
         itemBg: 'transparent',
-        itemHoverBg: isDark ? 'rgba(255,255,255,0.06)' : 'rgba(22,119,255,0.08)',
+        itemHoverBg: 'rgba(22,119,255,0.08)',
         itemSelectedBg: 'linear-gradient(90deg, rgb(var(--color-primary)), rgb(var(--color-primary-dark)))',
         itemSelectedColor: '#ffffff',
-        itemColor: isDark ? '#a0a0a0' : '#595959',
-        darkItemBg: isDark ? '#1a1a1a' : '#ffffff',
-        darkItemHoverBg: isDark ? 'rgba(255,255,255,0.06)' : 'rgba(22,119,255,0.08)',
+        itemColor: '#595959',
+        darkItemBg: '#ffffff',
+        darkItemHoverBg: 'rgba(22,119,255,0.08)',
         darkItemSelectedBg: 'linear-gradient(90deg, rgb(var(--color-primary)), rgb(var(--color-primary-dark)))',
         darkItemSelectedColor: '#ffffff',
-        darkItemColor: isDark ? '#a0a0a0' : '#595959',
+        darkItemColor: '#595959',
       },
       Layout: {
-        siderBg: isDark ? '#1a1a1a' : '#ffffff',
+        siderBg: '#ffffff',
         headerBg: '#ffffff',
         bodyBg: '#f0f2f5',
-        triggerBg: isDark ? '#2a2a2a' : '#ffffff',
-        triggerColor: isDark ? '#a0a0a0' : '#595959',
+        triggerBg: '#ffffff',
+        triggerColor: '#595959',
       },
       Card: {
         borderRadiusLG: 8,
@@ -93,7 +85,7 @@ const MainLayout: React.FC = () => {
         borderRadius: 8,
       },
     },
-  }), [isDark]);
+  }), []);
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -178,7 +170,7 @@ const MainLayout: React.FC = () => {
             collapsed={collapsed}
             width={220}
             collapsedWidth={64}
-            className={`${siderClass} border-r! border-gray-200! dark:border-gray-800!`}
+            className={`${siderClass} border-r! border-gray-200!`}
             style={{
               position: 'sticky',
               top: 0,
@@ -198,22 +190,20 @@ const MainLayout: React.FC = () => {
 
         <Layout className="flex-1 flex flex-col min-w-0">
           <Header
-            className={`
+            className="
               h-14! px-4! lg:px-6!
               flex items-center justify-between
-              bg-white! dark:bg-[#141414]!
-              border-b! border-gray-200! dark:border-gray-800!
+              bg-white!
+              border-b! border-gray-200!
               sticky top-0 z-50
               shadow-[0_1px_2px_0_rgba(0,0,0,0.03)]
-            `}
+            "
           >
             <div className="flex items-center gap-4 flex-1 min-w-0">
               {isMobile && (
                 <button
                   onClick={() => setCollapsed(!collapsed)}
-                  className={`p-2 rounded-md transition-colors ${
-                    isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-100'
-                  }`}
+                  className="p-2 rounded-md transition-colors hover:bg-gray-100"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 6h16M4 12h16M4 18h16" />
@@ -241,7 +231,7 @@ const MainLayout: React.FC = () => {
             </div>
           </Content>
 
-          <AntFooter className="p-0! h-12! border-t! border-gray-200! dark:border-gray-800! bg-white! dark:bg-[#141414]!">
+          <AntFooter className="p-0! h-12! border-t! border-gray-200! bg-white!">
             <Footer />
           </AntFooter>
         </Layout>

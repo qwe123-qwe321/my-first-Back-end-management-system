@@ -12,7 +12,7 @@ export const DashboardContainer: React.FC<DashboardContainerProps> = ({
   return (
     <div
       data-page-scroll-container="true"
-      className="h-full w-full bg-cover bg-center bg-fixed overflow-y-auto overflow-x-auto min-h-0 dark:bg-gray-950"
+      className="h-full w-full bg-cover bg-center bg-fixed overflow-y-auto overflow-x-auto min-h-0"
       style={{
         backgroundImage:
           'url(https://game.gtimg.cn/images/yxzj/ip/bg.c7e8614f.jpg)',

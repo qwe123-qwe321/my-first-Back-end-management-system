@@ -63,16 +63,16 @@ const Community: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-blue-50 via-white to-indigo-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 p-4 md:p-6 transition-colors duration-300">
+    <div className="min-h-screen bg-linear-to-br from-blue-50 via-white to-indigo-50 p-4 md:p-6 transition-colors duration-300">
       <div className="max-w-7xl mx-auto">
         {/* 页面标题和操作栏 */}
         <div className="mb-6">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+              <h1 className="text-3xl font-bold text-gray-900 mb-2">
                 玩家社区
               </h1>
-              <p className="text-gray-600 dark:text-gray-400">
+              <p className="text-gray-600">
                 与全球玩家交流游戏心得、分享攻略、参与讨论
               </p>
             </div>
@@ -82,7 +82,7 @@ const Community: React.FC = () => {
               <Button
                 icon={<ReloadOutlined />}
                 onClick={handleReload}
-                className="bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+                className="bg-white border border-gray-300 text-gray-800 hover:bg-gray-100"
               >
                 刷新
               </Button>
@@ -96,7 +96,7 @@ const Community: React.FC = () => {
                   )
                 }
                 onClick={handleFullscreenToggle}
-                className="bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+                className="bg-white border border-gray-300 text-gray-800 hover:bg-gray-100"
               >
                 {isFullscreen ? '退出全屏' : '全屏模式'}
               </Button>
@@ -105,7 +105,7 @@ const Community: React.FC = () => {
                 icon={<GlobalOutlined />}
                 onClick={handleOpenInNewWindow}
                 type="primary"
-                className="bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-800"
+                className="bg-blue-600 hover:bg-blue-700"
               >
                 在新窗口打开
               </Button>
@@ -113,16 +113,16 @@ const Community: React.FC = () => {
           </div>
 
           {/* 提示信息 */}
-          <div className="bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-800 rounded-lg p-4 mb-4">
+          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
             <div className="flex items-start gap-3">
-              <div className="text-blue-500 dark:text-blue-400 text-lg mt-0.5">
+              <div className="text-blue-500 text-lg mt-0.5">
                 💡
               </div>
               <div>
-                <h3 className="font-medium text-blue-800 dark:text-blue-300 mb-1">
+                <h3 className="font-medium text-blue-800 mb-1">
                   使用提示
                 </h3>
-                <ul className="text-sm text-blue-700 dark:text-blue-400 space-y-1">
+                <ul className="text-sm text-blue-700 space-y-1">
                   <li>• 社区页面已内嵌TapTap官方论坛，可直接浏览和参与讨论</li>
                   <li>• 点击"在新窗口打开"可在独立浏览器标签页中访问</li>
                   <li>• 使用"全屏模式"可获得更好的浏览体验</li>
@@ -134,13 +134,13 @@ const Community: React.FC = () => {
         </div>
 
         {/* 内嵌社区页面 */}
-        <div className="relative rounded-xl overflow-hidden shadow-2xl border border-gray-300 dark:border-gray-800 bg-white dark:bg-gray-900">
+        <div className="relative rounded-xl overflow-hidden shadow-2xl border border-gray-300 bg-white">
           {/* 加载状态指示器 */}
           {isLoading && (
-            <div className="absolute inset-0 flex items-center justify-center bg-white dark:bg-gray-900 z-10">
+            <div className="absolute inset-0 flex items-center justify-center bg-white z-10">
               <div className="text-center">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 dark:border-blue-500 mx-auto mb-4"></div>
-                <p className="text-gray-600 dark:text-gray-400">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+                <p className="text-gray-600">
                   正在加载玩家社区...
                 </p>
               </div>
@@ -159,19 +159,19 @@ const Community: React.FC = () => {
           />
 
           {/* 底部状态栏 */}
-          <div className="bg-gray-100 dark:bg-gray-800 border-t border-gray-300 dark:border-gray-700 px-4 py-3 flex items-center justify-between">
+          <div className="bg-gray-100 border-t border-gray-300 px-4 py-3 flex items-center justify-between">
             <div className="flex items-center gap-2">
               <div
                 className={`w-2 h-2 rounded-full ${isLoading ? 'bg-yellow-500 animate-pulse' : 'bg-green-500'}`}
               ></div>
-              <span className="text-sm text-gray-600 dark:text-gray-400">
+              <span className="text-sm text-gray-600">
                 {isLoading ? '正在连接...' : '已连接到 TapTap 社区'}
               </span>
             </div>
 
-            <div className="text-sm text-gray-500 dark:text-gray-500">
+            <div className="text-sm text-gray-500">
               来源:{' '}
-              <span className="text-blue-600 dark:text-blue-400 font-medium">
+              <span className="text-blue-600 font-medium">
                 taptap.cn
               </span>
             </div>
@@ -180,32 +180,32 @@ const Community: React.FC = () => {
 
         {/* 社区功能说明 */}
         <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
+          <div className="bg-white rounded-xl p-6 border border-gray-200">
             <div className="text-3xl mb-4">💬</div>
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">
               实时讨论
             </h3>
-            <p className="text-gray-600 dark:text-gray-400 text-sm">
+            <p className="text-gray-600 text-sm">
               与全球玩家实时交流游戏心得，分享攻略技巧，参与热门话题讨论
             </p>
           </div>
 
-          <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
+          <div className="bg-white rounded-xl p-6 border border-gray-200">
             <div className="text-3xl mb-4">🏆</div>
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">
               赛事资讯
             </h3>
-            <p className="text-gray-600 dark:text-gray-400 text-sm">
+            <p className="text-gray-600 text-sm">
               获取最新赛事信息，观看比赛直播，参与赛事竞猜，与职业选手互动
             </p>
           </div>
 
-          <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
+          <div className="bg-white rounded-xl p-6 border border-gray-200">
             <div className="text-3xl mb-4">🎮</div>
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">
               攻略分享
             </h3>
-            <p className="text-gray-600 dark:text-gray-400 text-sm">
+            <p className="text-gray-600 text-sm">
               学习高手攻略，查看英雄出装推荐，了解版本更新内容，提升游戏水平
             </p>
           </div>

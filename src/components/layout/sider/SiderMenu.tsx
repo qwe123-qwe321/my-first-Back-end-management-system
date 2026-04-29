@@ -14,7 +14,6 @@ import {
   UserOutlined,
 } from '@ant-design/icons';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useAppStore } from '../../../store/appStore';
 import { useThemeStore } from '../../../hooks/useTheme';
 
 interface SiderMenuProps {
@@ -62,7 +61,6 @@ export const SiderMenu: React.FC<SiderMenuProps> = ({
   openKeys,
   onOpenChange,
 }) => {
-  const isDark = useAppStore((state) => state.isDark);
   const colorTheme = useThemeStore((state) => state.colorTheme);
   const navigate = useNavigate();
   const location = useLocation();
@@ -83,9 +81,9 @@ export const SiderMenu: React.FC<SiderMenuProps> = ({
   };
 
   return (
-    <div className={`flex-1 overflow-y-auto ${isDark ? 'bg-[#1a1a1a]' : 'bg-white'}`}>
+    <div className="flex-1 overflow-y-auto bg-white">
       <Menu
-        theme={isDark ? 'dark' : 'light'}
+        theme="light"
         mode="inline"
         selectedKeys={[selectedKey || location.pathname]}
         openKeys={openKeys}
@@ -146,7 +144,7 @@ export const SiderMenu: React.FC<SiderMenuProps> = ({
 
         .ant-menu-submenu-selected:not(.ant-menu-item-selected) {
           background: transparent !important;
-          color: ${isDark ? '#a0a0a0' : '#595959'} !important;
+          color: #595959 !important;
         }
 
         .ant-menu-submenu-selected:not(.ant-menu-item-selected)::before {
@@ -158,13 +156,13 @@ export const SiderMenu: React.FC<SiderMenuProps> = ({
         }
 
         .ant-menu-submenu-open > .ant-menu-submenu-title .ant-menu-title-content {
-          color: ${isDark ? '#a0a0a0' : '#595959'} !important;
+          color: #595959 !important;
         }
 
         .ant-menu-item .anticon,
         .ant-menu-submenu-title .anticon {
           transition: all 0.3s ease !important;
-          color: ${isDark ? '#a0a0a0' : '#595959'};
+          color: #595959;
         }
 
         .ant-menu-item:hover .anticon,
@@ -182,7 +180,7 @@ export const SiderMenu: React.FC<SiderMenuProps> = ({
         }
 
         .ant-menu-submenu:not(.ant-menu-submenu-selected) .ant-menu-submenu-title .anticon {
-          color: ${isDark ? '#a0a0a0' : '#595959'} !important;
+          color: #595959 !important;
         }
         
         .ant-menu-submenu .ant-menu {

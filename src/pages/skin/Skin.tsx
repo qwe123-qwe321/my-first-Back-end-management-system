@@ -5,7 +5,7 @@ import { Card, Button } from 'antd';
 import { CheckOutlined } from '@ant-design/icons';
 
 const Skin: React.FC = () => {
-  const { currentSkin, setSkin, toggleDarkMode, isDarkMode } = useSkinStore();
+  const { currentSkin, setSkin } = useSkinStore();
 
   const skins = [
     { name: '默认蓝', color: '#1677ff' },
@@ -46,9 +46,6 @@ const Skin: React.FC = () => {
           ))}
         </div>
         <div className="w-2/3 p-4">
-          <Button onClick={toggleDarkMode} className="mb-4">
-            切换到{isDarkMode ? '亮色模式' : '暗色模式'}
-          </Button>
           <Button type="primary" onClick={() => alert('保存成功！')}>
             保存
           </Button>

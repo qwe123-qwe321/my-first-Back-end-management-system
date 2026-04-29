@@ -1,4 +1,3 @@
-// 世界观内容类别占比图表组件
 import React, { useMemo } from 'react';
 import { type EChartsOption } from 'echarts';
 import ReactECharts from 'echarts-for-react';
@@ -6,7 +5,6 @@ import {
   applySelectionToSeries,
   CHART_ACCENTS,
   CHART_CATEGORIES,
-  KING_COLORS,
   MOCK_CHART_DATA,
 } from '../../constants/chartConfig';
 
@@ -14,14 +12,12 @@ interface WorldviewChartProps {
   time: string;
   hero: string;
   channel: string;
-  isDark: boolean;
 }
 
 export const WorldviewChart: React.FC<WorldviewChartProps> = ({
   time,
   hero,
   channel,
-  isDark,
 }) => {
   const chartData = useMemo(
     () =>
@@ -55,59 +51,68 @@ export const WorldviewChart: React.FC<WorldviewChartProps> = ({
 
   const colors = [
     CHART_ACCENTS.primary,
-    CHART_ACCENTS.secondary,
-    CHART_ACCENTS.tertiary,
     CHART_ACCENTS.quaternary,
+    CHART_ACCENTS.tertiary,
+    CHART_ACCENTS.secondary,
     CHART_ACCENTS.danger,
   ];
 
-  const textColor = isDark ? KING_COLORS.text : '#1f2937';
-  const gridColor = isDark ? KING_COLORS.grid : '#e5e7eb';
+  const axisLabelColor = 'rgba(255,255,255,0.5)';
 
   const option: EChartsOption = {
     backgroundColor: 'transparent',
-    textStyle: { color: textColor },
+    textStyle: { color: '#e5e7eb' },
     title: {
       text: '世界观内容类别占比',
       left: 'center',
-      textStyle: { color: textColor, fontSize: 16, fontWeight: 600 },
+      textStyle: {
+        color: '#f0f0f0',
+        fontSize: 16,
+        fontWeight: 600,
+        textShadowColor: 'rgba(59,130,246,0.15)',
+        textShadowBlur: 10,
+      },
       top: 5,
     },
     tooltip: {
       trigger: 'item',
-      backgroundColor: 'rgba(31, 41, 55, 0.95)',
-      textStyle: { color: '#e5e7eb' },
-      borderColor: '#3b82f6',
+      backgroundColor: 'rgba(15,15,25,0.92)',
+      textStyle: { color: '#f0f0f0' },
+      borderColor: 'rgba(59,130,246,0.4)',
       borderWidth: 1,
       borderRadius: 8,
       padding: [10, 14],
+      formatter: '{b}: {c}%',
     },
     legend: {
       orient: 'vertical',
       top: 'center',
       right: 10,
-      textStyle: { color: textColor, fontSize: 11 },
+      textStyle: { color: axisLabelColor, fontSize: 11 },
       itemWidth: 12,
       itemHeight: 12,
       itemGap: 8,
+      icon: 'circle',
     },
     series: [
       {
         name: '内容占比',
         type: 'pie',
-        radius: ['38%', '65%'],
+        radius: ['35%', '62%'],
         center: ['35%', '55%'],
         avoidLabelOverlap: true,
-        padAngle: 2,
+        padAngle: 3,
         itemStyle: {
-          borderRadius: 4,
-          borderColor: 'transparent',
+          borderRadius: 6,
+          borderColor: 'rgba(20,20,30,0.9)',
           borderWidth: 2,
+          shadowBlur: 12,
+          shadowColor: 'rgba(0,0,0,0.4)',
         },
         label: {
           show: true,
           position: 'outside',
-          color: textColor,
+          color: 'rgba(255,255,255,0.75)',
           fontSize: 11,
           formatter: '{b}\n{c}%',
           lineHeight: 16,
@@ -115,21 +120,34 @@ export const WorldviewChart: React.FC<WorldviewChartProps> = ({
         },
         labelLine: {
           show: true,
-          length: 10,
-          length2: 35,
-          lineStyle: { color: gridColor, width: 1 },
+          length: 8,
+          length2: 30,
+          lineStyle: { color: 'rgba(255,255,255,0.12)', width: 1 },
         },
         emphasis: {
           itemStyle: {
-            shadowBlur: 8,
-            shadowColor: 'rgba(0, 0, 0, 0.2)',
+            shadowBlur: 20,
+            shadowColor: 'rgba(59,130,246,0.4)',
+            borderColor: '#fff',
+            borderWidth: 2,
           },
-          label: { fontSize: 13, fontWeight: 600 },
+          label: { fontSize: 13, fontWeight: 600, color: '#fff' },
         },
+        animationDuration: 1200,
+        animationEasing: 'cubicOut',
         data: CHART_CATEGORIES.worldview.map((name, index) => ({
           name,
           value: selectedWorldview[index],
-          itemStyle: { color: colors[index % colors.length] },
+          itemStyle: {
+            color: {
+              type: 'radial',
+              x: 0.5, y: 0.5, r: 0.5,
+              colorStops: [
+                { offset: 0, color: colors[index % colors.length] },
+                { offset: 1, color: colors[index % colors.length] + 'bb' },
+              ],
+            },
+          },
         })),
       },
     ],

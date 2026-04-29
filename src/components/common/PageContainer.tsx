@@ -1,7 +1,6 @@
 import type { ReactNode } from 'react';
 import { Breadcrumb } from 'antd';
 import { Link, useLocation } from 'react-router-dom';
-import { useAppStore } from '../../store/appStore';
 
 interface BreadcrumbItem {
   label: string;
@@ -41,7 +40,6 @@ export const PageContainer: React.FC<PageContainerProps> = ({
   children,
   className = '',
 }) => {
-  const isDark = useAppStore((state) => state.isDark);
   const location = useLocation();
 
   const generateBreadcrumbs = (): BreadcrumbItem[] => {
@@ -73,26 +71,18 @@ export const PageContainer: React.FC<PageContainerProps> = ({
       <div className="max-w-7xl mx-auto">
         <div className="mb-6">
           <Breadcrumb
-            className={`mb-3 text-sm ${
-              isDark ? 'text-gray-400' : 'text-gray-500'
-            }`}
+            className="mb-3 text-sm text-gray-500"
             items={computedBreadcrumbs.map((item, index) => ({
               key: index,
               title: item.path ? (
                 <Link
                   to={item.path}
-                  className={`hover:text-primary transition-colors ${
-                    isDark ? 'hover:text-blue-400' : 'hover:text-blue-600'
-                  }`}
+                  className="hover:text-primary transition-colors hover:text-blue-600"
                 >
                   {item.label}
                 </Link>
               ) : (
-                <span
-                  className={
-                    isDark ? 'text-gray-200' : 'text-gray-700'
-                  }
-                >
+                <span className="text-gray-700">
                   {item.label}
                 </span>
               ),
@@ -101,18 +91,10 @@ export const PageContainer: React.FC<PageContainerProps> = ({
 
           <div className="flex items-start justify-between">
             <div className="flex-1">
-              <h1
-                className={`text-2xl font-bold mb-1 ${
-                  isDark ? 'text-white' : 'text-gray-900'
-                }`}
-              >
+              <h1 className="text-2xl font-bold mb-1 text-gray-900">
                 <span className="gradient-text">{title}</span>
                 {subtitle && (
-                  <span
-                    className={`ml-3 text-lg font-normal ${
-                      isDark ? 'text-gray-400' : 'text-gray-500'
-                    }`}
-                  >
+                  <span className="ml-3 text-lg font-normal text-gray-500">
                     {subtitle}
                   </span>
                 )}

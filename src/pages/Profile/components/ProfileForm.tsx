@@ -44,7 +44,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
     renderView: () => React.ReactNode
   ) => (
     <div className="space-y-2">
-      <label className="flex items-center gap-2 text-gray-700 dark:text-gray-300 font-medium">
+      <label className="flex items-center gap-2 text-gray-700 font-medium">
         {icon}
         <span>{label}</span>
       </label>
@@ -52,26 +52,25 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
     </div>
   );
 
-  // 自定义输入框样式
   const inputClassName =
-    'w-full bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-100 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-600 focus:border-transparent transition-all';
+    'w-full bg-white border border-gray-300 text-gray-900 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all';
 
   const displayClassName =
-    'px-4 py-3 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100';
+    'px-4 py-3 bg-white rounded-lg border border-gray-200 text-gray-900';
 
   return (
-    <div className="bg-linear-to-br from-white to-gray-50 dark:from-gray-900 dark:to-gray-800 rounded-2xl shadow-lg p-8 border border-gray-200 dark:border-gray-800">
-      <div className="flex items-center justify-between mb-8 pb-6 border-b border-gray-300 dark:border-gray-700">
+    <div className="bg-linear-to-br from-white to-gray-50 rounded-2xl shadow-lg p-8 border border-gray-200">
+      <div className="flex items-center justify-between mb-8 pb-6 border-b border-gray-300">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+          <h2 className="text-2xl font-bold text-gray-900">
             个人资料
           </h2>
-          <p className="text-gray-600 dark:text-gray-400 mt-1">
+          <p className="text-gray-600 mt-1">
             管理您的个人信息和游戏资料
           </p>
         </div>
 
-        <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+        <div className="flex items-center gap-2 text-sm text-gray-600">
           <div className="w-2 h-2 bg-green-500 rounded-full"></div>
           <span>最后更新: 今天</span>
         </div>
@@ -79,8 +78,8 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
 
       <div className="space-y-8">
         {/* 基础信息 */}
-        <div className="bg-white/50 dark:bg-gray-800/30 p-6 rounded-xl border border-gray-200 dark:border-gray-800">
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
+        <div className="bg-white/50 p-6 rounded-xl border border-gray-200">
+          <h3 className="text-lg font-semibold text-gray-900 mb-6 flex items-center gap-2">
             <UserOutlined />
             基础信息
           </h3>
@@ -129,8 +128,8 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
         </div>
 
         {/* 联系方式 */}
-        <div className="bg-white/50 dark:bg-gray-800/30 p-6 rounded-xl border border-gray-200 dark:border-gray-800">
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
+        <div className="bg-white/50 p-6 rounded-xl border border-gray-200">
+          <h3 className="text-lg font-semibold text-gray-900 mb-6 flex items-center gap-2">
             <MailOutlined />
             联系方式
           </h3>
@@ -175,8 +174,8 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
         </div>
 
         {/* 个人信息 */}
-        <div className="bg-white/50 dark:bg-gray-800/30 p-6 rounded-xl border border-gray-200 dark:border-gray-800">
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
+        <div className="bg-white/50 p-6 rounded-xl border border-gray-200">
+          <h3 className="text-lg font-semibold text-gray-900 mb-6 flex items-center gap-2">
             <UserOutlined />
             个人信息
           </h3>
@@ -261,8 +260,8 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
         </div>
 
         {/* 个人简介 */}
-        <div className="bg-white/50 dark:bg-gray-800/30 p-6 rounded-xl border border-gray-200 dark:border-gray-800">
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
+        <div className="bg-white/50 p-6 rounded-xl border border-gray-200">
+          <h3 className="text-lg font-semibold text-gray-900 mb-6 flex items-center gap-2">
             <EditOutlined />
             个人简介
           </h3>
@@ -291,51 +290,51 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
         </div>
 
         {/* 账户信息 */}
-        <div className="bg-linear-to-r from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-900 p-6 rounded-xl border border-blue-100 dark:border-gray-800">
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
+        <div className="bg-linear-to-r from-blue-50 to-indigo-50 p-6 rounded-xl border border-blue-100">
+          <h3 className="text-lg font-semibold text-gray-900 mb-6 flex items-center gap-2">
             <SaveOutlined />
             账户信息
           </h3>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2">
-              <label className="text-gray-700 dark:text-gray-300 font-medium">
+              <label className="text-gray-700 font-medium">
                 注册时间
               </label>
               <div className={displayClassName}>{profile.joinDate}</div>
             </div>
 
             <div className="space-y-2">
-              <label className="text-gray-700 dark:text-gray-300 font-medium">
+              <label className="text-gray-700 font-medium">
                 账号等级
               </label>
               <div className={displayClassName}>Lv.{profile.level}</div>
             </div>
           </div>
 
-          <div className="mt-6 pt-6 border-t border-gray-300 dark:border-gray-700">
+          <div className="mt-6 pt-6 border-t border-gray-300">
             <div className="flex items-center justify-between">
               <div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">
+                <div className="text-sm text-gray-600">
                   账户状态
                 </div>
-                <div className="font-medium text-green-600 dark:text-green-400">
+                <div className="font-medium text-green-600">
                   正常
                 </div>
               </div>
               <div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">
+                <div className="text-sm text-gray-600">
                   安全等级
                 </div>
-                <div className="font-medium text-blue-600 dark:text-blue-400">
+                <div className="font-medium text-blue-600">
                   高
                 </div>
               </div>
               <div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">
+                <div className="text-sm text-gray-600">
                   VIP等级
                 </div>
-                <div className="font-medium text-purple-600 dark:text-purple-400">
+                <div className="font-medium text-purple-600">
                   VIP 8
                 </div>
               </div>
@@ -345,8 +344,8 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
       </div>
 
       {/* 操作提示 */}
-      <div className="mt-8 pt-6 border-t border-gray-300 dark:border-gray-700">
-        <div className="flex items-center gap-3 text-sm text-gray-600 dark:text-gray-400">
+      <div className="mt-8 pt-6 border-t border-gray-300">
+        <div className="flex items-center gap-3 text-sm text-gray-600">
           <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
           <span>
             提示：

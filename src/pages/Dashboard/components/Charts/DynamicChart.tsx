@@ -6,7 +6,7 @@ const WorldviewChart = lazy(() => import('./WorldviewChart'));
 
 const ChartSkeleton = () => (
   <div className="h-87.5 w-full animate-pulse">
-    <div className="h-full bg-gray-200 dark:bg-gray-700 rounded-lg" />
+    <div className="h-full bg-gray-200 rounded-lg" />
   </div>
 );
 
@@ -15,7 +15,6 @@ interface DynamicChartProps {
   time: string;
   hero: string;
   channel: string;
-  isDark: boolean;
 }
 
 export const DynamicChart: React.FC<DynamicChartProps> = ({
@@ -23,16 +22,15 @@ export const DynamicChart: React.FC<DynamicChartProps> = ({
   time,
   hero,
   channel,
-  isDark,
 }) => {
   const renderChart = () => {
     switch (type) {
       case 'trend':
-        return <TrendChart time={time} hero={hero} channel={channel} isDark={isDark} />;
+        return <TrendChart time={time} hero={hero} channel={channel} />;
       case 'source':
-        return <SourceChart time={time} hero={hero} channel={channel} isDark={isDark} />;
+        return <SourceChart time={time} hero={hero} channel={channel} />;
       case 'worldview':
-        return <WorldviewChart time={time} hero={hero} channel={channel} isDark={isDark} />;
+        return <WorldviewChart time={time} hero={hero} channel={channel} />;
       default:
         return null;
     }

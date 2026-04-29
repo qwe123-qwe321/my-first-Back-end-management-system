@@ -52,11 +52,11 @@ export const GlobalBreadcrumb: React.FC<GlobalBreadcrumbProps> = ({
       items={computedBreadcrumbs.map((item, index) => ({
         key: index,
         title: item.path ? (
-          <Link to={item.path} className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors">
+          <Link to={item.path} className="text-gray-400 hover:text-gray-600 transition-colors">
             {item.label}
           </Link>
         ) : (
-          <span className="text-gray-600 dark:text-gray-200">{item.label}</span>
+          <span className="text-gray-600">{item.label}</span>
         ),
       }))}
     />

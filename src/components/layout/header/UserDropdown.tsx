@@ -6,7 +6,6 @@ import { useAppStore } from '../../../store/appStore';
 import { useUserStore } from '../../../config/user/useUserStore';
 
 export const UserDropdown: React.FC = () => {
-  const isDark = useAppStore((state) => state.isDark);
   const profile = useUserStore((state) => state.profile);
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
@@ -48,14 +47,10 @@ export const UserDropdown: React.FC = () => {
     <Popover
       content={
         <div
-          className={`w-56 rounded-lg overflow-hidden ${
-            isDark ? 'bg-[#1a1a1a]' : 'bg-white'
-          }`}
+          className="w-56 rounded-lg overflow-hidden bg-white"
         >
           <div
-            className={`px-4 py-4 border-b ${
-              isDark ? 'border-gray-700' : 'border-gray-200'
-            }`}
+            className="px-4 py-4 border-b border-gray-200"
           >
             <div className="flex items-center gap-3">
               <Avatar
@@ -65,16 +60,12 @@ export const UserDropdown: React.FC = () => {
               />
               <div className="flex-1 min-w-0">
                 <div
-                  className={`font-semibold text-base truncate ${
-                    isDark ? 'text-white' : 'text-gray-900'
-                  }`}
+                  className="font-semibold text-base truncate text-gray-900"
                 >
                   {profile.nickname}
                 </div>
                 <div
-                  className={`text-sm ${
-                    isDark ? 'text-gray-400' : 'text-gray-500'
-                  }`}
+                  className="text-sm text-gray-500"
                 >
                   等级: Lv.{profile.level}
                 </div>
@@ -87,15 +78,11 @@ export const UserDropdown: React.FC = () => {
               <div
                 key={item.key}
                 onClick={item.action}
-                className={`px-4 py-3 cursor-pointer transition-all duration-200 flex items-center gap-3 hover:${
-                  isDark ? 'bg-gray-800' : 'bg-gray-50'
-                } ${isDark ? 'hover:bg-gray-800' : 'hover:bg-gray-50'}`}
+                className="px-4 py-3 cursor-pointer transition-all duration-200 flex items-center gap-3 hover:bg-gray-50"
               >
                 <span className={item.color}>{item.icon}</span>
                 <span
-                  className={`font-medium ${
-                    isDark ? 'text-gray-200' : 'text-gray-700'
-                  }`}
+                  className="font-medium text-gray-700"
                 >
                   {item.label}
                 </span>
@@ -104,11 +91,7 @@ export const UserDropdown: React.FC = () => {
           </div>
 
           <div
-            className={`px-4 py-3 border-t cursor-pointer transition-all duration-200 flex items-center gap-3 hover:${
-              isDark ? 'bg-red-900/20 border-gray-700' : 'bg-red-50 border-gray-200'
-            } border-t ${
-              isDark ? 'border-gray-700' : 'border-gray-200'
-            } hover:bg-red-50 dark:hover:bg-red-900/20`}
+            className="px-4 py-3 border-t cursor-pointer transition-all duration-200 flex items-center gap-3 hover:bg-red-50 border-t border-gray-200"
             onClick={handleLogout}
           >
             <span className="text-red-500">
@@ -126,22 +109,20 @@ export const UserDropdown: React.FC = () => {
         padding: 0,
         borderRadius: '12px',
         overflow: 'hidden',
-        ...(isDark
-          ? { background: '#1a1a1a', border: '1px solid #374151' }
-          : { background: '#fff', border: '1px solid #e5e7eb', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }),
+        background: '#fff',
+        border: '1px solid #e5e7eb',
+        boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
       }}
     >
       <div className="flex items-center gap-3 cursor-pointer group min-w-0">
         <div className="text-right hidden sm:block truncate max-w-40">
           <div
-            className={`text-base font-semibold ${
-              isDark ? 'text-white' : 'text-gray-900'
-            }`}
+            className="text-base font-semibold text-gray-900"
           >
             {profile.nickname}
           </div>
           <div
-            className={`text-xs ${isDark ? 'text-gray-400' : 'text-gray-600'}`}
+            className="text-xs text-gray-600"
           >
             等级:Lv.{profile.level}
           </div>
@@ -149,9 +130,7 @@ export const UserDropdown: React.FC = () => {
         <Avatar
           size="large"
           src={profile.avatar}
-          className={`border-2 transition-colors cursor-pointer ${
-            isDark ? 'border-gray-600 group-hover:border-blue-400' : 'border-gray-300 group-hover:border-blue-500'
-          }`}
+          className="border-2 transition-colors cursor-pointer border-gray-300 group-hover:border-blue-500"
         />
       </div>
     </Popover>

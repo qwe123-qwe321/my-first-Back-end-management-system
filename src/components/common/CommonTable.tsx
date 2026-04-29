@@ -2,7 +2,6 @@ import { useMemo } from 'react';
 import { Table } from 'antd';
 import type { TableProps, ColumnsType, TablePaginationConfig } from 'antd/es/table';
 import type { FilterValue, SorterResult } from 'antd/es/table/interface';
-import { useAppStore } from '../../store/appStore';
 
 export interface CommonTableProps<T extends object = object> {
   columns: ColumnsType<T>;
@@ -37,15 +36,12 @@ export function CommonTable<T extends object = object>({
   bordered = false,
   rowSelection,
 }: CommonTableProps<T>) {
-  const isDark = useAppStore((state) => state.isDark);
-
   const tableClassName = useMemo(() => {
     return [
       'common-table',
-      isDark ? 'ant-table-dark' : '',
       className,
     ].filter(Boolean).join(' ');
-  }, [isDark, className]);
+  }, [className]);
 
   return (
     <Table<T>

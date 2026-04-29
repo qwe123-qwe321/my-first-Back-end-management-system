@@ -48,7 +48,7 @@ export const ThemePanel: React.FC = () => {
 
   const content = (
     <div className="w-80 p-1">
-      <div className="text-sm font-medium text-gray-700 dark:text-gray-200 mb-3">主题色彩</div>
+      <div className="text-sm font-medium text-gray-700 mb-3">主题色彩</div>
       <div className="grid grid-cols-3 gap-3 mb-4">
         {themeConfigs.map((theme) => (
           <button
@@ -57,7 +57,7 @@ export const ThemePanel: React.FC = () => {
             className={`
               relative p-3 rounded-xl transition-all duration-200 cursor-pointer
               ${colorTheme === theme.key
-                ? 'ring-2 ring-offset-2 ring-blue-500 dark:ring-blue-400 scale-105'
+                ? 'ring-2 ring-offset-2 ring-blue-500 scale-105'
                 : 'hover:scale-102'
               }
             `}
@@ -77,7 +77,7 @@ export const ThemePanel: React.FC = () => {
                 style={{ background: theme.colors.accent }}
               />
             </div>
-            <div className="text-xs text-center text-gray-600 dark:text-gray-300">
+            <div className="text-xs text-center text-gray-600">
               {theme.name}
             </div>
             {colorTheme === theme.key && (

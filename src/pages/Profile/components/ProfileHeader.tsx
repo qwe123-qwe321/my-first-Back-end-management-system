@@ -49,7 +49,7 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
   };
 
   return (
-    <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-gray-900 dark:to-gray-800 rounded-2xl shadow-lg p-6 mb-6 border border-blue-100 dark:border-gray-800">
+    <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl shadow-lg p-6 mb-6 border border-blue-100">
       <div className="flex flex-col md:flex-row items-center md:items-start gap-6">
         <div className="relative group">
           <div className="relative">
@@ -57,10 +57,10 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
               <img
                 src={profile.avatar}
                 alt="用户头像"
-                className="w-32 h-32 rounded-full border-4 border-white dark:border-gray-700 shadow-lg object-cover"
+                className="w-32 h-32 rounded-full border-4 border-white shadow-lg object-cover"
               />
             ) : (
-              <div className="w-32 h-32 rounded-full border-4 border-white dark:border-gray-700 shadow-lg bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
+              <div className="w-32 h-32 rounded-full border-4 border-white shadow-lg bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
                 <span className="text-white text-4xl font-bold">
                   {profile.nickname.charAt(0)}
                 </span>
@@ -86,7 +86,7 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
               />
               <label
                 htmlFor="avatar-upload"
-                className="w-full px-4 py-2 bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-800 text-white rounded-lg font-medium transition-colors flex items-center justify-center gap-2 cursor-pointer"
+                className="w-full px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors flex items-center justify-center gap-2 cursor-pointer"
               >
                 <UploadOutlined />
                 更换头像
@@ -98,10 +98,10 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
         <div className="flex-1 text-center md:text-left">
           <div className="flex flex-col md:flex-row md:items-center justify-between mb-4">
             <div>
-              <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-1">
+              <h1 className="text-2xl font-bold text-gray-900 mb-1">
                 {profile.nickname}
               </h1>
-              <p className="text-gray-700 dark:text-gray-300 text-sm">
+              <p className="text-gray-700 text-sm">
                 ID: {profile.id} • {profile.username}
               </p>
             </div>
@@ -110,8 +110,8 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
               onClick={onEditToggle}
               className={`mt-4 md:mt-0 px-6 py-2 rounded-lg font-medium transition-all ${
                 isEditing
-                  ? 'bg-green-600 hover:bg-green-700 dark:bg-green-700 dark:hover:bg-green-800 text-white'
-                  : 'bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 border border-gray-300 dark:border-gray-700'
+                  ? 'bg-green-600 hover:bg-green-700 text-white'
+                  : 'bg-white hover:bg-gray-100 text-gray-800 border border-gray-300'
               }`}
             >
               <EditOutlined className="mr-2" />
@@ -125,15 +125,15 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
                 <span className="bg-gradient-to-r from-yellow-400 to-orange-500 text-gray-900 font-bold px-3 py-1 rounded-full text-sm">
                   Lv.{profile.level}
                 </span>
-                <span className="text-gray-700 dark:text-gray-300 text-sm">
+                <span className="text-gray-700 text-sm">
                   经验值: {profile.experience}/1000
                 </span>
               </div>
-              <span className="text-blue-600 dark:text-blue-400 font-medium text-sm">
+              <span className="text-blue-600 font-medium text-sm">
                 {experienceProgress}%
               </span>
             </div>
-            <div className="h-2 bg-gray-300 dark:bg-gray-700 rounded-full overflow-hidden">
+            <div className="h-2 bg-gray-300 rounded-full overflow-hidden">
               <div
                 className="h-full bg-gradient-to-r from-blue-500 to-purple-600 rounded-full transition-all duration-500"
                 style={{ width: `${experienceProgress}%` }}
@@ -142,35 +142,35 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="bg-white/80 dark:bg-gray-800/80 p-4 rounded-xl text-center backdrop-blur-sm">
-              <div className="text-2xl font-bold text-blue-600 dark:text-blue-400 mb-1">
+            <div className="bg-white/80 p-4 rounded-xl text-center backdrop-blur-sm">
+              <div className="text-2xl font-bold text-blue-600 mb-1">
                 {heroCount}
               </div>
-              <div className="text-gray-700 dark:text-gray-300 text-sm">
+              <div className="text-gray-700 text-sm">
                 英雄数量
               </div>
             </div>
-            <div className="bg-white/80 dark:bg-gray-800/80 p-4 rounded-xl text-center backdrop-blur-sm">
-              <div className="text-2xl font-bold text-green-600 dark:text-green-400 mb-1">
+            <div className="bg-white/80 p-4 rounded-xl text-center backdrop-blur-sm">
+              <div className="text-2xl font-bold text-green-600 mb-1">
                 {skinCount}
               </div>
-              <div className="text-gray-700 dark:text-gray-300 text-sm">
+              <div className="text-gray-700 text-sm">
                 皮肤数量
               </div>
             </div>
-            <div className="bg-white/80 dark:bg-gray-800/80 p-4 rounded-xl text-center backdrop-blur-sm">
-              <div className="text-2xl font-bold text-red-600 dark:text-red-400 mb-1">
+            <div className="bg-white/80 p-4 rounded-xl text-center backdrop-blur-sm">
+              <div className="text-2xl font-bold text-red-600 mb-1">
                 {winRate}%
               </div>
-              <div className="text-gray-700 dark:text-gray-300 text-sm">
+              <div className="text-gray-700 text-sm">
                 胜率
               </div>
             </div>
-            <div className="bg-white/80 dark:bg-gray-800/80 p-4 rounded-xl text-center backdrop-blur-sm">
-              <div className="text-2xl font-bold text-purple-600 dark:text-purple-400 mb-1">
+            <div className="bg-white/80 p-4 rounded-xl text-center backdrop-blur-sm">
+              <div className="text-2xl font-bold text-purple-600 mb-1">
                 {playTime}h
               </div>
-              <div className="text-gray-700 dark:text-gray-300 text-sm">
+              <div className="text-gray-700 text-sm">
                 游戏时长
               </div>
             </div>

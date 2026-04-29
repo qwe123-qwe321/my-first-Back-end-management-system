@@ -15,7 +15,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '../../components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '../../components/ui/card';
 import { userFormSchema, type UserFormValues } from '../../schemas/userSchema';
-import { useAppStore } from '../../store/appStore';
 import type { UserData } from '../../mocks/handlers';
 
 const fetchUsers = async (): Promise<UserData[]> => {
@@ -65,7 +64,6 @@ type DialogMode = 'create' | 'edit' | null;
 
 export default function UserManagement() {
   const queryClient = useQueryClient();
-  const { isDark } = useAppStore();
   const [search, setSearch] = useState('');
   const [sorting, setSorting] = useState<SortingState>([]);
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
@@ -135,7 +133,7 @@ export default function UserManagement() {
             onClick={() => {
               table.toggleAllRowsSelected();
             }}
-            className="p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded cursor-pointer inline-block"
+            className="p-1 hover:bg-gray-100 rounded cursor-pointer inline-block"
           >
             {table.getIsAllRowsSelected() ? (
               <CheckSquare className="w-4 h-4" />
@@ -147,7 +145,7 @@ export default function UserManagement() {
         cell: ({ row }) => (
           <div
             onClick={() => row.toggleSelected()}
-            className="p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded cursor-pointer inline-block"
+            className="p-1 hover:bg-gray-100 rounded cursor-pointer inline-block"
           >
             {row.getIsSelected() ? (
               <CheckSquare className="w-4 h-4" />
@@ -180,9 +178,9 @@ export default function UserManagement() {
         cell: (info) => {
           const role = info.getValue() as string;
           const colors: Record<string, string> = {
-            admin: 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400',
-            editor: 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400',
-            user: 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300',
+            admin: 'bg-red-100 text-red-800',
+            editor: 'bg-blue-100 text-blue-800',
+            user: 'bg-gray-100 text-gray-800',
           };
           const labels: Record<string, string> = {
             admin: '管理员',
@@ -190,7 +188,7 @@ export default function UserManagement() {
             user: '用户',
           };
           return (
-            <span className={`px-2 py-1 rounded text-xs ${colors[role] || 'bg-gray-100 dark:bg-gray-800'}`}>
+            <span className={`px-2 py-1 rounded text-xs ${colors[role] || 'bg-gray-100'}`}>
               {labels[role] || role}
             </span>
           );
@@ -207,8 +205,8 @@ export default function UserManagement() {
             <span
               className={`px-2 py-1 rounded text-xs ${
                 isActive
-                  ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400'
-                  : 'bg-gray-100 text-gray-500 dark:bg-gray-800 dark:text-gray-400'
+                  ? 'bg-green-100 text-green-800'
+                  : 'bg-gray-100 text-gray-500'
               }`}
             >
               {isActive ? '活跃' : '停用'}
@@ -230,7 +228,7 @@ export default function UserManagement() {
             <Button
               variant="ghost"
               size="sm"
-              className="text-blue-600 hover:text-blue-700 hover:bg-blue-50 dark:text-blue-400 dark:hover:bg-blue-900/30"
+              className="text-blue-600 hover:text-blue-700 hover:bg-blue-50"
               onClick={() => {
                 setEditingUser(info.row.original);
                 form.reset({
@@ -247,7 +245,7 @@ export default function UserManagement() {
             <Button
               variant="ghost"
               size="sm"
-              className="text-red-600 hover:text-red-700 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-900/30"
+              className="text-red-600 hover:text-red-700 hover:bg-red-50"
               onClick={() => deleteMutation.mutate(info.row.original.id)}
             >
               <Trash2 className="w-4 h-4" />
@@ -290,14 +288,12 @@ export default function UserManagement() {
     }
   };
 
-  const inputClass = `w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-    isDark ? 'bg-gray-800 border-gray-700 text-white' : 'bg-white border-gray-300'
-  }`;
+  const inputClass = 'w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white border-gray-300';
 
   return (
     <div className="p-6 space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <h1 className={`text-2xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>
+        <h1 className="text-2xl font-bold text-gray-900">
           用户管理
         </h1>
         <div className="flex items-center gap-3">
@@ -324,36 +320,32 @@ export default function UserManagement() {
         </div>
       </div>
 
-      <Card className={`${isDark ? 'bg-gray-800 border-gray-700' : 'bg-white'}`}>
+      <Card className="bg-white">
         <CardHeader className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-2">
-          <CardTitle className={`${isDark ? 'text-white' : 'text-gray-900'}`}>
+          <CardTitle className="text-gray-900">
             用户列表
           </CardTitle>
           <div className="relative w-full sm:w-64">
-            <Search className={`absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 ${isDark ? 'text-gray-400' : 'text-gray-400'}`} />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
             <input
               type="text"
               placeholder="搜索用户..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className={`w-full pl-10 pr-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                isDark ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400' : 'bg-white border-gray-300'
-              }`}
+              className="w-full pl-10 pr-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white border-gray-300"
             />
           </div>
         </CardHeader>
         <CardContent>
           {isLoading ? (
-            <div className={`flex justify-center py-12 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+            <div className="flex justify-center py-12 text-gray-600">
               加载中...
             </div>
           ) : (
             <>
               <div className="overflow-x-auto border rounded-lg">
                 <table className="w-full text-sm text-left">
-                  <thead className={`text-xs uppercase ${
-                    isDark ? 'bg-gray-700 text-gray-300' : 'bg-gray-50 text-gray-500'
-                  }`}>
+                  <thead className="text-xs uppercase bg-gray-50 text-gray-500">
                     {table.getHeaderGroups().map((headerGroup) => (
                       <tr key={headerGroup.id}>
                         {headerGroup.headers.map((header) => (
@@ -365,7 +357,7 @@ export default function UserManagement() {
                             {header.isPlaceholder ? null : (
                               <div
                                 className={`flex items-center gap-1 font-medium ${
-                                  header.column.getCanSort() ? 'cursor-pointer select-none hover:text-gray-700 dark:hover:text-gray-200' : ''
+                                  header.column.getCanSort() ? 'cursor-pointer select-none hover:text-gray-700' : ''
                                 }`}
                                 onClick={header.column.getToggleSortingHandler()}
                               >
@@ -387,20 +379,20 @@ export default function UserManagement() {
                       </tr>
                     ))}
                   </thead>
-                  <tbody className={isDark ? 'bg-gray-800' : 'bg-white'}>
+                  <tbody className="bg-white">
                     {table.getRowModel().rows.map((row) => (
                       <tr
                         key={row.id}
                         className={`border-b transition-colors ${
                           row.getIsSelected()
-                            ? isDark ? 'bg-blue-900/30' : 'bg-blue-50'
-                            : isDark ? 'border-gray-700' : 'border-gray-200'
+                            ? 'bg-blue-50'
+                            : 'border-gray-200'
                         }`}
                       >
                         {row.getVisibleCells().map((cell) => (
                           <td
                             key={cell.id}
-                            className={`px-4 py-3 ${isDark ? 'text-gray-200' : 'text-gray-900'}`}
+                            className="px-4 py-3 text-gray-900"
                             style={{ width: cell.column.getSize() }}
                           >
                             {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -418,11 +410,10 @@ export default function UserManagement() {
                   size="sm"
                   onClick={() => table.previousPage()}
                   disabled={!table.getCanPreviousPage()}
-                  className={isDark ? 'border-gray-600 hover:bg-gray-700' : ''}
                 >
                   上一页
                 </Button>
-                <span className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                <span className="text-sm text-gray-600">
                   第 {table.getState().pagination.pageIndex + 1} 页 / 共 {table.getPageCount()} 页
                 </span>
                 <Button
@@ -430,7 +421,6 @@ export default function UserManagement() {
                   size="sm"
                   onClick={() => table.nextPage()}
                   disabled={!table.getCanNextPage()}
-                  className={isDark ? 'border-gray-600 hover:bg-gray-700' : ''}
                 >
                   下一页
                 </Button>
@@ -442,16 +432,16 @@ export default function UserManagement() {
 
       {dialogMode && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-          <Card className={`w-full max-w-md mx-4 ${isDark ? 'bg-gray-800 border-gray-700' : 'bg-white'}`}>
+          <Card className="w-full max-w-md mx-4 bg-white">
             <CardHeader>
-              <CardTitle className={isDark ? 'text-white' : 'text-gray-900'}>
+              <CardTitle className="text-gray-900">
                 {dialogMode === 'edit' ? '编辑用户' : '新增用户'}
               </CardTitle>
             </CardHeader>
             <CardContent>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                 <div>
-                  <label className={`block text-sm font-medium mb-1 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
+                  <label className="block text-sm font-medium mb-1 text-gray-700">
                     姓名
                   </label>
                   <input
@@ -467,7 +457,7 @@ export default function UserManagement() {
                 </div>
 
                 <div>
-                  <label className={`block text-sm font-medium mb-1 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
+                  <label className="block text-sm font-medium mb-1 text-gray-700">
                     邮箱
                   </label>
                   <input
@@ -484,7 +474,7 @@ export default function UserManagement() {
                 </div>
 
                 <div>
-                  <label className={`block text-sm font-medium mb-1 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
+                  <label className="block text-sm font-medium mb-1 text-gray-700">
                     角色
                   </label>
                   <select
@@ -498,7 +488,7 @@ export default function UserManagement() {
                 </div>
 
                 <div>
-                  <label className={`block text-sm font-medium mb-1 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
+                  <label className="block text-sm font-medium mb-1 text-gray-700">
                     状态
                   </label>
                   <select
@@ -519,7 +509,6 @@ export default function UserManagement() {
                       setEditingUser(null);
                       form.reset();
                     }}
-                    className={isDark ? 'border-gray-600 hover:bg-gray-700' : ''}
                   >
                     取消
                   </Button>

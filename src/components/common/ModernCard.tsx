@@ -1,6 +1,5 @@
 import type { ReactNode } from 'react';
 import { Card as AntdCard } from 'antd';
-import { useAppStore } from '../../store/appStore';
 
 interface ModernCardProps {
   title?: ReactNode;
@@ -23,8 +22,6 @@ export const ModernCard: React.FC<ModernCardProps> = ({
   loading = false,
   onClick,
 }) => {
-  const isDark = useAppStore((state) => state.isDark);
-
   return (
     <AntdCard
       title={title}
@@ -35,11 +32,7 @@ export const ModernCard: React.FC<ModernCardProps> = ({
       bordered={bordered}
       className={`
         rounded-2xl! transition-all! duration-300!
-        ${
-          isDark
-            ? 'bg-[#1a1a1a]! border-gray-800! hover:shadow-[0_8px_30px_rgba(96,165,250,0.15)]! hover:border-blue-500/30!'
-            : 'bg-white! border-gray-100! hover:shadow-[0_8px_30px_rgba(59,130,246,0.15)]! hover:border-blue-500/30!'
-        }
+        bg-white! border-gray-100! hover:shadow-[0_8px_30px_rgba(59,130,246,0.15)]! hover:border-blue-500/30!
         ${hoverable ? 'cursor-pointer! hover:transform! hover:-translate-y-0.5!' : ''}
         ${className}
       `}
@@ -49,7 +42,7 @@ export const ModernCard: React.FC<ModernCardProps> = ({
         },
         header: {
           padding: '16px 24px',
-          borderBottom: isDark ? '1px solid #374151' : '1px solid #f3f4f6',
+          borderBottom: '1px solid #f3f4f6',
         },
       }}
     >
