@@ -1,3 +1,4 @@
+// 占位组件：用于路由懒加载时的过渡占位，显示加载提示或空白占位，防止页面切换时的闪烁
 import React from 'react';
 
 interface PlaceholderProps {

@@ -1,3 +1,4 @@
+// 王者仪表盘组件：整合图表筛选器、四个数据图表（世界观/来源/趋势/动态）和英雄档案，构成仪表盘核心内容区
 import React, { useState } from 'react';
 import { Row, Col, Card } from 'antd';
 import { ChartFilter } from './ChartFilter';

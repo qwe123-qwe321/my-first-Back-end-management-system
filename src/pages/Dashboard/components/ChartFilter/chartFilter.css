@@ -1,3 +1,4 @@
+/* 图表筛选器样式：定义筛选器组件的暗黑主题样式，覆盖Ant Design Select组件的默认颜色 */
 .king-dashboard-filter .king-dashboard-select {
   color: #f5f5f5 !important;
 }

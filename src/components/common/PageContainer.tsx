@@ -1,3 +1,4 @@
+// 页面容器组件：提供统一的页面布局容器，集成面包屑导航、页面标题和内容区域，确保各页面布局风格一致
 import type { ReactNode } from 'react';
 import { Breadcrumb } from 'antd';
 import { Link, useLocation } from 'react-router-dom';

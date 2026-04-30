@@ -1,3 +1,4 @@
+// Vite构建配置：配置React、Tailwind CSS插件，设置开发服务器端口和代理规则
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';

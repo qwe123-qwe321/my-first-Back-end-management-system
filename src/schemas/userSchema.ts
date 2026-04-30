@@ -1,3 +1,4 @@
+// 用户数据校验Schema（Zod）：定义用户表单的字段验证规则（姓名、邮箱、年龄、电话等），提供类型安全的表单校验
 import { z } from 'zod';
 
 export const userFormSchema = z.object({

@@ -1,3 +1,4 @@
+// 应用全局状态管理（Zustand）：管理用户登录状态、用户信息、侧边栏折叠、标签页等核心应用级状态，支持持久化存储
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 

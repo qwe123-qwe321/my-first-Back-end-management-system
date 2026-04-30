@@ -1,3 +1,4 @@
+// 403错误页面：显示无权限访问的提示信息，提供返回首页的操作入口
 import React from 'react';
 import ErrorPage from './ErrorPage';
 

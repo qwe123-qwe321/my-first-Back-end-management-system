@@ -1,3 +1,4 @@
+// 皮肤主题状态管理（Zustand）：管理应用皮肤主题切换，支持多种主题预设，状态持久化存储
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 

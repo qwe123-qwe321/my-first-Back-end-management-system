@@ -1,4 +1,5 @@
 // 首页轮播图常量配置文件：集中管理轮播图相关的静态配置项，包括轮播图片地址列表、自动播放间隔、响应式高度、兜底文案等，便于统一维护和修改
+// 首页轮播图常量配置文件：集中管理轮播图相关的静态配置项，包括轮播图片地址列表、自动播放间隔、响应式高度、兜底文案等，便于统一维护和修改
 export const CAROUSEL_IMAGES = [
   'https://game.gtimg.cn/images/yxzj/zlkdatasys/images/image/20260311/17732213301042.jpg',
   'https://game.gtimg.cn/images/yxzj/zlkdatasys/images/image/20260306/17727923952343.jpg',

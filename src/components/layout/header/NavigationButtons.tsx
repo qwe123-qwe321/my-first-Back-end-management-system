@@ -1,3 +1,4 @@
+// 导航按钮组件：提供浏览器风格的前进/后退导航按钮，基于路由历史实现页面切换，支持禁用状态
 import React from 'react';
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';

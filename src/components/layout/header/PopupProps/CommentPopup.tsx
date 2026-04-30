@@ -1,3 +1,4 @@
+// 评论弹窗组件：展示未读评论列表，支持快速回复和查看详情，集成在头部消息图标的下拉弹窗中
 import { Button, List } from 'antd';
 import React from 'react';
 import { unreadComments } from '../constants';

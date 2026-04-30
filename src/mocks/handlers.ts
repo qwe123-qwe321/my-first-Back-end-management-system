@@ -1,3 +1,4 @@
+// MSW API模拟处理器：模拟后端RESTful接口（英雄数据、用户管理、登录等），提供开发环境的完整数据模拟
 import { http, delay, HttpResponse } from 'msw';
 
 export interface Hero {

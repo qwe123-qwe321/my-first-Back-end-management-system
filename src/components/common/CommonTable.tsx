@@ -1,3 +1,4 @@
+// 通用表格组件：基于Ant Design Table封装的标准化表格，统一配置分页、列定义、空状态和加载样式，减少重复代码
 import { useMemo } from 'react';
 import { Table } from 'antd';
 import type { TableProps, ColumnsType, TablePaginationConfig } from 'antd/es/table';

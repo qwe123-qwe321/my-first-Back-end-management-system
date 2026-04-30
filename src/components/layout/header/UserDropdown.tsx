@@ -1,3 +1,4 @@
+// 用户下拉菜单组件：显示用户头像和下拉菜单，提供个人中心、主题设置、关于和退出登录等操作入口
 import { useState } from 'react';
 import { Avatar, Popover } from 'antd';
 import { LogoutOutlined, SettingOutlined, InfoCircleOutlined } from '@ant-design/icons';

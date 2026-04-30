@@ -1,3 +1,4 @@
+// 登录页面：提供用户登录表单（账号/密码），支持记住密码功能，登录成功后跳转至首页
 import React from 'react';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Flex, Form, Input, message } from 'antd';

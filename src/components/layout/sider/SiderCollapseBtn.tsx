@@ -1,3 +1,4 @@
+// 侧边栏折叠按钮组件：提供展开/折叠侧边栏的切换按钮，使用图标指示当前状态，固定在侧边栏底部
 import React from 'react';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 

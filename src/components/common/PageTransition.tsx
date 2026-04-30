@@ -1,3 +1,4 @@
+// 页面过渡动画组件：基于路由变化触发页面切换动画，使用CSS过渡实现页面内容的淡入淡出效果
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 

@@ -1,3 +1,4 @@
+// ESLint配置：配置React Hooks规则、TypeScript支持，定义代码风格和语法检查规则
 import js from '@eslint/js';
 import globals from 'globals';
 import reactHooks from 'eslint-plugin-react-hooks';

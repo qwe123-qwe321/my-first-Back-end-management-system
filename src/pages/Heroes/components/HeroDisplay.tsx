@@ -1,3 +1,4 @@
+// 英雄展示组件：整合皮肤选择器和语音面板，提供英雄详情展示、皮肤切换和语音播放的完整交互体验
 import React from 'react';
 import { HeroSkinSelector } from './HeroSkinSelector';
 import { HeroVoicePanel } from './HeroVoicePanel';

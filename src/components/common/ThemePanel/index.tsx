@@ -1,3 +1,4 @@
+// 主题面板组件：提供可视化主题切换面板，支持选择不同的主题色和皮肤主题，实时预览并应用主题变更
 import { useState } from 'react';
 import { Popover } from 'antd';
 import { CheckOutlined } from '@ant-design/icons';

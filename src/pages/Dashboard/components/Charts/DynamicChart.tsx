@@ -1,3 +1,4 @@
+// 动态图表组件：基于ECharts的动态数据可视化图表，使用懒加载优化性能，支持实时数据更新和动画效果
 import { lazy, Suspense } from 'react';
 
 const TrendChart = lazy(() => import('./TrendChart'));

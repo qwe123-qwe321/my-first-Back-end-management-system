@@ -1,3 +1,4 @@
+// 头部内容组件：整合导航按钮、标签页管理器、消息图标、主题面板和用户下拉菜单，构成完整的顶部导航栏
 import { Space } from 'antd';
 import { BellOutlined, CommentOutlined, MailFilled } from '@ant-design/icons';
 import React from 'react';

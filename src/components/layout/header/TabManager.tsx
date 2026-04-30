@@ -1,3 +1,4 @@
+// 标签页管理器组件：管理已打开页面的标签页，支持标签切换、关闭（单个/其他/全部）、首页常驻和拖拽排序功能
 import React, { useState, useEffect } from 'react';
 import { Tooltip } from 'antd';
 import { CloseOutlined, HomeOutlined } from '@ant-design/icons';

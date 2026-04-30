@@ -1,3 +1,4 @@
+// HTTP请求封装工具：基于fetch封装统一的请求方法，支持超时控制、自动鉴权（Token注入）、错误处理和响应拦截
 import { message } from 'antd';
 import { useAppStore } from '../store/appStore';
 

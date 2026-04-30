@@ -1,3 +1,4 @@
+// 社区页面：提供社区互动功能，包含动态发布、点赞、评论等社交功能入口
 import React, { useState } from 'react';
 import { Button, message } from 'antd';
 import {

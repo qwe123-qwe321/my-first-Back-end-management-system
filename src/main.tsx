@@ -1,3 +1,4 @@
+// 应用入口文件：初始化React应用，挂载路由、React Query状态管理、MSW模拟服务，并配置全局主题和动画
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { RouterProvider } from 'react-router-dom';

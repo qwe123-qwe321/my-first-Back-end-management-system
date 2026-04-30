@@ -1,3 +1,4 @@
+// 用户信息状态管理（Zustand）：管理当前登录用户的个人资料（头像、昵称、简介等），支持持久化存储和资料更新
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 

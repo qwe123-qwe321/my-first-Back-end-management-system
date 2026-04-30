@@ -1,3 +1,4 @@
+// 页面骨架屏组件：基于Ant Design Skeleton实现的页面加载骨架屏，在数据加载时展示占位结构，提升用户体验
 import React from 'react';
 import { Skeleton } from 'antd';
 

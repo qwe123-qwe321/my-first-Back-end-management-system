@@ -1,3 +1,4 @@
+// 英雄皮肤选择器组件：展示英雄的皮肤列表，支持皮肤切换预览，提供皮肤选择交互功能
 import React from 'react';
 
 interface VoiceLine {

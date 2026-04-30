@@ -1,3 +1,4 @@
+// 通知弹窗组件：展示系统通知列表，支持标记已读和查看详情，集成在头部消息图标的下拉弹窗中
 import { Button, List } from 'antd';
 import React from 'react';
 import { notificationList } from '../constants';

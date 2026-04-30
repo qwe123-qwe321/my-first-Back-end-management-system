@@ -1,3 +1,4 @@
+// 现代风格卡片组件：基于Ant Design Card封装的通用卡片容器，支持自定义样式、标题、操作栏和加载状态
 import type { ReactNode } from 'react';
 import { Card as AntdCard } from 'antd';
 

@@ -1,3 +1,4 @@
+// 个人中心页面：展示用户个人信息，提供资料编辑、头像上传等功能，整合ProfileHeader和ProfileForm组件
 import React, { useState } from 'react';
 import { message } from 'antd';
 import { useUserStore } from '../../config/user/useUserStore';

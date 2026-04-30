@@ -1,3 +1,4 @@
+/* 全局样式文件：引入Tailwind CSS基础样式，定义全局布局（全屏、无滚动条）、字体和基础样式重置 */
 @import 'tailwindcss';
 
 html,

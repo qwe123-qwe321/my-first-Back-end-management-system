@@ -1,3 +1,4 @@
+// 错误边界组件：React错误边界（Error Boundary），捕获子组件渲染异常，展示友好的错误提示页面并提供重新加载功能
 import { Component, type ErrorInfo, type ReactNode } from 'react';
 import { Result, Button } from 'antd';
 import { ReloadOutlined } from '@ant-design/icons';

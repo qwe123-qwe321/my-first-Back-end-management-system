@@ -1,3 +1,4 @@
+// 图表筛选器组件：提供时间范围、数据维度等筛选条件的选择器，联动控制仪表盘图表的展示数据
 import React from 'react';
 import { Select, Row, Col } from 'antd';
 import { CHART_ACCENTS, CHART_FILTERS } from '../../constants/chartConfig';

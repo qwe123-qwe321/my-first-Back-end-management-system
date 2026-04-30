@@ -1,3 +1,4 @@
+// 页脚组件：显示版权信息和ICP备案号，固定在页面底部，提供简洁的页脚展示
 import React from 'react';
 
 export const Footer: React.FC = () => {

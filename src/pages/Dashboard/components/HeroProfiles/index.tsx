@@ -1,3 +1,4 @@
+// 英雄档案主组件：展示英雄卡片列表，点击可跳转至英雄详情页，提供英雄档案的概览浏览功能
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { HeroCard, type HeroCardProps } from './HeroCard';

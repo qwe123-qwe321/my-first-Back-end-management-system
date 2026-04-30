@@ -1,3 +1,4 @@
+// 皮肤主题页面：提供应用皮肤主题的切换管理，基于Ant Design ConfigProvider实现全局主题配置
 import React from 'react';
 import { ConfigProvider } from 'antd';
 import { useSkinStore } from '../../store/skinStore';

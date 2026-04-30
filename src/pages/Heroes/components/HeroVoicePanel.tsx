@@ -1,3 +1,4 @@
+// 英雄语音面板组件：展示英雄的语音台词列表，支持点击播放语音，提供语音交互功能
 import React from 'react';
 
 interface VoiceLine {

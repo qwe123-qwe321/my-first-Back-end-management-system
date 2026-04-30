@@ -1,3 +1,4 @@
+// 错误页通用组件：提供统一的错误页面布局，支持自定义错误码、标题、描述和操作按钮，用于404/403/500等错误页
 import React from 'react';
 import { Button } from 'antd';
 import { useNavigate } from 'react-router-dom';

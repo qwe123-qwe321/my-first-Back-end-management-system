@@ -1,3 +1,4 @@
+// UI按钮组件：基于class-variance-authority实现的多态按钮，支持多种变体（默认/次要/幽灵/危险）和尺寸，统一应用样式
 import * as React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 

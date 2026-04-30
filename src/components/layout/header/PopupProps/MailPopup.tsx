@@ -1,3 +1,4 @@
+// 邮件弹窗组件：展示未读邮件列表，支持快速查看和标记已读，集成在头部消息图标的下拉弹窗中
 import { Button, List } from 'antd';
 import React from 'react';
 import { unreadMails } from '../constants';

@@ -1,3 +1,4 @@
+// 主题色状态管理Hook（Zustand）：管理应用的主题色切换（默认/紫色/绿色），支持持久化存储和CSS变量动态切换
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 

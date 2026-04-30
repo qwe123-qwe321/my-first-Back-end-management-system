@@ -1,3 +1,4 @@
+// Tailwind CSS配置：定义自定义主题色（王者荣耀风格金红配色）、字体和断点，扩展Tailwind的默认配置
 /** @type {import('tailwindcss').Config} */
 export default {
   darkMode: false,

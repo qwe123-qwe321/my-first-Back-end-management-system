@@ -1,3 +1,4 @@
+// UI卡片组件：基于Tailwind CSS的通用卡片容器，提供标题、描述、内容区域和自定义样式，用于展示信息区块
 import * as React from 'react';
 
 import { cn } from '../../lib/utils';

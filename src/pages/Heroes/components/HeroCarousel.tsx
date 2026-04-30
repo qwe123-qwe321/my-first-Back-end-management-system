@@ -1,3 +1,4 @@
+// 英雄轮播组件：展示英雄列表的横向轮播，支持左右滑动切换英雄，提供英雄快速浏览功能
 import React from 'react';
 
 interface Skin {

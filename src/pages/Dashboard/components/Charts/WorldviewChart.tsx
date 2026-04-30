@@ -1,3 +1,4 @@
+// 世界观图表组件：基于ECharts的柱状图/条形图，展示世界观相关数据指标，支持自定义配色和响应式布局
 import React, { useMemo } from 'react';
 import { type EChartsOption } from 'echarts';
 import ReactECharts from 'echarts-for-react';

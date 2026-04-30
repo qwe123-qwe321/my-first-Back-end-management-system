@@ -1,3 +1,4 @@
+// 关于页面：展示应用介绍、技术栈、版本信息等内容，提供项目背景说明
 import React from 'react';
 import { Card, Descriptions, Table, Tag, Typography } from 'antd';
 import type { TableColumnType } from 'antd';

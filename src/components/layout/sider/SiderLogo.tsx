@@ -1,3 +1,4 @@
+// 侧边栏Logo组件：显示应用Logo和标题，点击可跳转至首页，支持折叠状态下仅显示图标
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 

@@ -1,3 +1,4 @@
+// 英雄数据文件：定义英雄详情、语音台词、皮肤列表等数据结构，提供英雄管理页面的完整数据源
 export interface VoiceLine {
   id: number;
   text: string;

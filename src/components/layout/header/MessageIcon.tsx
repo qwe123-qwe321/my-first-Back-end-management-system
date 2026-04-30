@@ -1,3 +1,4 @@
+// 消息图标组件：集成通知、评论、邮件三个消息入口的图标按钮，显示未读数量徽标，点击弹出对应详情面板
 import { Badge, Popover } from 'antd';
 import React from 'react';
 

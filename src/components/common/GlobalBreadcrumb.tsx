@@ -1,3 +1,4 @@
+// 全局面包屑组件：基于当前路由路径自动生成面包屑导航，支持自定义映射和点击跳转，提供页面层级定位
 import React from 'react';
 import { Breadcrumb } from 'antd';
 import { Link, useLocation } from 'react-router-dom';

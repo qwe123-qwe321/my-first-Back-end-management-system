@@ -1,3 +1,4 @@
+// 消息提示Hook：封装Ant Design的message和notification组件，提供统一的成功/错误/警告/加载等消息提示方法
 import { message, notification } from 'antd';
 import type { NotificationArgsProps } from 'antd';
 import type { ReactNode } from 'react';

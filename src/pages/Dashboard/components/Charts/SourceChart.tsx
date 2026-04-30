@@ -1,3 +1,4 @@
+// 来源图表组件：基于ECharts的饼图/环形图，展示数据来源分布比例，支持动态数据更新和主题配色
 import React, { useMemo } from 'react';
 import { type EChartsOption } from 'echarts';
 import ReactECharts from 'echarts-for-react';

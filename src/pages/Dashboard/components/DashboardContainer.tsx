@@ -1,3 +1,4 @@
+// 仪表盘容器组件：提供仪表盘页面的基础布局容器，集成英雄轮播图，包裹子页面内容
 import React, { type PropsWithChildren } from 'react';
 import HeroCarousel from './HeroCarousel';
 

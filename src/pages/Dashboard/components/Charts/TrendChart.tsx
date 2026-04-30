@@ -1,3 +1,4 @@
+// 趋势图表组件：基于ECharts的折线图/面积图，展示数据随时间的变化趋势，支持多系列数据对比
 import React, { useMemo } from 'react';
 import { type EChartsOption } from 'echarts';
 import ReactECharts from 'echarts-for-react';

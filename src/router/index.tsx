@@ -1,3 +1,4 @@
+// 路由配置中心：定义应用所有页面路由（懒加载）、布局嵌套、错误页兜底，以及基于用户状态的登录重定向逻辑
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 import React, { lazy, Suspense } from 'react';
 import MainLayout from '../components/layout/MainLayout';

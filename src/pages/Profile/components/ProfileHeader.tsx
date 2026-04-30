@@ -1,3 +1,4 @@
+// 个人资料头部组件：展示用户头像、昵称和基本信息，支持头像上传和预览功能
 import React, { useRef } from 'react';
 import { EditOutlined, UploadOutlined } from '@ant-design/icons';
 import { useUserStore } from '../../../config/user/useUserStore';

@@ -1,3 +1,4 @@
+// 主布局组件：应用的核心布局框架，整合侧边栏、头部、标签页、内容区和页脚，管理主题配置和全局样式
 import React, { useMemo, useEffect, useState } from 'react';
 import { ConfigProvider, Layout, theme } from 'antd';
 import { SiderContent } from './sider/SiderContent';

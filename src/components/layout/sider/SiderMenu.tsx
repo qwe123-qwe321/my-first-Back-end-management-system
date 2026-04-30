@@ -1,3 +1,4 @@
+// 侧边栏菜单组件：基于Ant Design Menu实现的多级导航菜单，根据路由配置动态生成菜单项，支持折叠/展开和路由跳转
 import React, { useEffect } from 'react';
 import { Menu } from 'antd';
 import {

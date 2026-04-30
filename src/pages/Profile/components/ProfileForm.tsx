@@ -1,3 +1,4 @@
+// 个人资料表单组件：提供用户信息的编辑表单，支持修改昵称、简介等个人资料，包含表单验证和提交功能
 import React from 'react';
 import {
   UserOutlined,

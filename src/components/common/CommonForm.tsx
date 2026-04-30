@@ -1,3 +1,4 @@
+// 通用表单组件：基于Ant Design Form封装的标准化表单，统一配置表单布局、提交/重置按钮和校验行为，简化表单开发
 import { useCallback } from 'react';
 import { Form, Button, Space } from 'antd';
 import type { FormProps } from 'antd';

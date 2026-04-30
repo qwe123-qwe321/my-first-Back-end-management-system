@@ -1,3 +1,4 @@
+// 语音动画组件：实现英雄语音播放时的可视化动画效果，包含音频波形或声波动画，增强语音交互体验
 import React, { useState, useEffect, useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
 import { heroesData } from './data/heroesData';
