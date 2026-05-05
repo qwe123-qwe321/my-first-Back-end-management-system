@@ -57,7 +57,7 @@ const HeroCarousel: React.FC<HeroCarouselProps> = () => {
       <CarouselArrows onPrev={prevSlide} onNext={nextSlide} />
       <CarouselIndicators
         currentIndex={currentIndex}
-        onSelectIndex={selectIndex}
+        onSelect={selectIndex}
       />
     </div>
   );
